@@ -19,26 +19,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-        <div class="container"><a class="navbar-brand logo" href="#">UPOCASA</a><button data-toggle="collapse"
-                class="navbar-toggler" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span
-                    class="navbar-toggler-icon"></span></button>
-            <div class="collapse navbar-collapse" id="navcol-1">
-                <ul class="nav navbar-nav ml-auto">
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="faq.html">FAQ</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link active" href="about-us.html">Sobre
-                            nosotros</a></li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="contact-us.html">CONTACTANOS</a>
-                    </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="registration.html">REGISTRO</a>
-                    </li>
-                    <li class="nav-item" role="presentation"><a class="nav-link" href="login.html">INICIAR SESIÓN</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include "./header.html" ?>
     <main class="page">
         <section class="clean-block about-us">
             <div class="container">
@@ -84,37 +65,7 @@
             </div>
         </section>
     </main>
-    <footer>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 footer-navigation">
-                <h3><a href="#">UPO<span>CASA</span></a></h3>
-                <p class="links"><a href="#">Home</a><strong> · </strong><a href="#">Blog</a><strong> · </strong><a
-                        href="#">Pricing</a><strong> · </strong><a href="#">About</a><strong> · </strong><a
-                        href="#">Faq</a><strong> · </strong><a href="#">Contact</a></p>
-                <p class="company-name">UPOCASA © 2019</p>
-            </div>
-            <div class="col-sm-6 col-md-4 footer-contacts">
-                <div><span class="fa fa-map-marker footer-contacts-icon"> </span>
-                    <p><span class="new-line-span">Ctra. de Utrera, 1, 41013<br></span> Sevilla, España</p>
-                </div>
-                <div><i class="fa fa-phone footer-contacts-icon"></i>
-                    <p class="footer-center-info email text-left"> +34 955 683 4329</p>
-                </div>
-                <div><i class="fa fa-envelope footer-contacts-icon"></i>
-                    <p> <a href="#" target="_blank">ayuda@upocasa.com</a></p>
-                </div>
-            </div>
-            <div class="clearfix"></div>
-            <div class="col-md-4 footer-about">
-                <h4>Sobre nuestros</h4>
-                <p>UPOCASA es una empresa que se dedica a vender y alquilar viviendas. ¡Tu vivienda ideal te está
-                    esperando! Siguenos en las redes sociales para no perderte las mejores ofertas.<br><br><br><br></p>
-                <div class="social-links social-icons"><a href="#"><i class="fa fa-facebook"></i></a><a href="#"><i
-                            class="fa fa-twitter"></i></a><a href="#"><i class="fa fa-linkedin"></i></a><a href="#"><i
-                            class="fa fa-github"></i></a></div>
-            </div>
-        </div>
-    </footer>
+    <?php include "./footer.html" ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
