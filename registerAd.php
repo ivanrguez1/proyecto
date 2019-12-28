@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>FAQ - UPOCASA</title>
+    <title>Alta de Anuncio - UPOCASA</title>
     <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
@@ -25,7 +25,7 @@
         <section class="clean-block clean-faq dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Alta de Inmueble</h2>
+                    <h2 class="text-info">Alta de Anuncio</h2>
                 </div>
                 <div class="block-content">
                     <form action="#" method="post" enctype="multipart/form-data">
