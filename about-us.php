@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<?php include "./header.html" ?>
+    <?php include "./header.html" ?>
     <main class="page">
         <section class="clean-block about-us">
             <div class="container">
@@ -30,8 +30,7 @@
                 </div>
                 <div class="row justify-content-center">
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block"
-                                src="assets/img/sobreNosotros/sobreNosotros1.jpg">
+                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/sobreNosotros/sobreNosotros1.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Los mejores interiores</h4>
                                 <p class="card-text">¡Encuentra la vivienda que se ajuste a tu personalidad!.Con la
@@ -41,8 +40,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block"
-                                src="assets/img/sobreNosotros/sobreNosotros2.jpg">
+                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/sobreNosotros/sobreNosotros2.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Los mejores exteriores</h4>
                                 <p class="card-text">¿Te gustaría una vivendia con un exterior espectacular? Hermosos
@@ -52,8 +50,7 @@
                         </div>
                     </div>
                     <div class="col-sm-6 col-lg-4">
-                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block"
-                                src="assets/img/sobreNosotros/sobreNosotros3.jpg">
+                        <div class="card clean-card text-center"><img class="card-img-top w-100 d-block" src="assets/img/sobreNosotros/sobreNosotros3.jpg">
                             <div class="card-body info">
                                 <h4 class="card-title">Filtrar por extras</h4>
                                 <p class="card-text">Busca las viviendas que más se ajusten a tus necesidades: zonas

@@ -19,18 +19,20 @@
 </head>
 
 <body>
-<?php include "./header.html" ?>
+    <?php include "./header.html" ?>
     <main class="page registration-page">
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Registro</h2>
-                </div><form>
-    <div class="form-group"><label for="name">Nombre</label><input type="text" class="form-control item" id="name" /></div>
-    <div class="form-group"><label for="password">Contraseña</label><input type="password" class="form-control item" id="password" /></div>
-        <div class="form-group"><label for="password">Confirmar Contraseña</label><input type="password" class="form-control item" id="passwordConfirm" /></div>
-    <div class="form-group"><label for="email">Email</label><input type="email" class="form-control item" id="email" /></div><button class="btn btn-primary btn-block" type="submit">Registrarse</button>
-</form></div>
+                </div>
+                <form>
+                    <div class="form-group"><label for="name">Nombre</label><input type="text" class="form-control item" id="name" /></div>
+                    <div class="form-group"><label for="password">Contraseña</label><input type="password" class="form-control item" id="password" /></div>
+                    <div class="form-group"><label for="password">Confirmar Contraseña</label><input type="password" class="form-control item" id="passwordConfirm" /></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" class="form-control item" id="email" /></div><button class="btn btn-primary btn-block" type="submit">Registrarse</button>
+                </form>
+            </div>
         </section>
     </main>
     <?php include "./footer.html" ?>

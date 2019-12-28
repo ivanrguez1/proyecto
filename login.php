@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<?php include "./header.html" ?>
+    <?php include "./header.html" ?>
     <main class="page login-page">
         <section class="clean-block clean-form dark">
             <div class="container">
@@ -27,13 +27,10 @@
                     <h2 class="text-info">Inicio de Sesión</h2>
                 </div>
                 <form>
-                    <div class="form-group"><label for="email">Email</label><input type="email"
-                            class="form-control item" id="email" /></div>
-                    <div class="form-group"><label for="password">Contraseña</label><input type="password"
-                            class="form-control" id="password" /></div>
+                    <div class="form-group"><label for="email">Email</label><input type="email" class="form-control item" id="email" /></div>
+                    <div class="form-group"><label for="password">Contraseña</label><input type="password" class="form-control" id="password" /></div>
                     <div class="form-group">
-                        <div class="form-check"><input type="checkbox" class="form-check-input" id="checkbox" /><label
-                                class="form-check-label" for="checkbox">Recuerdamelo</label></div>
+                        <div class="form-check"><input type="checkbox" class="form-check-input" id="checkbox" /><label class="form-check-label" for="checkbox">Recuerdamelo</label></div>
                     </div><button class="btn btn-primary btn-block" type="submit">Iniciar Sesión</button>
                     <br><br>
                     ¿No tienes cuenta? <a href='registration.html'>Registrarse</a>

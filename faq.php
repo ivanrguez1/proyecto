@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<?php include "./header.html" ?>
+    <?php include "./header.html" ?>
     <main class="page faq-page">
         <section class="clean-block clean-faq dark">
             <div class="container">
