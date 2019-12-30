@@ -1,9 +1,18 @@
 @media only screen and (max-width: 800px) {
     #divExtras {
-        flex-direction: column!important;
+        flex-direction: column !important;
     }
-	
-	#divExtras > div{
-        width: 100%!important;
+
+    #divExtras>div {
+        width: 100% !important;
     }
+}
+
+.labelAlineado {
+    display: inline-block;
+    width: 150px;
+}
+
+.labelAlineadoCertificado {
+    width: 235px;
 }
