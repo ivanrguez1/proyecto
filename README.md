@@ -36,10 +36,10 @@ CREATE TABLE `upocasa`.`usuarios` (
 * JavaScript (ECMAScript 6)
 * Jquery 3
 * BootStrap 4
-* MySQL 5.7
+* MySQL 5.7 & Workbench 6.3
 * PHP 7
-* PHPMyAdmin 4.9
-
+* PhpMyAdmin 4.9
+* PhpStorm 2019.3 
 ## Por hacer
 * (User_Login) Acepto las condiciones de uso y la información básica de Protección de Datos
 

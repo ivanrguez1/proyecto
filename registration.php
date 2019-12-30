@@ -30,7 +30,15 @@
                     <div class="form-group"><label for="name">Nombre</label><input type="text" class="form-control item" id="name" /></div>
                     <div class="form-group"><label for="password">Contraseña</label><input type="password" class="form-control item" id="password" /></div>
                     <div class="form-group"><label for="password">Confirmar Contraseña</label><input type="password" class="form-control item" id="passwordConfirm" /></div>
-                    <div class="form-group"><label for="email">Email</label><input type="email" class="form-control item" id="email" /></div><button class="btn btn-primary btn-block" type="submit">Registrarse</button>
+                    <div class="form-group"><label for="email">Email</label><input type="email" class="form-control item" id="email" /></div>
+                    <div class="form-group">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="condiciones" />
+                            <label class="form-check-label" for="condiciones">Acepto las <a href="legal-warning.php">condiciones de uso</a>
+                                y la <a href="basicdata-protection.php">información básica de Protección de Datos </a> </label>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary btn-block" type="submit">Registrarse</button>
                 </form>
             </div>
         </section>
