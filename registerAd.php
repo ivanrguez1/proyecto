@@ -53,7 +53,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label>Precio del Anuncio:&nbsp;</label>
+                                <label>Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
                                     <input class="form-check-input" type="radio" name="tipoAnuncio" value="venta">
                                     <label class="form-check-label">Vendo</label>
@@ -165,7 +165,7 @@
                                         <option value="calefaccion">Calefacción</option>
                                         <option value="parquet">Parquet</option>
                                         <option value="cocinaOffice">Cocina Office</option>
-                                        <option value="suiteConBaño">Suite - con baño</option>
+                                        <option value="suiteConBaño">Suite con baño</option>
                                         <option value="amueblado">Amueblado</option>
                                         <option value="electrodomesticos">Electrodomésticos</option>
                                         <option value="horno">Horno</option>
@@ -186,7 +186,7 @@
                                     <span style="font-size: 1rem; font-weight: 400;"> </span>
                                     <select multiple="">
                                         <option value="jardinPrivado" selected="">Jardín Privado</option>
-                                        <option value="terreza">Terreza</option>
+                                        <option value="terreza">Terraza</option>
                                         <option value="zonaComunitaria">Zona Comunitaria</option>
                                         <option value="patio">Patio</option>
                                         <option value="piscina">Piscina</option>
