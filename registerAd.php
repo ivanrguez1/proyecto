@@ -42,7 +42,7 @@
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
                             <legend class="pt-auto pb-2">Características del inmueble</legend>
                             <div>
-                                <label>Tipo de Vivienda:&nbsp;</label>
+                                <label class="labelAlineado">Tipo de Vivienda:&nbsp;</label>
                                 <select>
                                     <option value="vivienda" selected="">Vivienda</option>
                                     <option value="garaje">Garaje</option>
@@ -53,7 +53,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label>Tipo de Anuncio:&nbsp;</label>
+                                <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
                                     <input class="form-check-input" type="radio" name="tipoAnuncio" value="venta">
                                     <label class="form-check-label">Vendo</label>
@@ -72,43 +72,39 @@
                                 </div>
                             </div>
                             <div>
-                                <label>Precio del Inmueble (€):&nbsp;</label>
+                                <label class="labelAlineado">Precio (€):&nbsp;</label>
                                 <input type="number" name="precio" min="1" placeholder="Precio Inmueble">
                             </div>
                             <div>
-                                <label>Superficie (m²):&nbsp;
-                                    <input type="number" name="superficio" min="1" placeholder="Superficie" step="0.01">&nbsp;
-                                    <br>
-                                </label>
+                                <label class="labelAlineado">Superficie (m²):&nbsp;</label>
+                                <input type="number" name="superficio" min="1" placeholder="Superficie" step="0.01">&nbsp;
+
                             </div>
                             <div>
-                                <label>Dirección:&nbsp;&nbsp;
-                                    <input type="text" placeholder="Dirección">
-                                    <br>
-                                </label>
+                                <label class="labelAlineado">Dirección:&nbsp;&nbsp;</label>
+                                <input type="text" placeholder="Dirección">
+
                             </div>
                             <div>
-                                <label>CP:&nbsp;</label>
+                                <label class="labelAlineado">CP:&nbsp;</label>
                                 <input type="text" placeholder="Código Postal">
                             </div>
                             <div>
-                                <label>Nº Habitaciones:&nbsp;
-                                    <input type="number" name="superficio" min="1" placeholder="Número de habitaciones">&nbsp;
-                                    <br>
-                                </label>
+                                <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
+                                <input type="number" name="superficio" min="1" placeholder="Número de habitaciones">&nbsp;
+
                             </div>
                             <div>
-                                <label>Nº Baños:&nbsp;
-                                    <input type="number" name="superficio" min="1" placeholder="Número de baños">&nbsp;
-                                    <br>
-                                </label>
+                                <label class="labelAlineado">Nº Baños:&nbsp;</label>
+                                <input type="number" name="superficio" min="1" placeholder="Número de baños">&nbsp;
+
                             </div>
                         </fieldset>
                         <br>
                         <fieldset class="shadow p-2 mb-auto mb-2 mt-auto">
                             <legend>Certificado energético</legend>
                             <div>
-                                <label>Escala eficiencia consumo:&nbsp;</label>
+                                <label class="labelAlineado labelAlineadoCertificado">Escala eficiencia consumo:&nbsp;</label>
                                 <select>
                                     <option value="A" selected="">A</option>
                                     <option value="B">B</option>
@@ -120,7 +116,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label>Escala eficiencia emisiones:&nbsp;</label>
+                                <label class="labelAlineado labelAlineadoCertificado">Escala eficiencia emisiones:&nbsp;</label>
                                 <select>
                                     <option value="A" selected="">A</option>
                                     <option value="B">B</option>
@@ -146,7 +142,7 @@
                             <legend>Extras</legend>
                             <div id="divExtras" class="d-flex flex-nowrap justify-content-between flex-row">
                                 <div class="h-100 shadow w-25 text-center ml-3 p-3">
-                                    <label>Extras Finca:&nbsp;</label>
+                                    <label class="labelAlineado">Extras Finca:&nbsp;</label>
                                     <select multiple="">
                                         <option value="garajePrivado" selected="">Garaje privado</option>
                                         <option value="trastero">Trastero</option>
@@ -158,7 +154,7 @@
                                 </div>
                                 <br>
                                 <div class="p-3 w-25 shadow text-center">
-                                    <label>Extras Básicos:&nbsp;</label>
+                                    <label class="labelAlineado">Extras Básicos:&nbsp;</label>
                                     <select multiple="">
                                         <option value="aireAcondicionado" selected="">Aire acondicionado</option>
                                         <option value="armarios">Armarios</option>
@@ -181,7 +177,7 @@
                                 </div>
                                 <br>
                                 <div class="shadow p-3 w-25 text-center">
-                                    <label>Otros Extras:</label>
+                                    <label class="labelAlineado">Otros Extras:</label>
                                     <label style="font-size: 1rem;">&nbsp;</label>
                                     <span style="font-size: 1rem; font-weight: 400;"> </span>
                                     <select multiple="">
