@@ -230,19 +230,61 @@ VALUES
 (6, 'Trastero');
 
 
+INSERT INTO `extras` (`idExtra`, `extra`) VALUES
+(1, 'Garaje Privado'),
+(2, 'Trastero'),
+(3, 'Ascensor'),
+(4, 'Parking Comunitario'),
+(5, 'Servicio de Portería'),
+(6, 'Videoportero'),
+(7, 'Aire acondicionado'),
+(8, 'Armarios'),
+(9, 'Calefacción'),
+(10, 'Parquet'),
+(11, 'Cocina Office'),
+(12, 'Suite con baño'),
+(13, 'Amueblado'),
+(14, 'Electrodomésticos'),
+(15, 'Horno'),
+(16, 'Lavadora'),
+(17, 'Microondas'),
+(18, 'Nevera'),
+(19, 'TV'),
+(20, 'Internet'),
+(21, 'Puerta Blindada'),
+(22, 'Lavadero'),
+(23, 'No Amueblado'),
+(24, 'Jardín Privado'),
+(25, 'Terraza'),
+(26, 'Zona Comunitaria'),
+(27, 'Patio'),
+(28, 'Piscina'),
+(29, 'Balcón'),
+(30, 'Zona Deportiva'),
+(31, 'Zona Infantil'),
+(32, 'Piscina Comunitaria');
+
+
 ```
 
 
 ## Tecnologías y Herramientas
 
-* HTML 5 & CSS3
-* JavaScript (ECMAScript 6)
-* Jquery 3
-* BootStrap 4
-* MySQL 5.7 & Workbench 6.3
-* PHP 7
-* PhpMyAdmin 4.9
-* PhpStorm 2019.3 
+* Front-End
+  * HTML 5 & CSS3
+  * JavaScript (ECMAScript 6)
+  * Jquery 3
+  * BootStrap 4
+
+* Back-End
+  * MySQL Server 5.7
+  * MySQL Workbench 6.3
+  * PHP 7
+  * PhpMyAdmin 4.9
+
+* IDEs
+  * PhpStorm 2019.3
+  * Visual Studio Code 1.40
 
 ## Por hacer
 

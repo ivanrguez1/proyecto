@@ -149,11 +149,11 @@ DEFAULT CHARACTER SET = utf8mb4;
 DROP TABLE IF EXISTS `upocasa`.`mensajes` ;
 
 CREATE TABLE IF NOT EXISTS `upocasa`.`mensajes` (
-  `idMensajes` INT NOT NULL AUTO_INCREMENT,
+  `idMensaje` INT NOT NULL AUTO_INCREMENT,
   `idUsuOrigen` INT NOT NULL,
   `idUsuDestino` INT NOT NULL,
   `mensaje` VARCHAR(450) NOT NULL,
-  PRIMARY KEY (`idMensajes`),
+  PRIMARY KEY (`idMensaje`),
   INDEX `fk_mensajes_usuarios_idx` (`idUsuOrigen` ASC),
   INDEX `fk_mensajes_usuarios2_idx` (`idUsuDestino` ASC),
   CONSTRAINT `fk_mensajes_usuarios1`
@@ -260,7 +260,9 @@ INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 (32, 'Piscina Comunitaria');
 
 
-
+INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
+(1, 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
+(2, 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13');
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
