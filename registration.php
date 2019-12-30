@@ -84,10 +84,11 @@ if(isset($_POST['email'])) {
                 <div class="block-heading">
                     <h2 class="text-info">Registro</h2>
                 </div>
+
                 <?php
-                
                     echo $mensaje;
                 ?>
+                
                 <form method="post" action="registration.php" onsubmit="return verCondiciones()">
                     <div class="form-group">
                         <label for="name">Nombre</label>
