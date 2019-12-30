@@ -134,7 +134,7 @@
                         </fieldset>
                         <br>
                         <p>
-                            <legend class="shadow-none p-2 pb-auto mb-2 mt-auto ">Comentarios del Inmueble
+                            <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                 <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
                                 <textarea rows="5" cols="100" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                 <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
