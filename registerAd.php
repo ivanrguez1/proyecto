@@ -6,6 +6,31 @@ $mensaje = "---";
 if(isset($_POST['envio'])) {
     $mensaje = "Enviado!<br><br>";
     // TODO Toda la lógica PHP de Alta del anuncio
+    $tipoVivienda = $_POST['tipoVivienda'];
+    $tipoAnuncio = $_POST['tipoAnuncio'];
+    $precio = $_POST['precio'];
+    $superficie = $_POST['superficie'];
+    $direccion = $_POST['direccion'];
+    $codPostal = $_POST['codPostal'];
+    $numHabitaciones = $_POST['numHabitaciones'];
+    $numAseos = $_POST['numAseos'];
+    $comentarios = $_POST['comentarios'];
+    
+    $mensaje .= "Tipo Vivienda: ".$tipoVivienda."<br />".
+                "Tipo Anuncio: ".$tipoAnuncio."<br />".
+                "Precio: ".$precio."<br />".
+                "Superficie: ".$superficie."<br />".
+                "Dirección: ".$direccion."<br />".
+                "Cod Postal: ".$codPostal."<br />".
+                "Nº Hab: ".$numHabitaciones."<br />".
+                "Nº Baños: ".$numAseos."<br />".
+                "Comentarios: ".$comentarios."<br />";
+    // Ojo, los extras vienen como array
+    $extras = $_POST['extras'];
+    foreach ($extras as $extra) {
+        $mensaje .= "Extra: ".$extra."<br />";
+    }
+
 }
 
 ?>
@@ -39,12 +64,15 @@ if(isset($_POST['envio'])) {
 
 <body>
     <?php 
+    /*
     if (isset($_SESSION['correo'])) {
         include "./header-logged.php";  
     } else {
         include "./header.html"; 
     }
+    */
     ?>
+    
     <main class="page faq-page">
         <section>
             <div class="container">
@@ -70,31 +98,31 @@ if(isset($_POST['envio'])) {
                             <legend class="pt-auto pb-2">Características del inmueble</legend>
                             <div>
                                 <label class="labelAlineado">Tipo de Vivienda:&nbsp;</label>
-                                <select>
-                                    <option value="vivienda" selected="">Vivienda</option>
-                                    <option value="garaje">Garaje</option>
-                                    <option value="terreno">Terreno</option>
-                                    <option value="localComercial">Local Comercial</option>
-                                    <option value="oficina">Oficina</option>
-                                    <option value="trastero">Trastero</option>
+                                <select name="tipoVivienda">
+                                    <option value="1" selected="">Vivienda</option>
+                                    <option value="2">Garaje</option>
+                                    <option value="3">Terreno</option>
+                                    <option value="4">Local Comercial</option>
+                                    <option value="5">Oficina</option>
+                                    <option value="6">Trastero</option>
                                 </select>
                             </div>
                             <div>
                                 <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="venta">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1">
                                     <label class="form-check-label">Vendo</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="alquilar">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="2">
                                     <label class="form-check-label">Alquilo</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="compartir">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="3">
                                     <label class="form-check-label">Comparto</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="vacacional">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="4">
                                     <label class="form-check-label">Vacacional</label>
                                 </div>
                             </div>
@@ -104,26 +132,26 @@ if(isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                <input type="number" name="superficio" min="1" placeholder="Superficie" step="0.01">&nbsp;
+                                <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Dirección:&nbsp;&nbsp;</label>
-                                <input type="text" placeholder="Dirección">
+                                <input type="text" placeholder="Dirección" name="direccion">
 
                             </div>
                             <div>
                                 <label class="labelAlineado">CP:&nbsp;</label>
-                                <input type="text" placeholder="Código Postal">
+                                <input type="text" placeholder="Código Postal" name="codPostal">
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="superficio" min="1" placeholder="Número de habitaciones">&nbsp;
+                                <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="superficio" min="1" placeholder="Número de baños">&nbsp;
+                                <input type="number" name="numAseos" min="1" placeholder="Número de baños">&nbsp;
 
                             </div>
                         </fieldset>
@@ -132,7 +160,7 @@ if(isset($_POST['envio'])) {
                             <legend>Certificado energético</legend>
                             <div>
                                 <label class="labelAlineado labelAlineadoCertificado">Escala eficiencia consumo:&nbsp;</label>
-                                <select>
+                                <select name="consumo">
                                     <option value="A" selected="">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -144,7 +172,7 @@ if(isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado labelAlineadoCertificado">Escala eficiencia emisiones:&nbsp;</label>
-                                <select>
+                                <select name="emisiones">
                                     <option value="A" selected="">A</option>
                                     <option value="B">B</option>
                                     <option value="C">C</option>
@@ -159,7 +187,8 @@ if(isset($_POST['envio'])) {
                         <p>
                             <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                 <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
-                                <textarea rows="5" cols="100" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
+                                <textarea rows="5" cols="100" name="comentarios"
+                                    class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                 <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
                             </legend>
                         </p>
@@ -170,36 +199,36 @@ if(isset($_POST['envio'])) {
                             <div id="divExtras" class="d-flex flex-nowrap justify-content-between flex-row">
                                 <div class="h-100 shadow w-25 text-center ml-3 p-3">
                                     <label class="labelAlineado">Extras Finca:&nbsp;</label>
-                                    <select multiple="">
-                                        <option value="garajePrivado" selected="">Garaje privado</option>
-                                        <option value="trastero">Trastero</option>
-                                        <option value="ascensor">Ascensor</option>
-                                        <option value="parkingComunitario">Parking comunitario</option>
-                                        <option value="servicioPorteria">Servicio de portería</option>
-                                        <option value="videportero">Videoportero</option>
+                                    <select multiple="multiple" name="extras[]">
+                                        <option value="1" selected="">Garaje privado</option>
+                                        <option value="2">Trastero</option>
+                                        <option value="3">Ascensor</option>
+                                        <option value="4">Parking comunitario</option>
+                                        <option value="5">Servicio de portería</option>
+                                        <option value="6">Videoportero</option>
                                     </select>
                                 </div>
                                 <br>
                                 <div class="p-3 w-25 shadow text-center">
                                     <label class="labelAlineado">Extras Básicos:&nbsp;</label>
-                                    <select multiple="">
-                                        <option value="aireAcondicionado" selected="">Aire acondicionado</option>
-                                        <option value="armarios">Armarios</option>
-                                        <option value="calefaccion">Calefacción</option>
-                                        <option value="parquet">Parquet</option>
-                                        <option value="cocinaOffice">Cocina Office</option>
-                                        <option value="suiteConBaño">Suite con baño</option>
-                                        <option value="amueblado">Amueblado</option>
-                                        <option value="electrodomesticos">Electrodomésticos</option>
-                                        <option value="horno">Horno</option>
-                                        <option value="lavadora">Lavadora</option>
-                                        <option value="microondas">Microondas</option>
-                                        <option value="nevera">Nevera</option>
-                                        <option value="tv">TV</option>
-                                        <option value="internet">Internet</option>
-                                        <option value="puertaBlindada">Puerta Blindada</option>
-                                        <option value="lavadero">Lavadero</option>
-                                        <option value="noAmueblado">No Amueblado</option>
+                                    <select multiple="multiple" name="extras[]">
+                                        <option value="7" selected="">Aire acondicionado</option>
+                                        <option value="8">Armarios</option>
+                                        <option value="9">Calefacción</option>
+                                        <option value="10">Parquet</option>
+                                        <option value="11">Cocina Office</option>
+                                        <option value="12">Suite con baño</option>
+                                        <option value="13">Amueblado</option>
+                                        <option value="14">Electrodomésticos</option>
+                                        <option value="15">Horno</option>
+                                        <option value="16">Lavadora</option>
+                                        <option value="17">Microondas</option>
+                                        <option value="18">Nevera</option>
+                                        <option value="19">TV</option>
+                                        <option value="20">Internet</option>
+                                        <option value="21">Puerta Blindada</option>
+                                        <option value="22">Lavadero</option>
+                                        <option value="23">No Amueblado</option>
                                     </select>
                                 </div>
                                 <br>
@@ -207,16 +236,16 @@ if(isset($_POST['envio'])) {
                                     <label class="labelAlineado">Otros Extras:</label>
                                     <label style="font-size: 1rem;">&nbsp;</label>
                                     <span style="font-size: 1rem; font-weight: 400;"> </span>
-                                    <select multiple="">
-                                        <option value="jardinPrivado" selected="">Jardín Privado</option>
-                                        <option value="terreza">Terraza</option>
-                                        <option value="zonaComunitaria">Zona Comunitaria</option>
-                                        <option value="patio">Patio</option>
-                                        <option value="piscina">Piscina</option>
-                                        <option value="balcon">Balcón</option>
-                                        <option value="zonaDeportiva">Zona Deportiva</option>
-                                        <option value="zonaInfantil">Zona Infantil</option>
-                                        <option value="piscinaComunitaria">Piscina Comunitaria</option>
+                                    <select multiple="multiple" name="extras[]">
+                                        <option value="24" selected="">Jardín Privado</option>
+                                        <option value="25">Terraza</option>
+                                        <option value="26">Zona Comunitaria</option>
+                                        <option value="27">Patio</option>
+                                        <option value="28">Piscina</option>
+                                        <option value="29">Balcón</option>
+                                        <option value="30">Zona Deportiva</option>
+                                        <option value="31">Zona Infantil</option>
+                                        <option value="32">Piscina Comunitaria</option>
                                     </select>
                                 </div>
                             </div>

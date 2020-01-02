@@ -3,7 +3,7 @@
 # Tabla de contenidos
 1. [Integrantes](#integrantes)
 2. [Base de datos](#base-de-datos)
-3. [Tecnologías y Herramientas](#tecnologias-y-herramientas)
+3. [Tecnologías y Herramientas](#tecnologías-y-herramientas)
 4. [Por hacer](#por-hacer)
 
 ## Integrantes
@@ -284,13 +284,14 @@ INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
   * PHP 7
   * PhpMyAdmin 4.9
 
-* IDEs
+* Otros
   * PhpStorm 2019.3
   * Visual Studio Code 1.40
+  * Markdown
 
 ## Por hacer
 
-* (registration) Lógica PHP
-* (login) Lógica PHP
+* (registration) Depurar
+* (login) Lógica PHP (sólo Cookies)
 * (registerAd) Lógica PHP
 

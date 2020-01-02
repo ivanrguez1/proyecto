@@ -19,6 +19,6 @@
 
 ### Pendientes
 
-* (registerAd.php) Toda la lógica PHP
+* (registerAd.php) SQL de inserción (recogida de datos terminada)
 * (login.php) Gestión de Cookies
 * (NOTAS_GIT) Pasarlo a Markdown
