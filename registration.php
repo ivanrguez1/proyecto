@@ -2,7 +2,7 @@
 require_once("assets/php/bbdd.php");
 session_start();
 
-$mensaje = "";
+$mensaje = "---";
 
 if(isset($_POST['email'])) {
     // Saneo los inputs recibidos
@@ -27,7 +27,7 @@ if(isset($_POST['email'])) {
 
         $resultado = ejecutaConsulta ($sql);
         if ($resultado) {
-            $mensaje = "Registro correcto";
+            header("Location:login.php");
         } else {
             $mensaje = "No se ha podido registrar";
         }
@@ -53,6 +53,7 @@ if(isset($_POST['email'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
     <!-- Se añade Jquery 3.4.1 & Bootstrap -->
     <script src="assets/js/jquery.min.js"></script>
@@ -84,11 +85,10 @@ if(isset($_POST['email'])) {
                 <div class="block-heading">
                     <h2 class="text-info">Registro</h2>
                 </div>
+                    <!-- Mensajes del servidor referentes al registro -->
+                   <p id="mensajes"><?php
+                    echo $mensaje; ?>
 
-                <?php
-                    echo $mensaje;
-                ?>
-                
                 <form method="post" action="registration.php" onsubmit="return verCondiciones()">
                     <div class="form-group">
                         <label for="name">Nombre</label>

@@ -1,3 +1,14 @@
+<?php
+require_once("assets/php/bbdd.php");
+session_start();
+$mensaje = "---";
+
+if(isset($_POST['envio'])) {
+    $mensaje = "Enviado!<br><br>";
+    // TODO Toda la lógica PHP de Alta del anuncio
+}
+
+?>
 <!DOCTYPE html>
 <html>
 
@@ -18,10 +29,22 @@
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
     <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
+    <script src="assets/js/smoothproducts.min.js"></script>
+    <script src="assets/js/theme.js"></script>
 </head>
 
 <body>
-    <?php include "./header.html" ?>
+    <?php 
+    if (isset($_SESSION['correo'])) {
+        include "./header-logged.php";  
+    } else {
+        include "./header.html"; 
+    }
+    ?>
     <main class="page faq-page">
         <section>
             <div class="container">
@@ -29,6 +52,10 @@
                     <h2 class="text-info text-center mt-5">Alta de Anuncio</h2>
                 </div>
                 <div>
+                     <!-- Mensajes del servidor referentes al registro -->
+                    <p id="mensajes"><?php
+                    echo $mensaje; ?>
+
                     <form action="#" method="post" enctype="multipart/form-data">
                         <fieldset class="shadow pl-3 pb-1 pt-auto bg-white mb-2 mt-5">
                             <legend class="">Carga de imágenes</legend>
@@ -195,18 +222,13 @@
                             </div>
                         </fieldset>
                         <br><br><br>
-                        <button class="btn btn-primary btn-block" type="submit">Enviar</button>
+                        <input class="btn btn-primary btn-block" type="submit" value="Enviar" name="envio"></input>
                     </form>
                 </div>
             </div>
         </section>
     </main>
     <?php include "./footer.html" ?>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
-    <script src="assets/js/smoothproducts.min.js"></script>
-    <script src="assets/js/theme.js"></script>
 </body>
 
 </html>

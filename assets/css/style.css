@@ -16,3 +16,8 @@
 .labelAlineadoCertificado {
     width: 235px;
 }
+
+/* Los mensajes del servidor van centrados */
+p#mensajes {
+    text-align: center;
+}

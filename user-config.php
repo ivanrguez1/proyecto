@@ -3,47 +3,15 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "";
 
-if(isset($_POST['email'])) {
-    // Saneo los inputs recibidos
-    $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
-    $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
+if(isset($_POST['envio'])) {
+    $mensaje = "Enviado!<br><br>";
+    // TODO Toda la lógica PHP de Modificación de datos del usuario
+}
 
-    // Creo la consulta para acceder a la BBDD y la ejecuto
-    $sql = "SELECT * FROM usuarios WHERE correo = '" . $email . "'";
-    $mensaje = $sql;
-    $resultado = ejecutaConsulta ($sql);
-    $numRegistros = mysqli_num_rows($resultado);
-
-    if ($numRegistros == 1) {
-        $registro = mysqli_fetch_assoc($resultado);
-        
-        // Hasta que se pruebe el registro con la encriptación, valen las claves sin encriptar
-        if (password_verify($password, $registro['clave'])) {
-
-            
-            
-            // Iniciamos la sesión y escribimos la cookie para guardar los datos
-            session_start();
-            $_SESSION['nombre'] = $registro['nombre'];
-            $_SESSION['correo'] = $registro['correo'];
-            /* 
-
-            // TODO: Gestión de cookies
-            // Ponemos una cookie que durará 1 mes
-            if (!isset($_COOKIE["usuario"])) {
-                setcookie("nombre", $registro['nombre'], (time() + (60 * 60 * 24 * 30)));
-            }
-            header("Location:registerAd.php.php");
-            */
-            $mensaje = "Acceso Correcto!<br><br>";
-        } else {
-            $mensaje = "Contraseña incorrecta<br><br>";
-            //die();
-        }
-    } else {
-        $mensaje = "El usuario no existe<br><br>";
-        //die();
-    }
+// Cierro la sesión y redirecciono 
+if(isset($_POST['logout'])) {
+    session_destroy();
+    header("Location:login.php");
 }
 
 
@@ -91,29 +59,25 @@ if(isset($_POST['email'])) {
         <section class="clean-block clean-form dark">
             <div class="container">
                 <div class="block-heading">
-                    <h2 class="text-info">Inicio de Sesión</h2>
+                    <h2 class="text-info">Modificar Usuario</h2>
                 </div>
 
                  <!-- Mensajes del servidor referentes al registro -->
                  <p id="mensajes"><?php
                     echo $mensaje; ?>
 
-                <form method="post" action="login.php" >
+                <form method="post" action="user-config.php" >
                     <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control item" id="email" name="email"/></div>
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control item" id="name" name="nombre" /></div>
                     <div class="form-group">
                         <label for="password">Contraseña</label>
                         <input type="password" class="form-control" id="password" name="password"/></div>
                     <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="recuerdame" />
-                            <label class="form-check-label" for="recuerdamelo">Recuérdame</label>
-                        </div>
-                    </div>
-                    <input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesión"></input>
-                    <br>
-                    ¿No tienes cuenta? <a href='registration.php'>Registrarse</a>
+                        <label for="password2">Repita Contraseña</label>
+                        <input type="password2" class="form-control" id="password2" name="password2"/></div>
+                    <input class="btn btn-primary btn-block" type="submit" value="Modificar Usuario" name="envio"></input><br/>
+                    <input class="btn btn-primary btn-block" type="submit" value="Cerrar Sesión" name="logout"></input>
                 </form>
 
             </div>
