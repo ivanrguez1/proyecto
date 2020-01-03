@@ -85,11 +85,11 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`anuncios` (
   `idAnuncio` INT NOT NULL AUTO_INCREMENT,
   `idUsuario` INT NOT NULL,
   `idTipoAnuncio` INT NOT NULL,
-  `idTipoVivienda` VARCHAR(45) NOT NULL,
+  `idTipoVivienda` INT NOT NULL,
   `precio` DECIMAL NOT NULL,
   `superficie` DECIMAL NOT NULL,
   `direccion` VARCHAR(120) NOT NULL,
-  `codPostal` TINYINT(5) NOT NULL,
+  `codPostal` SMALLINT(2) UNSIGNED NOT NULL,
   `numHabitaciones` TINYINT(2) NULL,
   `numAseos` TINYINT(2) NULL,
   `consumo` CHAR(1) NULL,
@@ -111,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`anuncios` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_anuncios_tiposVivienda`
     FOREIGN KEY (`idTipoVivienda`)
-    REFERENCES `upocasa`.`tiposVivienda` (`tipoVivienda`)
+    REFERENCES `upocasa`.`tiposVivienda` (`idtipoVivienda`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
@@ -210,13 +210,15 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- -----------------------------------------------------
 -- INSERT
 -- -----------------------------------------------------
+
+-- Tipos de Anuncio
 INSERT INTO `tiposAnuncio` (`idTipoAnuncio`, `tipoAnuncio`) VALUES
 (1, 'Vendo'),
 (2, 'Alquilo'),
 (3, 'Comparto'),
 (4, 'Vacacional');
 
-
+-- Tipos de Vivienda
 INSERT INTO `tiposVivienda` (`idtipoVivienda`, `tipoVivienda`) VALUES
 (1, 'Vivienda'),
 (2, 'Garaje'),
@@ -225,6 +227,7 @@ INSERT INTO `tiposVivienda` (`idtipoVivienda`, `tipoVivienda`) VALUES
 (5, 'Oficina'),
 (6, 'Trastero');
 
+-- Extras
 INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 (1, 'Garaje Privado'),
 (2, 'Trastero'),
@@ -259,10 +262,38 @@ INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 (31, 'Zona Infantil'),
 (32, 'Piscina Comunitaria');
 
-
-INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
+-- Usuarios
+INSERT INTO `usuarios` 
+(`idUsuario`, `nombre`, `correo`, `clave`, `alta`) 
+VALUES
 (1, 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
 (2, 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13');
+
+-- Anuncios
+INSERT INTO `anuncios` 
+(`idAnuncio`, `idUsuario`, `idTipoAnuncio`, `idTipoVivienda`, 
+`precio`, `superficie`, `direccion`, `codPostal`, `numHabitaciones`, 
+`numAseos`, `consumo`, `emisiones`, `comentarios`) 
+VALUES
+(1, 2, 1, 2, '23000', '30', 'Paris, 29', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
+(2, 2, 1, 2, '15000', '100', 'Paris, 14', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
+(3, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
+(4, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
+(5, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
+(6, 2, 1, 1, '250000', '120', 'Paris, 23', 41089, 3, 2, 'A', 'A', 'Prueba'),
+(7, 2, 1, 1, '900000', '175', 'San Bernardo', 41012, 5, 4, 'A', 'A', 'Prueba Final');
+
+-- Anuncios-extras
+INSERT INTO `anuncios_extras` (`idAnuncio`, `idExtra`) VALUES
+(4, 1),(5, 1),(7, 1),(7, 3),
+(4, 7),(5, 7),(7, 7),(7, 9),
+(7, 10),(4, 24),(5, 24),(7, 24),
+(7, 26),(7, 27);
+
+-- Fotos
+INSERT INTO `fotos` (`idFoto`, `idAnuncio`, `urlFoto1`, `urlFoto2`, `urlFoto3`, `urlFoto4`, `urlFoto5`) VALUES
+(2, 6, 'assets/img/ads/destacado2.jpg', NULL, NULL, NULL, NULL),
+(3, 7, 'assets/img/ads/destacado3.jpg', NULL, NULL, NULL, NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

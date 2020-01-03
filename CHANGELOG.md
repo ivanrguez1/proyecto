@@ -3,22 +3,35 @@
 # CHANGELOG
 
 # Tabla de contenidos
-1. [2020-01-02](#2020-01-02)
+1. [2020-01-03](#2020-01-03)
+2. [2020-01-02](#2020-01-02)
 
+
+## 2020-01-03
+
+### Nuevos 
+
+* [+] Creado archivo ad-search.php         -> Realiza búsquedas de anuncios (OR)
+
+### Cambios
+
+[*] Modificado archivo /assets/bbdd.php    -> devolverId ($correo), mete en SESSION[idUsuario] la id del usuario logado
+                                           -> ejecutaInsercion ($sql), devuelve la id de la ultima inserción
+[*] Modificado upocasa.sql                 -> (fix) anuncios.codPostal (TINYINT -> SMALLINT UNSIGNED)
+                                           -> (fix) REFERENCES `upocasa`.`tiposVivienda` (`idtipoVivienda`)
+[*] Modificado archivo registerAd.php      -> Desarrollada toda la lógica PHP, excepto subida de fotos (falta modularizar)
+[*] Modificado archivo upocasa.sql         -> Añadidos registros en tablas Anuncios y asociados
 
 ## 2020-01-02
 
-### Cambios 
+### Nuevos 
 
 * [+] Creado archivo CHANGELOG.md (Registro de cambios)
 * [+] Creado archivo user-config.php para modificar datos del usuario y Cerrar Sesión (OJO!)
 * [+] Creado archivo header-logged.php con cabecera alternativa al estar logado
 * [+] Creado archivo NOTAS_GIT con documentación sobre GIT
+
+### Cambios
+
 * [*] Modificado archivo registerAd.php (los script ahora van en la cabecera)
 * [*] Modificado archivo /assets/style.css -> Párrafo de Mensajes centrado
-
-### Pendientes
-
-* (registerAd.php) SQL de inserción (recogida de datos terminada)
-* (login.php) Gestión de Cookies
-* (NOTAS_GIT) Pasarlo a Markdown

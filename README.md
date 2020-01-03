@@ -291,7 +291,12 @@ INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
 
 ## Por hacer
 
-* (registration) Depurar
-* (login) Lógica PHP (sólo Cookies)
-* (registerAd) Lógica PHP
+* (registration)          -> Depurar
+* (registerAd.php)        -> Modularizar la recogida de Fotos
+* (login.php)             -> Gestión de Cookies
+* (NOTAS_GIT)             -> Pasarlo a Markdown
+* (Nuevo! ads.php)        -> Anuncios por usuario 
+* (Nuevo! ad-search.php)  -> Búsqueda de anuncios (Pendiente botones ELIMINAR Y MODIFICAR); Añadir Jquery
+* (Nuevo! ad-show.php)    -> Anuncio concreto
+* (Nuevo! messages.php)   -> Mensajeria entre usuarios
 

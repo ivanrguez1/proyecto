@@ -28,3 +28,17 @@ function ejecutaConsulta ($sql) {
     return $resultado;
 }
 
+function ejecutaInsercion ($sql) {
+    $conexion = conectarBBD ();
+    mysqli_query($conexion, $sql);
+    return mysqli_insert_id($conexion);
+}
+
+function devolverId ($correo) {
+    $sql = "SELECT idUsuario FROM usuarios WHERE correo = '".$correo."'";
+    $resultado = ejecutaConsulta ($sql);
+    $registro = mysqli_fetch_assoc($resultado);
+    $id = $registro['idUsuario'];
+    return $id;
+}
+

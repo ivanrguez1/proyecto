@@ -1,11 +1,12 @@
 <?php
 require_once("assets/php/bbdd.php");
 session_start();
-$mensaje = "---";
+$mensaje = "-----";
+
 
 if(isset($_POST['envio'])) {
-    $mensaje = "Enviado!<br><br>";
-    // TODO Toda la lógica PHP de Alta del anuncio
+
+    // Toda la lógica PHP de Alta del anuncio (tablas anuncios y anuncios_extras)
     $tipoVivienda = $_POST['tipoVivienda'];
     $tipoAnuncio = $_POST['tipoAnuncio'];
     $precio = $_POST['precio'];
@@ -14,25 +15,70 @@ if(isset($_POST['envio'])) {
     $codPostal = $_POST['codPostal'];
     $numHabitaciones = $_POST['numHabitaciones'];
     $numAseos = $_POST['numAseos'];
+    $consumo = $_POST['consumo'];
+    $emisiones = $_POST['emisiones'];
     $comentarios = $_POST['comentarios'];
-    
-    $mensaje .= "Tipo Vivienda: ".$tipoVivienda."<br />".
-                "Tipo Anuncio: ".$tipoAnuncio."<br />".
-                "Precio: ".$precio."<br />".
-                "Superficie: ".$superficie."<br />".
-                "Dirección: ".$direccion."<br />".
-                "Cod Postal: ".$codPostal."<br />".
-                "Nº Hab: ".$numHabitaciones."<br />".
-                "Nº Baños: ".$numAseos."<br />".
-                "Comentarios: ".$comentarios."<br />";
-    // Ojo, los extras vienen como array
     $extras = $_POST['extras'];
-    foreach ($extras as $extra) {
-        $mensaje .= "Extra: ".$extra."<br />";
+
+    $idUsuario = $_SESSION['idUsuario'];
+    
+    // Rellenamos los datos de la tabla anuncios
+    $sql = "INSERT INTO anuncios 
+    (idUsuario, idTipoAnuncio, idTipoVivienda, precio, 
+    superficie, direccion, codPostal, numHabitaciones, 
+    numAseos, consumo, emisiones, comentarios)
+    VALUES
+    ('".$idUsuario."','".$tipoAnuncio."','".$tipoVivienda."','".$precio."',
+    '".$superficie."','".$direccion."','".$codPostal."','".$numHabitaciones."',
+    '".$numAseos."','".$consumo."','".$emisiones."','".$comentarios."')";
+
+    $idAnuncio = ejecutaInsercion($sql);
+    
+    // Rellenamos los datos de la tabla anuncios_extras
+    $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
+    VALUES ";
+    for ($i = 0; $i < count($extras)-1; $i++) {
+        $sql .= "('".$idAnuncio."','".$extras[$i]."'),";
+    }
+    $sql .= "('".$idAnuncio."','".$extras[count($extras)-1]."');";
+
+    ejecutaInsercion($sql);
+
+    // ----------------------------------------------------------
+    // ALEX MIRA ESTO! (Funciona pero no lo puedo modularizar)
+    // ----------------------------------------------------------
+    // Recurso: https://code.tutsplus.com/es/tutorials/how-to-upload-a-file-in-php-with-example--cms-31763
+
+    if (isset($_FILES['foto1'])) {
+        $mensaje = "Enviada Foto!<br><br>";
+        $imgRuta = $_FILES['foto1']['tmp_name'];
+        $imgNombre = $_FILES['foto1']['name'];
+        $imgTam = $_FILES['foto1']['size'];
+        $imgTipo = $_FILES['foto1']['type'];
+        $imgComps = explode(".", $imgNombre);
+        $imgExtension = strtolower(end($imgComps));
+
+        // Directorio donde irá las imágenes de los anuncios
+        $directorioImg = 'assets/img/ads/';
+        $rutaDestino = $directorioImg . $imgNombre;
+        $mensaje .= $rutaDestino.'<br />';
+        
+        // Muevo la imagen a assets/img/ads
+        if(move_uploaded_file($imgRuta, $rutaDestino)){
+            $mensaje .='Imagen movida correctamente';
+        } else {
+            $mensaje .='Error en la subida';
+        }
+
+        // Ya solo queda hacer la inserción en la BBDD
+        $sql = "INSERT INTO fotos (idAnuncio, urlFoto1) VALUES ('".$idAnuncio."','".$rutaDestino."')";
+        ejecutaInsercion($sql);
     }
 
+    // ----------------------------------------------------------
+    // FIN DE RETOQUE ALEX
+    // ----------------------------------------------------------
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -49,7 +95,7 @@ if(isset($_POST['envio'])) {
     <link rel="stylesheet" href="assets/css/best-carousel-slide.css">
     <link rel="stylesheet" href="assets/css/Blog---Recent-Posts-1.css">
     <link rel="stylesheet" href="assets/css/Blog---Recent-Posts.css">
-    <link rel="stylesheet" href="assets/css/divider-text-middle.css">
+    <!--<link rel="stylesheet" href="assets/css/divider-text-middle.css">-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
@@ -64,13 +110,13 @@ if(isset($_POST['envio'])) {
 
 <body>
     <?php 
-    /*
+    
     if (isset($_SESSION['correo'])) {
         include "./header-logged.php";  
     } else {
         include "./header.html"; 
     }
-    */
+    
     ?>
     
     <main class="page faq-page">
@@ -82,16 +128,17 @@ if(isset($_POST['envio'])) {
                 <div>
                      <!-- Mensajes del servidor referentes al registro -->
                     <p id="mensajes"><?php
-                    echo $mensaje; ?>
+                    echo $mensaje; 
+                    ?>
 
                     <form action="#" method="post" enctype="multipart/form-data">
                         <fieldset class="shadow pl-3 pb-1 pt-auto bg-white mb-2 mt-5">
                             <legend class="">Carga de imágenes</legend>
-                            <input type="file" class="pt-2 pb-2 w-100">
-                            <input type="file" class="pt-2 pb-2 w-100">
-                            <input type="file" class="pt-2 pb-2 w-100">
-                            <input type="file" class="pt-2 pb-2 w-100">
-                            <input type="file" class="pt-2 pb-2 w-100">
+                            <input type="file" class="pt-2 pb-2 w-100" name="foto1">
+                            <input type="file" class="pt-2 pb-2 w-100" name="foto2">
+                            <input type="file" class="pt-2 pb-2 w-100" name="foto3">
+                            <input type="file" class="pt-2 pb-2 w-100" name="foto4">
+                            <input type="file" class="pt-2 pb-2 w-100" name="foto5">
                         </fieldset>
                         <br>
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">

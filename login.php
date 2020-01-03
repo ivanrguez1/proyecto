@@ -23,11 +23,13 @@ if(isset($_POST['email'])) {
             
             
             // Iniciamos la sesión y escribimos la cookie para guardar los datos
-            session_start();
             $_SESSION['nombre'] = $registro['nombre'];
             $_SESSION['correo'] = $registro['correo'];
+            
+            // Guardamos en una variable de sesión la ID del usuario logado
+            $_SESSION['idUsuario'] = devolverId($registro['correo']);
+            
             /* 
-
             // TODO: Gestión de cookies
             // Ponemos una cookie que durará 1 mes
             if (!isset($_COOKIE["usuario"])) {

@@ -25,6 +25,9 @@
                     <a class="nav-link" href="registration.php">Registro</a>
                 </li>
                 <li class="nav-item" role="presentation">
+                    <a class="nav-link" href="ad-search.php">Buscar</a>
+                </li>
+                <li class="nav-item" role="presentation">
                     <a class="nav-link" href="user-config.php"><?php
                     echo "Bienvenida/o ".$_SESSION['nombre'];
                     ?></a>
