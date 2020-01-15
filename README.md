@@ -300,3 +300,16 @@ INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
 * (Nuevo! ad-show.php)    -> Anuncio concreto
 * (Nuevo! messages.php)   -> Mensajeria entre usuarios
 
+
+## Diagramas
+
+```mermaid
+classDiagram
+    class BankAccount
+    BankAccount : +String owner
+    BankAccount : +Bigdecimal balance
+    BankAccount : +deposit(amount)
+    BankAccount : +withdrawl(amount)
+
+```
+
