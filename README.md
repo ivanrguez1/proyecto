@@ -296,8 +296,8 @@ INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
 * (login.php)             -> Gestión de Cookies
 * (NOTAS_GIT)             -> Pasarlo a Markdown
 * (Nuevo! ads.php)        -> Anuncios por usuario 
-* (Nuevo! ad-search.php)  -> Búsqueda de anuncios (Pendiente botones ELIMINAR Y MODIFICAR); Añadir Jquery
-* (Nuevo! ad-show.php)    -> Anuncio concreto
+* (ad-search.php)         -> Búsqueda de anuncios - Añadir Jquery!
+* (ad-show.php)           -> Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
 * (Nuevo! messages.php)   -> Mensajeria entre usuarios
 
 

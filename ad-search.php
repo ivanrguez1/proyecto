@@ -57,6 +57,10 @@ if(isset($_POST['envio'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>
     <script src="assets/js/theme.js"></script>
+    
+    <script type="text/javascript" language="javascript" src="assets/js/jquery.dataTables.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
 </head>
 
 <body>
@@ -71,6 +75,18 @@ if(isset($_POST['envio'])) {
     ?>
     
     <main class="page faq-page">
+
+    <!-- Definimos el DataTable-->
+    <script>
+    $(document).ready(function() {
+        $('#mitabla').DataTable( {
+        
+        "order": [[1, 'asc']],
+        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
+        "pagingType": "full_numbers",    // Se añaden los botobes Primero y último   
+    } );
+    } );
+    </script>
         <section>
             <div class="container">
                 <div class="block-heading">
@@ -82,7 +98,7 @@ if(isset($_POST['envio'])) {
                     <br />
                     <?php
                     if(isset($_POST['envio'])) {
-                        echo "<table class='table'>";
+                        echo '<table id="mitabla" class="table table-striped table-bordered" style="width:100%">';
                         echo "<thead>";
                         echo "<tr>";
                             echo "<th> Dirección </th>";
@@ -91,6 +107,7 @@ if(isset($_POST['envio'])) {
                             echo "<th> Superficie </th>";
                             echo "<th> Nº Habitaciones</th>";
                             echo "<th> Nº Baños</th>";
+                            echo "<th> Ver Anuncio</th>";
                         echo "</tr>";
                         echo "</thead>";    
                         while($registro = mysqli_fetch_array($resultado)) {
@@ -101,17 +118,19 @@ if(isset($_POST['envio'])) {
                             echo "<td>" . $registro['superficie'] . "</td>";
                             echo "<td>" . $registro['numHabitaciones'] . "</td>";
                             echo "<td>" . $registro['numAseos'] . "</td>";
+                            echo "<td><a href='ad-show.php?id=" . $registro['idAnuncio'] . "'>Ver Anuncio</a></td>";
                             echo "</tr>";
                         }
                         echo "</table>"; 
                         mysqli_free_result($resultado);
                     }
                     ?>
+                    <p>&nbsp;
                 </div>
                 
                 <div>
-                     <!-- Mensajes del servidor referentes al registro -->
-                    <p id="mensajes"><?php
+                    <!-- Mensajes del servidor referentes al registro -->
+                    <p id="mensajes" class="alert alert-success" ><?php
                     echo $mensaje; 
                     ?>
 

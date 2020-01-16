@@ -22,10 +22,10 @@
                     <a class="nav-link" href="registerAd.php">Alta Anuncio</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" href="registration.php">Registro</a>
+                    <a class="nav-link" href="ad-search.php">Buscar</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" href="ad-search.php">Buscar</a>
+                    <a class="nav-link" href="ads.php">Mis Anuncios</a>
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" href="user-config.php"><?php

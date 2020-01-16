@@ -1,3 +1,8 @@
+<?php
+require_once("assets/php/bbdd.php");
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -19,7 +24,13 @@
 </head>
 
 <body>
-    <?php include "./header.html" ?>
+    <?php 
+    if (isset($_SESSION['correo'])) {
+        include "./header-logged.php";  
+    } else {
+        include "./header.html"; 
+    } 
+    ?>
     <main class="page faq-page">
         <section class="clean-block clean-faq dark">
             <div class="container">

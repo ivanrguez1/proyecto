@@ -1,3 +1,8 @@
+<?php
+require_once("assets/php/bbdd.php");
+session_start();
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -20,7 +25,13 @@
 
 <body>
 
-  <?php include "./header.html" ?>
+  <?php 
+    if (isset($_SESSION['correo'])) {
+        include "./header-logged.php";  
+    } else {
+        include "./header.html"; 
+    } 
+  ?>
 
   <main class="page landing-page">
     <section id="carousel">
