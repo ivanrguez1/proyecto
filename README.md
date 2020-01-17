@@ -1,16 +1,33 @@
+# Informe de la aplicación
 # Proyecto UPOCASA
 
 # Tabla de contenidos
 1. [Integrantes](#integrantes)
-2. [Base de datos](#base-de-datos)
-3. [Tecnologías y Herramientas](#tecnologías-y-herramientas)
-4. [Por hacer](#por-hacer)
+2. [Por hacer](#por-hacer)
+3. [Base de datos](#base-de-datos)
+4. [Tecnologías y Herramientas](#tecnologías-y-herramientas)
+
 
 ## Integrantes
 
 Los integrantes de este proyecto son:
 * Alejandro Palomino García
 * Iván Alfonso Rodríguez Ruiz
+
+
+## Por hacer
+
+* (documentación)         -> Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
+* (documentación-manual)  -> Manual de uso de la aplicación  
+* (registration)          -> Depurar
+* (registerAd.php)        -> Modularizar la recogida de Fotos
+* (login.php)             -> Gestión de Cookies
+* (Nuevo! ads.php)        -> Anuncios por usuario 
+* (ad-search.php)         -> Búsqueda de anuncios - Añadir Jquery!
+* (ad-show.php)           -> Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
+* (Nuevo! messages.php)   -> Mensajeria entre usuarios
+
+
 
 ## Base de datos
 
@@ -289,16 +306,6 @@ INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
   * Visual Studio Code 1.40
   * Markdown
 
-## Por hacer
-
-* (registration)          -> Depurar
-* (registerAd.php)        -> Modularizar la recogida de Fotos
-* (login.php)             -> Gestión de Cookies
-* (NOTAS_GIT)             -> Pasarlo a Markdown
-* (Nuevo! ads.php)        -> Anuncios por usuario 
-* (ad-search.php)         -> Búsqueda de anuncios - Añadir Jquery!
-* (ad-show.php)           -> Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
-* (Nuevo! messages.php)   -> Mensajeria entre usuarios
 
 
 ## Diagramas
