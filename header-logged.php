@@ -1,6 +1,6 @@
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <div class="container">
-        <a class="navbar-brand logo" href="#">UPOCASA</a>
+        <a class="navbar-brand logo" href="index.php">UPOCASA</a>
         <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
             <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
         </button>
@@ -29,8 +29,8 @@
                 </li>
                 <li class="nav-item" role="presentation">
                     <a class="nav-link" href="user-config.php"><?php
-                    echo "Bienvenida/o ".$_SESSION['nombre'];
-                    ?></a>
+                                                                echo "Bienvenida/o " . $_SESSION['nombre'];
+                                                                ?></a>
                 </li>
             </ul>
         </div>
