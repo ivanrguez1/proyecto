@@ -89,6 +89,10 @@ if(isset($_POST['email'])) {
     <?php 
     
     if (isset($_SESSION['correo'])) {
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'])) {
+            echo $_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'];
+            mkdir($_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'], 0755, true);
+        }
         include "./header-logged.php";  
     } else {
         include "./header.html"; 

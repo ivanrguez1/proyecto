@@ -35,6 +35,8 @@ if(isset($_POST['envio'])) {
     '".$superficie."','".$direccion."','".$codPostal."','".$numHabitaciones."',
     '".$numAseos."','".$consumo."','".$emisiones."','".$comentarios."')";
 
+    echo $sql;
+
     $idAnuncio = ejecutaInsercion($sql);
     
     // Rellenamos los datos de la tabla anuncios_extras
@@ -48,39 +50,32 @@ if(isset($_POST['envio'])) {
     ejecutaInsercion($sql);
 
     // ----------------------------------------------------------
-    // ALEX MIRA ESTO! (Funciona pero no lo puedo modularizar)
-    // ----------------------------------------------------------
-    // Recurso: https://code.tutsplus.com/es/tutorials/how-to-upload-a-file-in-php-with-example--cms-31763
+    // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
 
-    if (isset($_FILES['foto1'])) {
-        $mensaje = "Enviada Foto!<br><br>";
-        $imgRuta = $_FILES['foto1']['tmp_name'];
-        $imgNombre = $_FILES['foto1']['name'];
-        $imgTam = $_FILES['foto1']['size'];
-        $imgTipo = $_FILES['foto1']['type'];
-        $imgComps = explode(".", $imgNombre);
-        $imgExtension = strtolower(end($imgComps));
+    $targetDir = $_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'].'/';
 
-        // Directorio donde irá las imágenes de los anuncios
-        $directorioImg = 'assets/img/ads/';
-        $rutaDestino = $directorioImg . $imgNombre;
-        $mensaje .= $rutaDestino.'<br />';
+    for ($i=1; $i < 6; $i++) { 
+        $fileName = time().basename($_FILES["foto".$i]["name"]);
+        $targetFilePath = $targetDir . $fileName;
+        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
         
-        // Muevo la imagen a assets/img/ads
-        if(move_uploaded_file($imgRuta, $rutaDestino)){
-            $mensaje .='Imagen movida correctamente';
-        } else {
-            $mensaje .='Error en la subida';
+        if(!empty($_FILES["foto".$i]["name"])){
+            $allowTypes = array('jpg','png','jpeg');
+            if(in_array($fileType, $allowTypes)){
+                // Upload file to server
+                if(move_uploaded_file($_FILES["foto".$i]["tmp_name"], $targetFilePath)){
+                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto".$i.") VALUES ('".$idAnuncio."','".$fileName."')";
+                    echo $sql;
+                    ejecutaInsercion($sql);
+                }else{
+                    $mensaje = 'Error en la subido de las fotos.';
+                }
+            }else{
+                $mensaje = 'Lo siento, solo se permiten fotos de tipo JPG, JPEG, PNG.';
+            }
+
         }
-
-        // Ya solo queda hacer la inserción en la BBDD
-        $sql = "INSERT INTO fotos (idAnuncio, urlFoto1) VALUES ('".$idAnuncio."','".$rutaDestino."')";
-        ejecutaInsercion($sql);
     }
-
-    // ----------------------------------------------------------
-    // FIN DE RETOQUE ALEX
-    // ----------------------------------------------------------
 }
 ?>
 <!DOCTYPE html>
@@ -168,7 +163,7 @@ if(isset($_POST['envio'])) {
                                         <label class="form-check-label">Alquilo</label>
                                     </div>
                                     <div class="form-check form-check-inline d-inline">
-                                        <input class="form-check-input" type="radio" name="tipoAnuncio" value="3">
+                                        <input clasfiles="form-check-input" type="radio" name="tipoAnuncio" value="3">
                                         <label class="form-check-label">Comparto</label>
                                     </div>
                                     <div class="form-check form-check-inline d-inline">
