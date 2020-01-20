@@ -127,11 +127,11 @@ DROP TABLE IF EXISTS `upocasa`.`fotos` ;
 CREATE TABLE IF NOT EXISTS `upocasa`.`fotos` (
   `idFoto` INT NOT NULL AUTO_INCREMENT,
   `idAnuncio` INT NULL,
-  `urlFoto1` VARCHAR(45) NULL,
-  `urlFoto2` VARCHAR(45) NULL,
-  `urlFoto3` VARCHAR(45) NULL,
-  `urlFoto4` VARCHAR(45) NULL,
-  `urlFoto5` VARCHAR(45) NULL,
+  `nombreFoto1` VARCHAR(45) NULL,
+  `nombreFoto2` VARCHAR(45) NULL,
+  `nombreFoto3` VARCHAR(45) NULL,
+  `nombreFoto4` VARCHAR(45) NULL,
+  `nombreFoto5` VARCHAR(45) NULL,
   INDEX `fk_fotos_anuncios_idx` (`idAnuncio` ASC),
   PRIMARY KEY (`idFoto`),
   CONSTRAINT `fk_fotos_anuncios`
@@ -291,7 +291,7 @@ INSERT INTO `anuncios_extras` (`idAnuncio`, `idExtra`) VALUES
 (7, 26),(7, 27);
 
 -- Fotos
-INSERT INTO `fotos` (`idFoto`, `idAnuncio`, `urlFoto1`, `urlFoto2`, `urlFoto3`, `urlFoto4`, `urlFoto5`) VALUES
+INSERT INTO `fotos` (`idFoto`, `idAnuncio`, `nombreFoto1`, `nombreFoto2`, `nombreFoto3`, `nombreFoto4`, `nombreFoto5`) VALUES
 (2, 6, 'assets/img/ads/destacado2.jpg', NULL, NULL, NULL, NULL),
 (3, 7, 'assets/img/ads/destacado3.jpg', NULL, NULL, NULL, NULL);
 
