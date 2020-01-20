@@ -4,21 +4,22 @@ session_start();
 
 $mensaje = "---";
 
-if(isset($_SESSION['nombre'])){
+if (isset($_SESSION['nombre'])) {
     header('Location: index.php');
 }
 
-if(isset($_POST['email'])) {
+if (isset($_POST['email'])) {
     // Saneo los inputs recibidos
     $nombre = filter_var(trim($_POST['nombre']), FILTER_SANITIZE_STRING);
+    $nick = filter_var(trim($_POST['nick']), FILTER_SANITIZE_STRING);
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
 
     // Para la clave, primero saneamos y luego encriptamos
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
-    $sql = "SELECT * FROM usuarios WHERE correo = '$email'";
-    $resultado = ejecutaConsulta ($sql);
+    $sql = "SELECT * FROM usuarios WHERE correo = '$email' OR nick = '$nick'";
+    $resultado = ejecutaConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 
     $mensaje = $numRegistros;
@@ -27,9 +28,9 @@ if(isset($_POST['email'])) {
         $mensaje = "Usuario ya registrado<br><br>";
         die();
     } else {
-        $sql = "INSERT INTO usuarios (nombre, correo, clave) VALUES ('" . $nombre . "', '" . $email . "', '" . $password . "')";
+        $sql = "INSERT INTO usuarios (nombre, nick, correo, clave) VALUES ('" . $nombre . "', '" . $nick . "', '" . $email . "', '" . $password . "')";
 
-        $resultado = ejecutaConsulta ($sql);
+        $resultado = ejecutaConsulta($sql);
         if ($resultado) {
             header("Location:login.php");
         } else {
@@ -67,16 +68,16 @@ if(isset($_POST['email'])) {
     <script src="assets/js/theme.js"></script>
 
     <script>
-    // Si no se marca la aceptación de condiciones, se pone un recuadro rojo y no se envía el formulario
-    function verCondiciones() {
-        if (!$('#condiciones').prop('checked')) {
-            $("#cuadroCondiciones").css({
-                "border": "3px solid red",
-                "padding": "4px"
-            })
-            return false;
+        // Si no se marca la aceptación de condiciones, se pone un recuadro rojo y no se envía el formulario
+        function verCondiciones() {
+            if (!$('#condiciones').prop('checked')) {
+                $("#cuadroCondiciones").css({
+                    "border": "3px solid red",
+                    "padding": "4px"
+                })
+                return false;
+            }
         }
-    }
     </script>
 </head>
 
@@ -91,12 +92,15 @@ if(isset($_POST['email'])) {
                 </div>
                 <!-- Mensajes del servidor referentes al registro -->
                 <p id="mensajes"><?php
-                    echo $mensaje; ?>
+                                    echo $mensaje; ?>
 
                     <form method="post" action="registration.php" onsubmit="return verCondiciones()">
                         <div class="form-group">
                             <label for="name">Nombre</label>
                             <input type="text" class="form-control item" id="name" name="nombre" /></div>
+                        <div class="form-group">
+                            <label for="name">Nick</label>
+                            <input type="text" class="form-control item" id="nick" name="nick" /></div>
                         <div class="form-group">
                             <label for="email">Email</label>
                             <input type="email" class="form-control item" id="email" name="email" /></div>
@@ -109,8 +113,7 @@ if(isset($_POST['email'])) {
                         <div class="form-group" id="cuadroCondiciones">
                             <div class="form-check">
                                 <input type="checkbox" class="form-check-input" id="condiciones" />
-                                <label class="form-check-label" for="condiciones">Acepto las <a
-                                        href="legal-warning.php">condiciones de uso</a>
+                                <label class="form-check-label" for="condiciones">Acepto las <a href="legal-warning.php">condiciones de uso</a>
                                     y la <a href="basicdata-protection.php">información básica de Protección de Datos
                                     </a> </label>
                             </div>

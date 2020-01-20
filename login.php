@@ -3,11 +3,11 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "";
 
-if(isset($_SESSION['nombre'])){
+if (isset($_SESSION['nombre'])) {
     header('Location: index.php');
 }
 
-if(isset($_POST['email'])) {
+if (isset($_POST['email'])) {
     // Saneo los inputs recibidos
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
@@ -15,24 +15,25 @@ if(isset($_POST['email'])) {
     // Creo la consulta para acceder a la BBDD y la ejecuto
     $sql = "SELECT * FROM usuarios WHERE correo = '" . $email . "'";
     $mensaje = $sql;
-    $resultado = ejecutaConsulta ($sql);
+    $resultado = ejecutaConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 
     if ($numRegistros == 1) {
         $registro = mysqli_fetch_assoc($resultado);
-        
+
         // Hasta que se pruebe el registro con la encriptación, valen las claves sin encriptar
         if (password_verify($password, $registro['clave'])) {
 
-            
-            
+
+
             // Iniciamos la sesión y escribimos la cookie para guardar los datos
             $_SESSION['nombre'] = $registro['nombre'];
+            $_SESSION['nick'] = $registro['nick'];
             $_SESSION['correo'] = $registro['correo'];
-            
+
             // Guardamos en una variable de sesión la ID del usuario logado
             $_SESSION['idUsuario'] = devolverId($registro['correo']);
-            
+
             /* 
             // TODO: Gestión de cookies
             // Ponemos una cookie que durará 1 mes
@@ -43,7 +44,6 @@ if(isset($_POST['email'])) {
             */
             $mensaje = "Acceso Correcto!<br><br>";
             header('Location: index.php');
-            
         } else {
             $mensaje = "Contraseña incorrecta<br><br>";
             //die();
@@ -86,18 +86,18 @@ if(isset($_POST['email'])) {
 </head>
 
 <body>
-    <?php 
-    
+    <?php
+
     if (isset($_SESSION['correo'])) {
-        if (!file_exists($_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'])) {
-            echo $_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'];
-            mkdir($_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'], 0755, true);
+        if (!file_exists($_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'])) {
+            echo $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'];
+            mkdir($_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'], 0755, true);
         }
-        include "./header-logged.php";  
+        include "./header-logged.php";
     } else {
-        include "./header.html"; 
+        include "./header.html";
     }
-        
+
     ?>
     <main class="page login-page">
         <section class="clean-block clean-form dark">
@@ -108,7 +108,7 @@ if(isset($_POST['email'])) {
 
                 <!-- Mensajes del servidor referentes al registro -->
                 <p id="mensajes"><?php
-                    echo $mensaje; ?>
+                                    echo $mensaje; ?>
 
                     <form method="post" action="login.php">
                         <div class="form-group">

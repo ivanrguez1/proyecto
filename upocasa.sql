@@ -35,12 +35,14 @@ DROP TABLE IF EXISTS `upocasa`.`usuarios` ;
 CREATE TABLE IF NOT EXISTS `upocasa`.`usuarios` (
   `idUsuario` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(60) NOT NULL,
+  `nick` VARCHAR(60) NOT NULL,
   `correo` VARCHAR(60) NOT NULL,
   `clave` VARCHAR(120) NOT NULL,
   `alta` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUsuario`),
   UNIQUE INDEX `correo_UNIQUE` (`correo` ASC),
   UNIQUE INDEX `nombre_UNIQUE` (`nombre` ASC),
+  UNIQUE INDEX `nick_UNIQUE` (`nick` ASC),
   UNIQUE INDEX `idUsuario_UNIQUE` (`idUsuario` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
@@ -264,10 +266,10 @@ INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 
 -- Usuarios
 INSERT INTO `usuarios` 
-(`idUsuario`, `nombre`, `correo`, `clave`, `alta`) 
+(`idUsuario`, `nombre`, `nick`, `correo`, `clave`, `alta`) 
 VALUES
-(1, 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
-(2, 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13');
+(1, 'Alejandro', 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
+(2, 'Iván', 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13');
 
 -- Anuncios
 INSERT INTO `anuncios` 
