@@ -35,8 +35,6 @@ if (isset($_POST['envio'])) {
     '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
     '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
 
-    echo $sql;
-
     $idAnuncio = ejecutaInsercion($sql);
 
     // Rellenamos los datos de la tabla anuncios_extras
@@ -65,7 +63,6 @@ if (isset($_POST['envio'])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
                     $sql = "INSERT INTO fotos (idAnuncio, nombreFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $fileName . "')";
-                    echo $sql;
                     ejecutaInsercion($sql);
                 } else {
                     $mensaje = 'Error en la subido de las fotos.';
@@ -136,6 +133,10 @@ if (isset($_POST['envio'])) {
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto3">
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto4">
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto5">
+                                <br><br>
+                                <div class="info">
+                                    <p>&emsp;Por defecto la <strong>primera</strong> imagen corresponde a la foto de <strong>portada</strong></p>
+                                </div>
                             </fieldset>
                             <br>
                             <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">

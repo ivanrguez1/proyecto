@@ -4,7 +4,7 @@ session_start();
 $mensaje = "-----";
 
 
-if(isset($_POST['envio'])) {
+if (isset($_POST['envio'])) {
 
     // Toda la lógica PHP de Alta del anuncio (tablas anuncios y anuncios_extras)
     $tipoVivienda = $_POST['tipoVivienda'];
@@ -15,21 +15,20 @@ if(isset($_POST['envio'])) {
     $codPostal = $_POST['codPostal'];
     $numHabitaciones = $_POST['numHabitaciones'];
     $numAseos = $_POST['numAseos'];
-    
+
     $sql = "SELECT * FROM anuncios 
-            WHERE idTipoVivienda = '".$tipoVivienda."' 
-            OR idTipoAnuncio = '".$tipoAnuncio."' 
-            OR precio = '".$precio."' 
-            OR superficie = '".$superficie."' 
-            OR direccion = '".$direccion."' 
-            OR codPostal = '".$codPostal."' 
-            OR numHabitaciones = '".$numHabitaciones."' 
-            OR numAseos = '".$numAseos."'"; 
-    
+            WHERE idTipoVivienda = '" . $tipoVivienda . "' 
+            OR idTipoAnuncio = '" . $tipoAnuncio . "' 
+            OR precio = '" . $precio . "' 
+            OR superficie = '" . $superficie . "' 
+            OR direccion = '" . $direccion . "' 
+            OR codPostal = '" . $codPostal . "' 
+            OR numHabitaciones = '" . $numHabitaciones . "' 
+            OR numAseos = '" . $numAseos . "'";
+
     $mensaje = "Búsqueda Finalizada";
-    $resultado = ejecutaConsulta ($sql);
+    $resultado = ejecutaConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
-    
 }
 ?>
 <!DOCTYPE html>
@@ -57,85 +56,48 @@ if(isset($_POST['envio'])) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>
     <script src="assets/js/theme.js"></script>
-    
+
     <script type="text/javascript" language="javascript" src="assets/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
 
 </head>
 
 <body>
-    <?php 
-    
+    <?php
+
     if (isset($_SESSION['correo'])) {
-        include "./header-logged.php";  
+        include "./header-logged.php";
     } else {
-        include "./header.html"; 
+        include "./header.html";
     }
-    
+
     ?>
-    
+
     <main class="page faq-page">
 
-    <!-- Definimos el DataTable-->
-    <script>
-    $(document).ready(function() {
-        $('#mitabla').DataTable( {
-        
-        "order": [[1, 'asc']],
-        "lengthMenu": [[5, 10, 20, -1], [5, 10, 20, "Todos"]],
-        "pagingType": "full_numbers",    // Se añaden los botobes Primero y último   
-    } );
-    } );
-    </script>
         <section>
-            <div class="container">
-                <div class="block-heading">
-                    <h2 class="text-info text-center mt-5">Búsqueda de anuncios</h2>
-                </div>
+            <div class="block-heading">
+                <h2 class="text-info text-center mt-5">Búsqueda de anuncios</h2>
+            </div>
 
-                <!-- ALEX! Habría que ponerlo bonito -->     
-                <div>
-                    <br />
-                    <?php
-                    if(isset($_POST['envio'])) {
-                        echo '<table id="mitabla" class="table table-striped table-bordered" style="width:100%">';
-                        echo "<thead>";
-                        echo "<tr>";
-                            echo "<th> Dirección </th>";
-                            echo "<th> CodPostal </th>";
-                            echo "<th> Precio </th>";
-                            echo "<th> Superficie </th>";
-                            echo "<th> Nº Habitaciones</th>";
-                            echo "<th> Nº Baños</th>";
-                            echo "<th> Ver Anuncio</th>";
-                        echo "</tr>";
-                        echo "</thead>";    
-                        while($registro = mysqli_fetch_array($resultado)) {
-                            echo "<tr>";
-                            echo "<td>" . $registro['direccion'] . "</td>";
-                            echo "<td>" . $registro['codPostal'] . "</td>";
-                            echo "<td>" . $registro['precio'] . "€ </td>";
-                            echo "<td>" . $registro['superficie'] . "</td>";
-                            echo "<td>" . $registro['numHabitaciones'] . "</td>";
-                            echo "<td>" . $registro['numAseos'] . "</td>";
-                            echo "<td><a href='ad-show.php?id=" . $registro['idAnuncio'] . "'>Ver Anuncio</a></td>";
-                            echo "</tr>";
-                        }
-                        echo "</table>"; 
-                        mysqli_free_result($resultado);
-                    }
-                    ?>
-                    <p>&nbsp;
-                </div>
-                
-                <div>
-                    <!-- Mensajes del servidor referentes al registro -->
-                    <p id="mensajes" class="alert alert-success" ><?php
-                    echo $mensaje; 
-                    ?>
+            <div>
+                <br />
+                <?php
+                if (isset($_POST['envio'])) {
+                    include "./ad-search-result.php";
+                }
+                ?>
+                <p>&nbsp;
+            </div>
+
+            <div class="container">
+                <!-- Mensajes del servidor referentes al registro -->
+                <p id="mensajes" class="alert alert-success"><?php
+                                                                echo $mensaje;
+                                                                ?>
 
                     <form action="#" method="post" enctype="multipart/form-data">
-                        
+
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
                             <legend class="pt-auto pb-2">Características del inmueble</legend>
                             <div>
@@ -200,7 +162,6 @@ if(isset($_POST['envio'])) {
                         <br>
                         <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda" name="envio"></input>
                     </form>
-                </div>
             </div>
         </section>
     </main>

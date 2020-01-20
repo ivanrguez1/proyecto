@@ -1,28 +1,32 @@
 @media only screen and (max-width: 800px) {
-    #divExtras {
-        flex-direction: column !important;
-    }
-    #divExtras>div {
-        width: 100% !important;
-    }
+  #divExtras {
+    flex-direction: column !important;
+  }
+  #divExtras > div {
+    width: 100% !important;
+  }
 }
 
 .labelAlineado {
-    display: inline-block;
-    width: 150px;
+  display: inline-block;
+  width: 150px;
 }
 
 .labelAlineadoCertificado {
-    width: 235px;
+  width: 235px;
 }
-
 
 /* Los mensajes del servidor van centrados */
 
 p#mensajes {
-    text-align: center;
+  text-align: center;
 }
 
 main {
-    margin-top: 1.3 rem;
+  margin-top: 1.3 rem;
+}
+
+.info {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196f3;
 }
