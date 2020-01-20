@@ -3,6 +3,10 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "";
 
+if(isset($_SESSION['nombre'])){
+    header('Location: index.php');
+}
+
 if(isset($_POST['email'])) {
     // Saneo los inputs recibidos
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
@@ -38,6 +42,8 @@ if(isset($_POST['email'])) {
             header("Location:registerAd.php.php");
             */
             $mensaje = "Acceso Correcto!<br><br>";
+            header('Location: index.php');
+            
         } else {
             $mensaje = "Contraseña incorrecta<br><br>";
             //die();
@@ -96,27 +102,27 @@ if(isset($_POST['email'])) {
                     <h2 class="text-info">Inicio de Sesión</h2>
                 </div>
 
-                 <!-- Mensajes del servidor referentes al registro -->
-                 <p id="mensajes"><?php
+                <!-- Mensajes del servidor referentes al registro -->
+                <p id="mensajes"><?php
                     echo $mensaje; ?>
 
-                <form method="post" action="login.php" >
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control item" id="email" name="email"/></div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password"/></div>
-                    <div class="form-group">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="recuerdame" />
-                            <label class="form-check-label" for="recuerdamelo">Recuérdame</label>
+                    <form method="post" action="login.php">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control item" id="email" name="email" /></div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" /></div>
+                        <div class="form-group">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="recuerdame" />
+                                <label class="form-check-label" for="recuerdamelo">Recuérdame</label>
+                            </div>
                         </div>
-                    </div>
-                    <input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesión"></input>
-                    <br>
-                    ¿No tienes cuenta? <a href='registration.php'>Registrarse</a>
-                </form>
+                        <input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesión"></input>
+                        <br>
+                        ¿No tienes cuenta? <a href='registration.php'>Registrarse</a>
+                    </form>
 
             </div>
         </section>
