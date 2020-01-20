@@ -3,6 +3,10 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "";
 
+if(!isset($_SESSION['nombre'])){
+    header('Location: login.php');
+}
+
 if(isset($_POST['envio'])) {
     $mensaje = "Enviado!<br><br>";
     // TODO Toda la lógica PHP de Modificación de datos del usuario
@@ -62,23 +66,25 @@ if(isset($_POST['logout'])) {
                     <h2 class="text-info">Modificar Usuario</h2>
                 </div>
 
-                 <!-- Mensajes del servidor referentes al registro -->
-                 <p id="mensajes"><?php
+                <!-- Mensajes del servidor referentes al registro -->
+                <p id="mensajes"><?php
                     echo $mensaje; ?>
 
-                <form method="post" action="user-config.php" >
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control item" id="name" name="nombre" /></div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="form-control" id="password" name="password"/></div>
-                    <div class="form-group">
-                        <label for="password2">Repita Contraseña</label>
-                        <input type="password2" class="form-control" id="password2" name="password2"/></div>
-                    <input class="btn btn-primary btn-block" type="submit" value="Modificar Usuario" name="envio"></input><br/>
-                    <input class="btn btn-primary btn-block" type="submit" value="Cerrar Sesión" name="logout"></input>
-                </form>
+                    <form method="post" action="user-config.php">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control item" id="name" name="nombre" /></div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control" id="password" name="password" /></div>
+                        <div class="form-group">
+                            <label for="password2">Repita Contraseña</label>
+                            <input type="password2" class="form-control" id="password2" name="password2" /></div>
+                        <input class="btn btn-primary btn-block" type="submit" value="Modificar Usuario"
+                            name="envio"></input><br />
+                        <input class="btn btn-primary btn-block" type="submit" value="Cerrar Sesión"
+                            name="logout"></input>
+                    </form>
 
             </div>
         </section>

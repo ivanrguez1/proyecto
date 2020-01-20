@@ -2,7 +2,6 @@
     #divExtras {
         flex-direction: column !important;
     }
-
     #divExtras>div {
         width: 100% !important;
     }
@@ -17,7 +16,13 @@
     width: 235px;
 }
 
+
 /* Los mensajes del servidor van centrados */
+
 p#mensajes {
     text-align: center;
+}
+
+main {
+    margin-top: 1.3 rem;
 }

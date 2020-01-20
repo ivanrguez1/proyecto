@@ -21,15 +21,16 @@ session_start();
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <script src="assets/js/jquery.min.js"></script>
 </head>
 
 <body>
-    <?php 
+    <?php
     if (isset($_SESSION['correo'])) {
-        include "./header-logged.php";  
+        include "./header-logged.php";
     } else {
-        include "./header.html"; 
-    } 
+        include "./header.html";
+    }
     ?>
     <main class="page faq-page">
         <section class="clean-block clean-faq dark">
@@ -55,7 +56,7 @@ session_start();
                     <div class="faq-item">
                         <h4 class="question">¿Puedo modificar una publicación a posteriori?</h4>
                         <div class="answer">
-                            <p>¡Claro sin problemas!, puedes modificar y eliminar tus anuncios a cuando quieras.</p>
+                            <p>¡Claro sin problemas!, puedes modificar y eliminar tus anuncios cuando quieras.</p>
                         </div>
                     </div>
                 </div>
@@ -63,7 +64,6 @@ session_start();
         </section>
     </main>
     <?php include "./footer.html" ?>
-    <script src="assets/js/jquery.min.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>

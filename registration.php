@@ -4,6 +4,10 @@ session_start();
 
 $mensaje = "---";
 
+if(isset($_SESSION['nombre'])){
+    header('Location: index.php');
+}
+
 if(isset($_POST['email'])) {
     // Saneo los inputs recibidos
     $nombre = filter_var(trim($_POST['nombre']), FILTER_SANITIZE_STRING);
@@ -63,16 +67,16 @@ if(isset($_POST['email'])) {
     <script src="assets/js/theme.js"></script>
 
     <script>
-
-        // Si no se marca la aceptación de condiciones, se pone un recuadro rojo y no se envía el formulario
-        function verCondiciones () {
-            if(!$('#condiciones').prop('checked')) {
-                $("#cuadroCondiciones").css({
-                    "border": "3px solid red",
-                    "padding": "4px"})
-                return false;
-            }
+    // Si no se marca la aceptación de condiciones, se pone un recuadro rojo y no se envía el formulario
+    function verCondiciones() {
+        if (!$('#condiciones').prop('checked')) {
+            $("#cuadroCondiciones").css({
+                "border": "3px solid red",
+                "padding": "4px"
+            })
+            return false;
         }
+    }
     </script>
 </head>
 
@@ -85,32 +89,34 @@ if(isset($_POST['email'])) {
                 <div class="block-heading">
                     <h2 class="text-info">Registro</h2>
                 </div>
-                    <!-- Mensajes del servidor referentes al registro -->
-                   <p id="mensajes"><?php
+                <!-- Mensajes del servidor referentes al registro -->
+                <p id="mensajes"><?php
                     echo $mensaje; ?>
 
-                <form method="post" action="registration.php" onsubmit="return verCondiciones()">
-                    <div class="form-group">
-                        <label for="name">Nombre</label>
-                        <input type="text" class="form-control item" id="name" name="nombre" /></div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control item" id="email" name="email" /></div>
-                    <div class="form-group">
-                        <label for="password">Contraseña</label>
-                        <input type="password" class="form-control item" id="password" name="password" /></div>
-                    <div class="form-group">
-                        <label for="password">Confirmar Contraseña</label>
-                        <input type="password" class="form-control item" id="passwordConfirm" /></div>
-                    <div class="form-group" id="cuadroCondiciones">
-                        <div class="form-check">
-                            <input type="checkbox" class="form-check-input" id="condiciones" />
-                            <label class="form-check-label" for="condiciones">Acepto las <a href="legal-warning.php">condiciones de uso</a>
-                                y la <a href="basicdata-protection.php">información básica de Protección de Datos </a> </label>
+                    <form method="post" action="registration.php" onsubmit="return verCondiciones()">
+                        <div class="form-group">
+                            <label for="name">Nombre</label>
+                            <input type="text" class="form-control item" id="name" name="nombre" /></div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control item" id="email" name="email" /></div>
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <input type="password" class="form-control item" id="password" name="password" /></div>
+                        <div class="form-group">
+                            <label for="password">Confirmar Contraseña</label>
+                            <input type="password" class="form-control item" id="passwordConfirm" /></div>
+                        <div class="form-group" id="cuadroCondiciones">
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" id="condiciones" />
+                                <label class="form-check-label" for="condiciones">Acepto las <a
+                                        href="legal-warning.php">condiciones de uso</a>
+                                    y la <a href="basicdata-protection.php">información básica de Protección de Datos
+                                    </a> </label>
+                            </div>
                         </div>
-                    </div>
-                    <input class="btn btn-primary btn-block" type="submit" value="Registrarse"></input>
-                </form>
+                        <input class="btn btn-primary btn-block" type="submit" value="Registrarse"></input>
+                    </form>
             </div>
         </section>
     </main>
