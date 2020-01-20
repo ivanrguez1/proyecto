@@ -34,10 +34,10 @@
 
                     echo "<div class='media'<br>";
                     if ($imagenEncontrada) {
-                        echo "<img class='d-flex align-self-start' src='" . $urlFoto . "' alt='Generic placeholder image'>";
+                        echo "<a href='ad-show.php?id=" . $registro['idAnuncio'] . "' target='_blank'><img class='d-flex align-self-start' src='" . $urlFoto . "' alt='Generic placeholder image'></a>";
                         $imagenEncontrada = false;
                     } else {
-                        echo "<img class='d-flex align-self-start' src='assets/img/ads/sinImagen.jpg' alt='Generic placeholder image'>";
+                        echo "<a href='ad-show.php?id=" . $registro['idAnuncio'] . "' target='_blank'><img class='d-flex align-self-start' src='assets/img/ads/sinImagen.jpg' alt='Generic placeholder image'></a>";
                     }
 
                     echo "<div class='media-body pl-3'>";
