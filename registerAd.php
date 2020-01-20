@@ -304,6 +304,15 @@ if(isset($_POST['envio'])) {
             </div>
         </section>
     </main>
+    <script type="text/javascript">
+    
+    $('option').mousedown(function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        return false;
+    }); 
+    
+    </script>
     <?php include "./footer.html" ?>
 </body>
 
