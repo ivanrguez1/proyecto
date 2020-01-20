@@ -145,11 +145,11 @@ DROP TABLE IF EXISTS `upocasa`.`fotos` ;
 CREATE TABLE IF NOT EXISTS `upocasa`.`fotos` (
   `idFoto` INT NOT NULL AUTO_INCREMENT,
   `idAnuncio` INT NULL,
-  `nombreFoto1` VARCHAR(45) NULL,
-  `nombreFoto2` VARCHAR(45) NULL,
-  `nombreFoto3` VARCHAR(45) NULL,
-  `nombreFoto4` VARCHAR(45) NULL,
-  `nombreFoto5` VARCHAR(45) NULL,
+  `urlFoto1` VARCHAR(45) NULL,
+  `urlFoto2` VARCHAR(45) NULL,
+  `urlFoto3` VARCHAR(45) NULL,
+  `urlFoto4` VARCHAR(45) NULL,
+  `urlFoto5` VARCHAR(45) NULL,
   INDEX `fk_fotos_anuncios_idx` (`idAnuncio` ASC),
   PRIMARY KEY (`idFoto`),
   CONSTRAINT `fk_fotos_anuncios`
