@@ -62,7 +62,7 @@ if (isset($_POST['envio'])) {
             if (in_array($fileType, $allowTypes)) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
-                    $sql = "INSERT INTO fotos (idAnuncio, nombreFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $fileName . "')";
+                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
                     ejecutaInsercion($sql);
                 } else {
                     $mensaje = 'Error en la subido de las fotos.';

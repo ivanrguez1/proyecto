@@ -11,31 +11,33 @@
                 <?php
 
                 $imagenEncontrada = false;
-                $nombreFoto;
+                $urlFoto;
 
                 while ($registro = mysqli_fetch_array($resultado)) {
 
                     $i = 1;
 
                     do {
-                        $sql = "SELECT nombreFoto" . $i . " FROM fotos
+                        $sql = "SELECT urlFoto" . $i . " FROM fotos
                         WHERE idAnuncio = '" . $registro['idAnuncio'] . "'";
                         $resultadoFoto = ejecutaConsulta($sql);
                         $fotos = mysqli_fetch_array($resultadoFoto);
 
-                        if (!empty($fotos['nombreFoto' . $i])) {
+                        if (!empty($fotos['urlFoto' . $i])) {
                             $imagenEncontrada = true;
-                            $nombreFoto = $fotos['nombreFoto' . $i];
+                            $urlFoto = $fotos['urlFoto' . $i];
                         }
+
 
                         $i++;
                     } while ($i < 6 && !$imagenEncontrada);
 
                     echo "<div class='media'<br>";
                     if ($imagenEncontrada) {
-                        echo "<img class='d-flex align-self-start' src='" . $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'] . '/' . $nombreFoto . "' alt='Generic placeholder image'>";
+                        echo "<img class='d-flex align-self-start' src='" . $urlFoto . "' alt='Generic placeholder image'>";
+                        $imagenEncontrada = false;
                     } else {
-                        echo "<img class='d-flex align-self-start' src='" . $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/sinImagen.jpg' . " alt='Generic placeholder image'>";
+                        echo "<img class='d-flex align-self-start' src='assets/img/ads/sinImagen.jpg' alt='Generic placeholder image'>";
                     }
 
                     echo "<div class='media-body pl-3'>";

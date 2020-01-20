@@ -277,12 +277,12 @@ INSERT INTO `anuncios`
 `precio`, `superficie`, `direccion`, `codPostal`, `numHabitaciones`, 
 `numAseos`, `consumo`, `emisiones`, `comentarios`) 
 VALUES
-(1, 2, 1, 2, '23000', '30', 'Paris, 29', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
-(2, 2, 1, 2, '15000', '100', 'Paris, 14', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
-(3, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
-(4, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
-(5, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle ParÃ­s'),
-(6, 2, 1, 1, '250000', '120', 'Paris, 23', 41089, 3, 2, 'A', 'A', 'Prueba'),
+(1, 2, 1, 2, '23000', '100', 'Paris, 29', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
+(2, 2, 1, 2, '15000', '60', 'Paris, 14', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
+(3, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle París'),
+(4, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
+(5, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
+(6, 1, 1, 1, '250000', '220', 'Betis, 3', 41089, 3, 2, 'A', 'A', 'Chalet de Alex en Sevilla'),
 (7, 2, 1, 1, '900000', '175', 'San Bernardo', 41012, 5, 4, 'A', 'A', 'Prueba Final');
 
 -- Anuncios-extras
@@ -294,8 +294,10 @@ INSERT INTO `anuncios_extras` (`idAnuncio`, `idExtra`) VALUES
 
 -- Fotos
 INSERT INTO `fotos` (`idFoto`, `idAnuncio`, `urlFoto1`, `urlFoto2`, `urlFoto3`, `urlFoto4`, `urlFoto5`) VALUES
-(2, 6, 'assets/img/ads/destacado2.jpg', NULL, NULL, NULL, NULL),
-(3, 7, 'assets/img/ads/destacado3.jpg', NULL, NULL, NULL, NULL);
+(2, 1, 'assets/img/ads/ivan/garage1.jpg', NULL, NULL, NULL, NULL),
+(3, 2, 'assets/img/ads/ivan/garage2.jpg', NULL, NULL, NULL, NULL),
+(4, 6, 'assets/img/ads/alex/foto1Alex.jpg', 'assets/img/ads/alex/foto2Alex.jpg', 'assets/img/ads/alex/foto3Alex.jpg', NULL, NULL);
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
