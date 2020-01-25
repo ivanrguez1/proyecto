@@ -11,6 +11,12 @@ for (let index = 0; index < nombresImagenes.length; index++) {
   }
 }
 
+if (datosImagenes.length == 0) {
+  datosImagenes[0] = ['assets/img/ads/sinImagen.jpg']
+}
+
+console.log(datosImagenes);
+
 var i = 0;
 var listaImagenes = [];
 
@@ -67,11 +73,11 @@ function crearMiniaturas() {
 //############################################################################################
 
 function actualizarImagenGrandeYMiniaturas(imagenSeleccionada) {
-  $("#imagenGrande").fadeOut("slow", function() {
+  $("#imagenGrande").fadeOut("slow", function () {
     hallarNuevoIndice(imagenSeleccionada);
     $("#imagenGrande").attr("src", datosImagenes[i][0]);
     actualizarMiniaturas();
-    $("#imagenGrande").fadeIn("slow", function() {});
+    $("#imagenGrande").fadeIn("slow", function () {});
   });
 }
 
@@ -108,7 +114,7 @@ function actualizarMiniaturas(imagenSeleccionada) {
 
   //A continuación cambiamos el atributo src de cada imagen que este en miniatura en base a listaImagenes.
 
-  $("#divMiniaturas img").each(function(index) {
+  $("#divMiniaturas img").each(function (index) {
     $(this).attr("src", datosImagenes[listaImagenes[index]][0]);
   });
 }
