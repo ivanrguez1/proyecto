@@ -160,6 +160,7 @@ if (isset($_POST['envio'])) {
                             </div>
                         </fieldset>
                         <br>
+                        <input display:none></input>
                         <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda" name="envio"></input>
                     </form>
             </div>

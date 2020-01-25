@@ -94,21 +94,118 @@ if (isset($_GET['id'])) {
                     echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
 
                     ?>
+
+
+
                     <div class="carrusel">
-                        <img id="imagenGrande" width="75%" height="80%" alt="Foto" />
+                        <img id="imagenGrande" width="70%" height="70%" alt="Foto" />
                         <div id="divMiniaturas"></div>
                     </div>
+
+
+                    <?php
+
+                    //[0] -> Extras Finca; [1] -> Extras Básicos; [2] -> Otros Extras
+                    $tiposExtras = [['Garaje Privado', 'Trastero', 'Ascensor', 'Parking Comunitario', 'Servicio de Portería', 'Videoportero'], ['Aire acondicionado', 'Armarios', 'Calefacción', 'Parquet', 'Cocina Office', 'Suite con baño', 'Amueblado', 'Electrodomésticos', 'Horno', 'Lavadora', 'Microondas', 'Nevera', 'TV', 'Internet', 'Puerta Blindada', 'Lavadero', 'No Amueblado'], ['Jardín Privado', 'Terraza', 'Zona Comunitaria', 'Patio', 'Piscina', 'Balcón', 'Zona Deportiva', 'Zona Infantil', 'Piscina Comunitaria']];
+                    $extrasFinca = array();
+                    $extrasBasicos = array();
+                    $otrosExtras = array();
+
+                    $sql = "SELECT extra FROM extras WHERE idExtra in (SELECT idExtra FROM anuncios_extras WHERE idAnuncio = '" . $_GET['id'] . "')";
+                    $resultado = ejecutaConsulta($sql);
+
+                    while ($registro = mysqli_fetch_array($resultado)) {
+
+                        if (in_array($registro['extra'], $tiposExtras[0])) {
+                            array_push($extrasFinca, $registro['extra']);
+                        } else if (in_array($registro['extra'], $tiposExtras[1])) {
+                            array_push($extrasBasicos, $registro['extra']);
+                        } else {
+                            array_push($otrosExtras, $registro['extra']);
+                        }
+                    }
+
+
+                    ?>
+
+
+                    <div id="divExtras" class='row'>
+                        <div class='column'>
+                            <p style="text-align: center">- Extras Finca -</p>
+                            <br><br>
+                            <?php
+
+                            if (sizeof($extrasFinca) > 0) {
+                                echo "<ul type='circle'>";
+                            }
+
+                            for ($i = 0; $i < sizeof($extrasFinca); $i++) {
+                                echo "<li>" . $extrasFinca[$i] . "</li> <br>";
+                            }
+
+                            if (sizeof($extrasFinca) > 0) {
+                                echo "</ul>";
+                            }
+                            ?>
+
+                        </div>
+                        <div class='column'>
+                            <p style="text-align: center">- Extras Básicos -</p>
+
+                            <br><br>
+                            <?php
+
+                            if (sizeof($extrasBasicos) > 0) {
+                                echo "<ul type='circle'>";
+                            }
+
+                            for ($i = 0; $i < sizeof($extrasBasicos); $i++) {
+                                echo "<li>" . $extrasBasicos[$i] . "</li> <br>";
+                            }
+
+                            if (sizeof($extrasBasicos) > 0) {
+                                echo "</ul>";
+                            }
+                            ?>
+
+                        </div>
+                        <div class='column'>
+                            <p style="text-align: center">- Otros Extras -</p>
+
+                            <br><br>
+                            <?php
+
+                            if (sizeof($otrosExtras) > 0) {
+                                echo "<ul type='circle'>";
+                            }
+
+                            for ($i = 0; $i < sizeof($otrosExtras); $i++) {
+                                echo "<li>" . $otrosExtras[$i] . "</li> <br>";
+                            }
+
+                            if (sizeof($otrosExtras) > 0) {
+                                echo "</ul>";
+                            }
+                            ?>
+
+                        </div>
+                    </div>
+
+
                     <div class="form-group"><button class="btn btn-primary btn-block" type="submit" id="btnVolverABuscar">Volver a Buscar</button>
                     </div>
-                </form>
-                <div>
-                    <!-- Mensajes del servidor referentes al registro -->
-                    <!--<p id="mensajes" class="alert alert-success"><?php
-                                                                        echo $mensaje;
-                                                                        ?>
-                    -->
-                </div>
             </div>
+            </form>
+            <div>
+                <!-- Mensajes del servidor referentes al registro -->
+                <!--<p id="mensajes" class="alert alert-success"><?php
+                                                                    echo $mensaje;
+                                                                    ?>
+                    -->
+            </div>
+
+            </div>
+
         </section>
     </main>
     <?php include "./footer.html" ?>
