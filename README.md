@@ -1,3 +1,12 @@
+---
+title: README
+created: '2020-01-25T09:02:10.447Z'
+modified: '2020-01-25T10:00:14.729Z'
+---
+
+README 
+--------------
+
 # Informe de la aplicación
 # Proyecto UPOCASA
 
@@ -17,17 +26,22 @@ Los integrantes de este proyecto son:
 
 ## Por hacer
 
-* (documentación)         -> Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
-* (documentación-manual)  -> Manual de uso de la aplicación  
-* (registration)          -> Depurar
-* (registerAd.php)        -> Modularizar la recogida de Fotos
-* (login.php)             -> Gestión de Cookies
-* (Nuevo! ads.php)        -> Anuncios por usuario 
-* (ad-search.php)         -> Búsqueda de anuncios - Añadir Jquery!
-* (ad-show.php)           -> Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
-* (Nuevo! messages.php)   -> Mensajeria entre usuarios
+* (documentación)             -> (Iván) Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
+* (documentación-manual)      -> (Iván) Manual de uso de la aplicación  
+* (registration)              -> (Alex)Depurar
+* (registerAd.php)            -> (Alex) Modularizar la recogida de Fotos
+* (login.php)                 -> (Alex) Gestión de Cookies
+* (Nuevo! ads.php)            -> (Alex) Anuncios por usuario 
+* (ad-search.php)             -> (Alex) Búsqueda de anuncios. Depurar
+* (ad-show.php)               -> (Alex) Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
+* (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
 
-
+CRUD de Administración /admin/
+(Yo me encargo, le pongo el Jquery con DataTable)
+* (Nuevo! tipos-vivienda.php) -> (Iván) CRUD completo de gestión
+* (Nuevo! extras.php)         -> (Iván) CRUD completo de gestión
+* (Nuevo! tipos-anuncio.php)  -> (Iván) CRUD completo de gestión
+* (Nuevo! usuarios.php)       -> (Iván) CRUD completo de gestión
 
 ## Base de datos
 
@@ -319,4 +333,5 @@ classDiagram
     BankAccount : +withdrawl(amount)
 
 ```
+
 
