@@ -15,8 +15,6 @@ if (datosImagenes.length == 0) {
   datosImagenes[0] = ['assets/img/ads/sinImagen.jpg']
 }
 
-console.log(datosImagenes);
-
 var i = 0;
 var listaImagenes = [];
 
@@ -42,12 +40,18 @@ $("#imagenGrande").attr("src", datosImagenes[i][0]);
 //############################################################################################
 
 //Aquí modificamos el tiempo en el que se actualizan las imágenes (actualmente 10 seg.).
-myTimer = setInterval(actualizarImagenGrandeYMiniaturas, 10000);
+
+if (datosImagenes.length > 1) {
+  myTimer = setInterval(actualizarImagenGrandeYMiniaturas, 10000);
+}
+
 
 function actualizarPorClick(imagen) {
   //Reseteamos el intervalo de tiempo en el que se muestran las imágenes.
   clearInterval(myTimer);
-  myTimer = setInterval(actualizarImagenGrandeYMiniaturas, 10000);
+  if (datosImagenes.length > 1) {
+    myTimer = setInterval(actualizarImagenGrandeYMiniaturas, 10000);
+  }
   //Actualizamos el carrusel de imágenes.
   actualizarImagenGrandeYMiniaturas(imagen);
   actualizarMiniaturas(imagen);

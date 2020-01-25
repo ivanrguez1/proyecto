@@ -2,7 +2,8 @@
   #divExtras {
     flex-direction: column !important;
   }
-  #divExtras > div {
+
+  #divExtras>div {
     width: 100% !important;
   }
 }
@@ -46,9 +47,11 @@ main {
   .contentAdSelected {
     width: 100%;
   }
+
   .carrusel {
     width: 100%;
   }
+
   #imagenGrande {
     width: 70%;
     height: 50%;
@@ -60,5 +63,50 @@ main {
 }
 
 #btnVolverABuscar {
-  margin-top: 600px;
+  margin-top: 10%;
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+  border: 1px solid;
+  box-shadow: 5px 10px #888888;
+}
+
+.column {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.blue-column {
+  height: 100px;
+
+}
+
+.green-column {
+  height: 100px;
+}
+
+.row>div {
+  margin: 10px;
+
+  /* and that, will result in a 10px gap */
+}
+
+#divExtras {
+  margin-top: 550px;
 }
