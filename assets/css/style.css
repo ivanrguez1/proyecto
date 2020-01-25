@@ -1,28 +1,64 @@
 @media only screen and (max-width: 800px) {
-    #divExtras {
-        flex-direction: column !important;
-    }
-    #divExtras>div {
-        width: 100% !important;
-    }
+  #divExtras {
+    flex-direction: column !important;
+  }
+  #divExtras > div {
+    width: 100% !important;
+  }
 }
 
 .labelAlineado {
-    display: inline-block;
-    width: 150px;
+  display: inline-block;
+  width: 150px;
 }
 
 .labelAlineadoCertificado {
-    width: 235px;
+  width: 235px;
 }
-
 
 /* Los mensajes del servidor van centrados */
 
 p#mensajes {
-    text-align: center;
+  text-align: center;
 }
 
 main {
-    margin-top: 1.3 rem;
+  padding-top: 120px !important;
+}
+
+.info {
+  background-color: #e7f3fe;
+  border-left: 6px solid #2196f3;
+}
+
+.containerAnuncioSeleccionado {
+  width: 100%;
+}
+
+#divMiniaturas img {
+  width: 200px;
+  height: 125px;
+  display: "flex";
+  flex-direction: "column";
+}
+
+@media only screen and (max-width: 1050px) {
+  .contentAdSelected {
+    width: 100%;
+  }
+  .carrusel {
+    width: 100%;
+  }
+  #imagenGrande {
+    width: 70%;
+    height: 50%;
+  }
+
+  #divMiniaturas img {
+    width: 150px;
+  }
+}
+
+#btnVolverABuscar {
+  margin-top: 600px;
 }

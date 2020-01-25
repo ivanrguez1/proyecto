@@ -4,20 +4,20 @@ session_start();
 $mensaje = "-----";
 
 
-if(isset($_GET['id'])) {
+if (isset($_GET['id'])) {
 
     // Realizamos la búsqueda en la Base de datos
     $id = $_GET['id'];
     $sql = "SELECT 
             tipoAnuncio, tipoVivienda, 
-            direccion, codPostal, superficie, numHabitaciones, numAseos
+            direccion, codPostal, superficie, numHabitaciones, numAseos, comentarios, precio
             FROM anuncios, tiposAnuncio, tiposVivienda
             WHERE anuncios.idTipoAnuncio = tiposAnuncio.idTipoAnuncio
             AND anuncios.idtipoVivienda = tiposVivienda.idtipoVivienda
-            AND idAnuncio = '".$id."'"; 
-    
+            AND idAnuncio = '" . $id . "'";
+
     $mensaje = "Búsqueda Finalizada";
-    $resultado = ejecutaConsulta ($sql);
+    $resultado = ejecutaConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
     $mensaje = $sql;
 }
@@ -41,56 +41,79 @@ if(isset($_GET['id'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.css">
     <link rel="stylesheet" href="assets/css/Pretty-Footer.css">
     <link rel="stylesheet" href="assets/css/smoothproducts.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 </head>
 
 <body>
-    <?php 
+    <?php
     if (isset($_SESSION['correo'])) {
-        include "./header-logged.php";  
+        include "./header-logged.php";
     } else {
-        include "./header.html"; 
-    } 
+        include "./header.html";
+    }
     ?>
 
     <main class="page contact-us-page">
-        <section class="clean-block clean-form dark">
-            <div class="container">
+        <section class="clean-block-anuncioSeleccionado">
+            <div class="containerAnuncioSeleccionado">
                 <div class="block-heading">
-                    <h2 class="text-info">Anuncio Seleccionado</h2>
+                    <h2 class="text-info" style="text-align: center">Anuncio Seleccionado</h2>
                 </div>
-                <!-- 
-                    ALEX: La presentación es un desastre. Hay que ponerlo bonito. 
-                -->
-                <form action="ad-search.php" method="post">
+                <form action="ad-search.php" method="post" class="clean-block-adSelected">
+                    <div class="contentAdSelected">
+                        <?php
+                        while ($registro = mysqli_fetch_array($resultado)) {
+                        ?>
+                            <div class="form-group"><label>Precio: </label><strong><?php echo " " . $registro['precio'] . "€"; ?></strong></div>
+                            <div class="form-group"><label>Tipo de Anuncio: </label><strong><?php echo " " . $registro['tipoAnuncio']; ?></strong></div>
+                            <div class="form-group"><label>Tipo de Vivienda: </label><strong><?php echo " " . $registro['tipoVivienda']; ?></strong></div>
+                            <div class="form-group"><label>Descripción: </label><strong><?php echo " " . $registro['comentarios']; ?></strong></div>
+                            <div class="form-group"><label>Dirección: </label><strong><?php echo " " . $registro['direccion']; ?></strong></div>
+                            <div class="form-group"><label>Código Postal: </label><strong><?php echo " " . $registro['codPostal']; ?></strong></div>
+                            <div class="form-group"><label>Superficie: </label><strong><?php echo " " . $registro['superficie'] . "m²"; ?></strong></div>
+                            <div class="form-group"><label>Nº de Habitaciones: </label><strong><?php echo " " . $registro['numHabitaciones']; ?></strong></div>
+                            <div class="form-group"><label>Nº de Aseos: </label><strong><?php echo " " . $registro['numAseos']; ?></strong></div>
+                        <?php
+                        }
+                        // Liberamos el resultado del SQL
+                        mysqli_free_result($resultado);
+                        ?>
+                    </div>
                     <?php
-                    while($registro = mysqli_fetch_array($resultado)) {
+
+
+                    $sql = "SELECT 
+                    urlFoto1, urlFoto2, 
+                    urlFoto3, urlFoto4, urlFoto5
+                    FROM fotos
+                    WHERE idAnuncio = '" . $id . "'";
+
+                    $resultado = ejecutaConsulta($sql);
+                    $registro = mysqli_fetch_array($resultado);
+
+                    echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
+
                     ?>
-                    <div class="form-group"><label>Tipo de Anuncio</label><strong><?php echo $registro['tipoAnuncio']; ?></strong></div>
-                    <div class="form-group"><label>Tipo de Vivienda</label><strong><?php echo $registro['tipoVivienda']; ?></strong></div>
-                    <div class="form-group"><label>Dirección</label><strong><?php echo $registro['direccion']; ?></strong></div>
-                    <div class="form-group"><label>Código Postal</label><strong><?php  echo $registro['codPostal']; ?></strong></div>
-                    <div class="form-group"><label>Superficie</label><strong><?php echo $registro['superficie']; ?></strong></div>
-                    <div class="form-group"><label>Nº de Habitaciones</label><strong><?php echo $registro['numHabitaciones']; ?></strong></div>
-                    <div class="form-group"><label>Nº de Aseos</label><strong><?php echo $registro['numAseos']; ?></strong></div>
-                    <?php 
-                    }
-                    // Liberamos el resultado del SQL
-                    mysqli_free_result($resultado);
-                    ?>
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit">Volver a Buscar</button>
+                    <div class="carrusel">
+                        <img id="imagenGrande" width="75%" height="80%" alt="Foto" />
+                        <div id="divMiniaturas"></div>
+                    </div>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit" id="btnVolverABuscar">Volver a Buscar</button>
                     </div>
                 </form>
                 <div>
-                <!-- Mensajes del servidor referentes al registro -->
-                <p id="mensajes" class="alert alert-success" ><?php
-                    echo $mensaje; 
-                ?>
+                    <!-- Mensajes del servidor referentes al registro -->
+                    <!--<p id="mensajes" class="alert alert-success"><?php
+                                                                        echo $mensaje;
+                                                                        ?>
+                    -->
                 </div>
             </div>
         </section>
     </main>
     <?php include "./footer.html" ?>
     <script src="assets/js/jquery.min.js"></script>
+    <script src="assets/js/carrusel.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.10.0/baguetteBox.min.js"></script>
     <script src="assets/js/smoothproducts.min.js"></script>

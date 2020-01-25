@@ -3,11 +3,11 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "-----";
 
-if(!isset($_SESSION['nombre'])){
+if (!isset($_SESSION['nombre'])) {
     header('Location: login.php');
 }
 
-if(isset($_POST['envio'])) {
+if (isset($_POST['envio'])) {
 
     // Toda la lógica PHP de Alta del anuncio (tablas anuncios y anuncios_extras)
     $tipoVivienda = $_POST['tipoVivienda'];
@@ -24,56 +24,52 @@ if(isset($_POST['envio'])) {
     $extras = $_POST['extras'];
 
     $idUsuario = $_SESSION['idUsuario'];
-    
+
     // Rellenamos los datos de la tabla anuncios
     $sql = "INSERT INTO anuncios 
     (idUsuario, idTipoAnuncio, idTipoVivienda, precio, 
     superficie, direccion, codPostal, numHabitaciones, 
     numAseos, consumo, emisiones, comentarios)
     VALUES
-    ('".$idUsuario."','".$tipoAnuncio."','".$tipoVivienda."','".$precio."',
-    '".$superficie."','".$direccion."','".$codPostal."','".$numHabitaciones."',
-    '".$numAseos."','".$consumo."','".$emisiones."','".$comentarios."')";
-
-    echo $sql;
+    ('" . $idUsuario . "','" . $tipoAnuncio . "','" . $tipoVivienda . "','" . $precio . "',
+    '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
+    '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
 
     $idAnuncio = ejecutaInsercion($sql);
-    
+
     // Rellenamos los datos de la tabla anuncios_extras
     $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
     VALUES ";
-    for ($i = 0; $i < count($extras)-1; $i++) {
-        $sql .= "('".$idAnuncio."','".$extras[$i]."'),";
+    for ($i = 0; $i < count($extras) - 1; $i++) {
+        $sql .= "('" . $idAnuncio . "','" . $extras[$i] . "'),";
     }
-    $sql .= "('".$idAnuncio."','".$extras[count($extras)-1]."');";
+    $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
     ejecutaInsercion($sql);
 
     // ----------------------------------------------------------
     // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
 
-    $targetDir = $_SERVER['DOCUMENT_ROOT'].'/upocasa/assets/img/ads/'.$_SESSION['nombre'].'/';
+    $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'] . '/';
 
-    for ($i=1; $i < 6; $i++) { 
-        $fileName = time().basename($_FILES["foto".$i]["name"]);
+    for ($i = 1; $i < 6; $i++) {
+        $fileName = time() . basename($_FILES["foto" . $i]["name"]);
         $targetFilePath = $targetDir . $fileName;
-        $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
-        
-        if(!empty($_FILES["foto".$i]["name"])){
-            $allowTypes = array('jpg','png','jpeg');
-            if(in_array($fileType, $allowTypes)){
+        $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+        if (!empty($_FILES["foto" . $i]["name"])) {
+            $allowTypes = array('jpg', 'png', 'jpeg');
+            if (in_array($fileType, $allowTypes)) {
                 // Upload file to server
-                if(move_uploaded_file($_FILES["foto".$i]["tmp_name"], $targetFilePath)){
-                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto".$i.") VALUES ('".$idAnuncio."','".$fileName."')";
-                    echo $sql;
+                if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
+                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
                     ejecutaInsercion($sql);
-                }else{
+                } else {
                     $mensaje = 'Error en la subido de las fotos.';
                 }
-            }else{
+            } else {
                 $mensaje = 'Lo siento, solo se permiten fotos de tipo JPG, JPEG, PNG.';
             }
-
         }
     }
 }
@@ -107,14 +103,14 @@ if(isset($_POST['envio'])) {
 </head>
 
 <body>
-    <?php 
-    
+    <?php
+
     if (isset($_SESSION['correo'])) {
-        include "./header-logged.php";  
+        include "./header-logged.php";
     } else {
-        include "./header.html"; 
+        include "./header.html";
     }
-    
+
     ?>
 
     <main class="page faq-page">
@@ -126,8 +122,8 @@ if(isset($_POST['envio'])) {
                 <div>
                     <!-- Mensajes del servidor referentes al registro -->
                     <p id="mensajes"><?php
-                    echo $mensaje; 
-                    ?>
+                                        echo $mensaje;
+                                        ?>
 
                         <form action="#" method="post" enctype="multipart/form-data">
                             <fieldset class="shadow pl-3 pb-1 pt-auto bg-white mb-2 mt-5">
@@ -137,6 +133,10 @@ if(isset($_POST['envio'])) {
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto3">
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto4">
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto5">
+                                <br><br>
+                                <div class="info">
+                                    <p>&emsp;Por defecto la <strong>primera</strong> imagen corresponde a la foto de <strong>portada</strong></p>
+                                </div>
                             </fieldset>
                             <br>
                             <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
@@ -177,8 +177,7 @@ if(isset($_POST['envio'])) {
                                 </div>
                                 <div>
                                     <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                    <input type="number" name="superficie" min="1" placeholder="Superficie"
-                                        step="0.01">&nbsp;
+                                    <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
 
                                 </div>
                                 <div>
@@ -192,8 +191,7 @@ if(isset($_POST['envio'])) {
                                 </div>
                                 <div>
                                     <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                    <input type="number" name="numHabitaciones" min="1"
-                                        placeholder="Número de habitaciones">&nbsp;
+                                    <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones">&nbsp;
 
                                 </div>
                                 <div>
@@ -236,8 +234,7 @@ if(isset($_POST['envio'])) {
                             <p>
                                 <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                     <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
-                                    <textarea rows="5" cols="100" name="comentarios"
-                                        class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
+                                    <textarea rows="5" cols="100" name="comentarios" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                     <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
                                 </legend>
                             </p>
@@ -307,11 +304,11 @@ if(isset($_POST['envio'])) {
         </section>
     </main>
     <script type="text/javascript">
-    $('option').mousedown(function(e) {
-        e.preventDefault();
-        $(this).prop('selected', !$(this).prop('selected'));
-        return false;
-    });
+        $('option').mousedown(function(e) {
+            e.preventDefault();
+            $(this).prop('selected', !$(this).prop('selected'));
+            return false;
+        });
     </script>
     <?php include "./footer.html" ?>
 </body>
