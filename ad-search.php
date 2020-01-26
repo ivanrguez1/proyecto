@@ -9,22 +9,51 @@ if (isset($_POST['envio'])) {
     // Toda la lógica PHP de Alta del anuncio (tablas anuncios y anuncios_extras)
     $tipoVivienda = $_POST['tipoVivienda'];
     $tipoAnuncio = $_POST['tipoAnuncio'];
-    $precio = $_POST['precio'];
-    $superficie = $_POST['superficie'];
-    $direccion = $_POST['direccion'];
-    $codPostal = $_POST['codPostal'];
-    $numHabitaciones = $_POST['numHabitaciones'];
-    $numAseos = $_POST['numAseos'];
+    $precio = explode(",", $_POST['precio'], 2);
+    if (sizeof($precio) == 1) {
+        $precio[1] = $precio[0];
+    }
+
+    $precio[0] *= 1000;
+    $precio[1] *= 1000;
+
+    $superficie = explode(",", $_POST['superficie'], 2);
+
+    if (sizeof($superficie) == 1) {
+        $superficie[1] = $superficie[0];
+    }
+
+    $numHabitaciones = explode(",", $_POST['numHabitaciones'], 2);
+
+    if (sizeof($numHabitaciones) == 1) {
+        $numHabitaciones[1] = $numHabitaciones[0];
+    }
+
+    $numAseos = explode(",", $_POST['numAseos'], 2);
+
+    if (sizeof($numAseos) == 1) {
+        $numAseos[1] = $numAseos[0];
+    }
+
+    $sql = "SELECT codPostal FROM municipios WHERE nombreMunicipio = '" . $_POST['municipio'] . "'";
+
+    $resultado = ejecutaConsulta($sql);
+    $codPostales = array();
+
+    while ($registro = mysqli_fetch_array($resultado)) {
+        array_push($codPostales, $registro['codPostal']);
+    }
+
+    $codPostales = join("','", $codPostales);
 
     $sql = "SELECT * FROM anuncios 
             WHERE idTipoVivienda = '" . $tipoVivienda . "' 
-            OR idTipoAnuncio = '" . $tipoAnuncio . "' 
-            OR precio = '" . $precio . "' 
-            OR superficie = '" . $superficie . "' 
-            OR direccion = '" . $direccion . "' 
-            OR codPostal = '" . $codPostal . "' 
-            OR numHabitaciones = '" . $numHabitaciones . "' 
-            OR numAseos = '" . $numAseos . "'";
+            AND idTipoAnuncio = '" . $tipoAnuncio . "' 
+            AND (precio >= '" . $precio[0] . "' AND precio < '" . $precio[1] . "')
+            AND (superficie >= '" . $superficie[0] . "' AND superficie < '" . $superficie[1] . "')
+            AND codPostal IN ('" . $codPostales . "')
+            AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
+            AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')";
 
     $mensaje = "Búsqueda Finalizada";
     $resultado = ejecutaConsulta($sql);
@@ -59,6 +88,13 @@ if (isset($_POST['envio'])) {
 
     <script type="text/javascript" language="javascript" src="assets/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.range.css">
+    <script src="assets/js/jquery.range.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="assets/css/chosen.css">
+    <script src="assets/js/chosen.jquery.js"></script>
+
 
 </head>
 
@@ -114,7 +150,7 @@ if (isset($_POST['envio'])) {
                             <div>
                                 <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1" checked="checked">
                                     <label class="form-check-label">Vendo</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
@@ -131,36 +167,106 @@ if (isset($_POST['envio'])) {
                                 </div>
                             </div>
                             <div>
-                                <label class="labelAlineado">Precio (€):&nbsp;</label>
-                                <input type="number" name="precio" min="1" placeholder="Precio">
+                                <label class="labelAlineado" style="display: inline">Precio en € (escala
+                                    1:1000):&nbsp;</label>
+                                <br><br>
+
+                                <input class="range-slider" type="hidden" name="precio" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 1,
+                                        to: 500,
+                                        step: 25,
+                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
                             </div>
                             <div>
+                                <br>
                                 <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="superficie" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 1,
+                                        to: 400,
+                                        step: 20,
+                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
                             </div>
-                            <div>
-                                <label class="labelAlineado">Dirección:&nbsp;&nbsp;</label>
-                                <input type="text" placeholder="Dirección" name="direccion">
 
-                            </div>
-                            <div>
-                                <label class="labelAlineado">CP:&nbsp;</label>
-                                <input type="text" placeholder="Código Postal" name="codPostal">
-                            </div>
+                            <br>
+                            <label class="labelAlineado" style="display: inline">Municipio:&nbsp;</label>
+                            <br><br>
+
+                            <?php
+
+
+                            $sql = "SELECT DISTINCT(nombreMunicipio) FROM municipios";
+                            $resultado = ejecutaConsulta($sql);
+                            echo "<select class='selectMunicipios' data-placeholder='Selecciona el municipio' name='municipio'";
+                            while ($registro = mysqli_fetch_array($resultado)) {
+                                echo "<option value='" . $registro['nombreMunicipio'] . "'>" . $registro['nombreMunicipio'] . "</option>";
+                            }
+                            echo "</select>";
+
+                            ?>
+
+                            <script>
+                                $(".selectMunicipios").chosen({
+                                    disable_search_threshold: 10,
+                                    no_results_text: "Vaya, no se ha encontrado ese municipio!",
+                                    width: "30%"
+                                });
+                            </script>
+
+                            <br><br>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones">&nbsp;
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="numHabitaciones" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 0,
+                                        to: 6,
+                                        step: 1,
+                                        scale: [0, 1, 2, 3, 4, 5, 6],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
                             </div>
                             <div>
+                                <br><br>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="1" placeholder="Número de baños">&nbsp;
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="numAseos" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 0,
+                                        to: 4,
+                                        step: 1,
+                                        scale: [0, 1, 2, 3, 4],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
+                                <br><br>
                             </div>
                         </fieldset>
                         <br>
-                        <input display:none></input>
                         <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda" name="envio"></input>
                     </form>
             </div>

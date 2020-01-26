@@ -101,7 +101,7 @@ main {
   height: 100px;
 }
 
-.row>div {
+#divExtras div {
   margin: 10px;
 
   /* and that, will result in a 10px gap */
