@@ -8,7 +8,10 @@ if (isset($_SESSION['nombre'])) {
     header('Location: index.php');
 }
 
-if (isset($_POST['email'])) {
+$errors = array();
+
+if (isset($_POST['registrarUsuario'])) {
+
     // Saneo los inputs recibidos
     $nombre = filter_var(trim($_POST['nombre']), FILTER_SANITIZE_STRING);
     $nick = filter_var(trim($_POST['nick']), FILTER_SANITIZE_STRING);
@@ -18,6 +21,21 @@ if (isset($_POST['email'])) {
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
     $password = password_hash($password, PASSWORD_DEFAULT);
 
+    //Comprobamos si hay errores
+
+    if (empty($nick)) {
+        array_push($errors, "¡El nick es obligatorio!");
+    }
+    if (empty($email)) {
+        array_push($errors, "¡El email es obligatorio!");
+    }
+    if (empty($password)) {
+        array_push($errors, "¡La contraseña es obligatoria!");
+    }
+    if ($_POST['password'] != $_POST['passwordConfirm']) {
+        array_push($errors, "¡Las contraseña no son iguales!");
+    }
+
     $sql = "SELECT * FROM usuarios WHERE correo = '$email' OR nick = '$nick'";
     $resultado = ejecutaConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
@@ -25,16 +43,17 @@ if (isset($_POST['email'])) {
     $mensaje = $numRegistros;
 
     if ($numRegistros > 0) {
-        $mensaje = "Usuario ya registrado<br><br>";
-        die();
+        array_push($errors, "¡Nick o correo electrónico ya registrado!");
     } else {
-        $sql = "INSERT INTO usuarios (nombre, nick, correo, clave) VALUES ('" . $nombre . "', '" . $nick . "', '" . $email . "', '" . $password . "')";
+        if (count($errors) == 0) {
+            $sql = "INSERT INTO usuarios (nombre, nick, correo, clave) VALUES ('" . $nombre . "', '" . $nick . "', '" . $email . "', '" . $password . "')";
 
-        $resultado = ejecutaConsulta($sql);
-        if ($resultado) {
-            header("Location:login.php");
-        } else {
-            $mensaje = "No se ha podido registrar";
+            $resultado = ejecutaConsulta($sql);
+            if ($resultado) {
+                header("Location:login.php");
+            } else {
+                array_push($errors, "¡No se ha podido registrar! Por favor, pongase en contacto con el administrador.");
+            }
         }
     }
 }
@@ -90,36 +109,40 @@ if (isset($_POST['email'])) {
                 <div class="block-heading">
                     <h2 class="text-info">Registro</h2>
                 </div>
-                <!-- Mensajes del servidor referentes al registro -->
-                <p id="mensajes"><?php
-                                    echo $mensaje; ?>
 
-                    <form method="post" action="registration.php" onsubmit="return verCondiciones()">
-                        <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" class="form-control item" id="name" name="nombre" /></div>
-                        <div class="form-group">
-                            <label for="name">Nick</label>
-                            <input type="text" class="form-control item" id="nick" name="nick" /></div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control item" id="email" name="email" /></div>
-                        <div class="form-group">
-                            <label for="password">Contraseña</label>
-                            <input type="password" class="form-control item" id="password" name="password" /></div>
-                        <div class="form-group">
-                            <label for="password">Confirmar Contraseña</label>
-                            <input type="password" class="form-control item" id="passwordConfirm" /></div>
-                        <div class="form-group" id="cuadroCondiciones">
-                            <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="condiciones" />
-                                <label class="form-check-label" for="condiciones">Acepto las <a href="legal-warning.php">condiciones de uso</a>
-                                    y la <a href="basicdata-protection.php">información básica de Protección de Datos
-                                    </a> </label>
-                            </div>
+                <form method="post" action="registration.php" onsubmit="return verCondiciones()">
+                    <?php include('errors.php'); ?>
+                    <div class="form-group">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control item" id="name" name="nombre" /></div>
+                    <div class="form-group">
+                        <label for="name">Nick</label>
+                        <input type="text" class="form-control item" id="nick" name="nick" /></div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control item" id="email" name="email" /></div>
+                    <div class="form-group">
+                        <label for="password">Contraseña</label>
+                        <input type="password" class="form-control item" id="password" name="password" /></div>
+                    <div class="form-group">
+                        <label for="password">Confirmar Contraseña</label>
+                        <input type="password" class="form-control item" id="passwordConfirm" name="passwordConfirm" /></div>
+                    <div class="form-group" id="cuadroCondiciones">
+                        <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="condiciones" />
+                            <label class="form-check-label" for="condiciones">Acepto las <a href="legal-warning.php">condiciones de uso</a>
+                                y la <a href="basicdata-protection.php">información básica de Protección de Datos
+                                </a> </label>
                         </div>
-                        <input class="btn btn-primary btn-block" type="submit" value="Registrarse"></input>
-                    </form>
+                    </div>
+                    <input class="btn btn-primary btn-block" type="submit" value="Registrarse" name="registrarUsuario"></input>
+                    <br><br>
+                    <p style="text-align: right">
+                        ¿Eres ya un miembro? <a href="login.php">Iniciar Sesión</a>
+                    </p>
+
+                </form>
+
             </div>
         </section>
     </main>
