@@ -10,6 +10,7 @@ if (isset($_POST['envio'])) {
     $tipoVivienda = $_POST['tipoVivienda'];
     $tipoAnuncio = $_POST['tipoAnuncio'];
     $precio = $_POST['precio'];
+    echo $precio;
     $superficie = $_POST['superficie'];
     $direccion = $_POST['direccion'];
     $codPostal = $_POST['codPostal'];
@@ -59,6 +60,10 @@ if (isset($_POST['envio'])) {
 
     <script type="text/javascript" language="javascript" src="assets/js/jquery.dataTables.min.js"></script>
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+
+    <link rel="stylesheet" type="text/css" href="assets/css/jquery.range.css">
+    <script src="assets/js/jquery.range.js"></script>
+
 
 </head>
 
@@ -131,15 +136,42 @@ if (isset($_POST['envio'])) {
                                 </div>
                             </div>
                             <div>
-                                <label class="labelAlineado">Precio (€):&nbsp;</label>
-                                <input type="number" name="precio" min="1" placeholder="Precio">
-                            </div>
-                            <div>
-                                <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
+                                <label class="labelAlineado" style="display: inline">Precio en € (escala 1:1000):&nbsp;</label>
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="precio" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 1,
+                                        to: 500,
+                                        step: 25,
+                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
                             </div>
                             <div>
+                                <br>
+                                <label class="labelAlineado">Superficie (m²):&nbsp;</label>
+                                <br><br>
+
+                                <input class="range-slider" type="hidden" name="superficie" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 1,
+                                        to: 400,
+                                        step: 20,
+                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
+                            </div>
+                            <div>
+                                <br><br>
                                 <label class="labelAlineado">Dirección:&nbsp;&nbsp;</label>
                                 <input type="text" placeholder="Dirección" name="direccion">
 
@@ -150,13 +182,39 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones">&nbsp;
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="numHabitaciones" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 0,
+                                        to: 6,
+                                        step: 1,
+                                        scale: [0, 1, 2, 3, 4, 5, 6],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
                             </div>
                             <div>
+                                <br><br>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="1" placeholder="Número de baños">&nbsp;
+                                <br><br>
 
+                                <input class="range-slider" type="hidden" name="numAseos" />
+                                <script>
+                                    $('.range-slider').jRange({
+                                        from: 0,
+                                        to: 4,
+                                        step: 1,
+                                        scale: [0, 1, 2, 3, 4],
+                                        format: '%s',
+                                        width: 750,
+                                        isRange: true,
+                                    });
+                                </script>
+                                <br><br>
                             </div>
                         </fieldset>
                         <br>
