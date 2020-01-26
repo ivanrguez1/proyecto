@@ -20,6 +20,10 @@
                 $imagenEncontrada = false;
                 $urlFoto;
 
+                if ($numRegistros == 0) {
+                    echo "¡Vaya!, no se han encontrado anuncios.";
+                }
+
                 while ($registro = mysqli_fetch_array($resultado)) {
 
                     $i = 1;

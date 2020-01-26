@@ -3,11 +3,25 @@ require_once("assets/php/bbdd.php");
 session_start();
 $mensaje = "";
 
+
+/*
+//Función utilizada para debugear.
+function debug_to_console($data)
+{
+    $output = $data;
+    if (is_array($output))
+        $output = implode(',', $output);
+
+    echo "<script>console.log('Debug Objects: " . $output . "' );</script>";
+}*/
+
 if (isset($_SESSION['nombre'])) {
     header('Location: index.php');
 }
 
-if (isset($_POST['email'])) {
+if (isset($_POST['iniciarSesion'])) {
+
+
     // Saneo los inputs recibidos
     $email = filter_var(trim($_POST['email']), FILTER_SANITIZE_STRING);
     $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
@@ -24,8 +38,6 @@ if (isset($_POST['email'])) {
         // Hasta que se pruebe el registro con la encriptación, valen las claves sin encriptar
         if (password_verify($password, $registro['clave'])) {
 
-
-
             // Iniciamos la sesión y escribimos la cookie para guardar los datos
             $_SESSION['nombre'] = $registro['nombre'];
             $_SESSION['nick'] = $registro['nick'];
@@ -34,14 +46,27 @@ if (isset($_POST['email'])) {
             // Guardamos en una variable de sesión la ID del usuario logado
             $_SESSION['idUsuario'] = devolverId($registro['correo']);
 
-            /* 
+
             // TODO: Gestión de cookies
-            // Ponemos una cookie que durará 1 mes
-            if (!isset($_COOKIE["usuario"])) {
-                setcookie("nombre", $registro['nombre'], (time() + (60 * 60 * 24 * 30)));
+            // Si el checked "recuerdame" esta marcado, ponemos una cookie que durará 1 mes
+
+            if (isset($_POST['recuerdame']) && !isset($_COOKIE["usuario"])) {
+
+                //Si el checkbox para recordar la sesión está marcado y no hay ya una cookie establecida -> establecemos Cookies.
+
+                setcookie("email", $email, (time() + 60 * 60 * 24 * 30));
+                setcookie("password", $password, (time() + 60 * 60 * 24 * 30));
+            } else if (!isset($_POST['recuerdame'])) {
+
+                //Si el checkbox para recordar la sesión está desmarcado -> limpiamos Cookies.
+
+                setcookie("email", "", 1);
+                unset($_COOKIE['email']);
+                setcookie("password", "", 1);
+                unset($_COOKIE['password']);
             }
-            header("Location:registerAd.php.php");
-            */
+
+
             $mensaje = "Acceso Correcto!<br><br>";
             header('Location: index.php');
         } else {
@@ -113,17 +138,17 @@ if (isset($_POST['email'])) {
                     <form method="post" action="login.php">
                         <div class="form-group">
                             <label for="email">Email</label>
-                            <input type="email" class="form-control item" id="email" name="email" /></div>
+                            <input type="email" class="form-control item" id="email" name="email" value="<?php if (isset($_COOKIE["email"])) echo $_COOKIE["email"] ?>" /></div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
-                            <input type="password" class="form-control" id="password" name="password" /></div>
+                            <input type="password" class="form-control" id="password" name="password" value="<?php if (isset($_COOKIE["password"])) echo $_COOKIE["password"] ?>" /></div>
                         <div class="form-group">
                             <div class="form-check">
-                                <input type="checkbox" class="form-check-input" id="recuerdame" />
-                                <label class="form-check-label" for="recuerdamelo">Recuérdame</label>
+                                <input type="checkbox" class="form-check-input" name="recuerdame" checked="checked" />
+                                <label class="form-check-label">Recuérdame</label>
                             </div>
                         </div>
-                        <input class="btn btn-primary btn-block" type="submit" value="Iniciar Sesión"></input>
+                        <input class="btn btn-primary btn-block" type="submit" name="iniciarSesion" value="Iniciar Sesión"></input>
                         <br>
                         ¿No tienes cuenta? <a href='registration.php'>Registrarse</a>
                     </form>
