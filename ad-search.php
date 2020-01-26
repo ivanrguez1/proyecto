@@ -114,7 +114,7 @@ if (isset($_POST['envio'])) {
                             <div>
                                 <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1" checked="checked">
                                     <label class="form-check-label">Vendo</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
@@ -160,7 +160,6 @@ if (isset($_POST['envio'])) {
                             </div>
                         </fieldset>
                         <br>
-                        <input display:none></input>
                         <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda" name="envio"></input>
                     </form>
             </div>
