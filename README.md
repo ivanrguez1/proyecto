@@ -75,6 +75,18 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`usuarios` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 ```
+* Municipios
+
+```sql
+DROP TABLE IF EXISTS `upocasa`.`municipios` ;
+
+CREATE TABLE municipios (
+  codPostal INT NOT NULL,
+  nombreMunicipio VARCHAR(255) NOT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = 'Municipios\n';
+```
 
 * Tipos de anuncio
 
