@@ -4,6 +4,12 @@
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="assets/css/googleMapsStyle.css">
 
+<link rel="stylesheet" type="text/css" href="assets/css/jquery.range.css">
+<script src="assets/js/jquery.range.js"></script>
+
+<link rel="stylesheet" type="text/css" href="assets/css/chosen.css">
+<script src="assets/js/chosen.jquery.js"></script>
+
 <section class=" search-box">
     <div class="container-fluid">
         <div class="row">

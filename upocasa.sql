@@ -295,7 +295,7 @@ VALUES
 (3, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle París'),
 (4, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
 (5, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
-(6, 1, 1, 1, '250000', '220', 'Betis, 3', 41089, 3, 2, 'A', 'A', 'Chalet de Alex en Sevilla'),
+(6, 1, 1, 1, '250000', '220', 'Betis, 3', 41702, 3, 2, 'A', 'A', 'Chalet de Alex en Dos Hermanas'),
 (7, 2, 1, 1, '900000', '175', 'San Bernardo', 41012, 5, 4, 'A', 'A', 'Prueba Final');
 
 -- Anuncios-extras
