@@ -29,7 +29,7 @@ if (isset($_POST['iniciarSesion'])) {
     // Creo la consulta para acceder a la BBDD y la ejecuto
     $sql = "SELECT * FROM usuarios WHERE correo = '" . $email . "'";
     $mensaje = $sql;
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 
     if ($numRegistros == 1) {

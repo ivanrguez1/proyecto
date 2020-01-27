@@ -17,7 +17,7 @@ if (isset($_GET['id'])) {
             AND idAnuncio = '" . $id . "'";
 
     $mensaje = "Búsqueda Finalizada";
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
     $mensaje = $sql;
 }
@@ -97,7 +97,7 @@ if (isset($_GET['id'])) {
                     FROM fotos
                     WHERE idAnuncio = '" . $id . "'";
 
-                    $resultado = ejecutaConsulta($sql);
+                    $resultado = ejecutarConsulta($sql);
                     $registro = mysqli_fetch_array($resultado);
 
                     echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
@@ -121,7 +121,7 @@ if (isset($_GET['id'])) {
                     $otrosExtras = array();
 
                     $sql = "SELECT extra FROM extras WHERE idExtra in (SELECT idExtra FROM anuncios_extras WHERE idAnuncio = '" . $_GET['id'] . "')";
-                    $resultado = ejecutaConsulta($sql);
+                    $resultado = ejecutarConsulta($sql);
 
                     while ($registro = mysqli_fetch_array($resultado)) {
 

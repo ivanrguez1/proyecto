@@ -57,7 +57,7 @@ if (isset($_POST['envio'])) {
     '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
     '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
 
-    $idAnuncio = ejecutaInsercion($sql);
+    $idAnuncio = ejecutarAccion($sql);
 
     // Rellenamos los datos de la tabla anuncios_extras
     $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
@@ -67,7 +67,7 @@ if (isset($_POST['envio'])) {
     }
     $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
-    ejecutaInsercion($sql);
+    ejecutarAccion($sql);
 
     // ----------------------------------------------------------
     // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
@@ -85,7 +85,7 @@ if (isset($_POST['envio'])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
                     $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
-                    ejecutaInsercion($sql);
+                    ejecutarAccion($sql);
                 } else {
                     array_push($errors, "¡En la subida de las fotos!");
                 }

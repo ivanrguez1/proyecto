@@ -31,7 +31,7 @@
                     do {
                         $sql = "SELECT urlFoto" . $i . " FROM fotos
                         WHERE idAnuncio = '" . $registro['idAnuncio'] . "'";
-                        $resultadoFoto = ejecutaConsulta($sql);
+                        $resultadoFoto = ejecutarConsulta($sql);
                         $fotos = mysqli_fetch_array($resultadoFoto);
 
                         if (!empty($fotos['urlFoto' . $i])) {
