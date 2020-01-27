@@ -3,7 +3,7 @@
     flex-direction: column !important;
   }
 
-  #divExtras>div {
+  #divExtras > div {
     width: 100% !important;
   }
 }
@@ -94,19 +94,28 @@ main {
 
 .blue-column {
   height: 100px;
-
 }
 
 .green-column {
   height: 100px;
 }
 
-#divExtras div {
+#divExtras,
+#divExtrasShowAd div {
   margin: 10px;
 
   /* and that, will result in a 10px gap */
 }
 
 #divExtras {
+  margin-top: 10px;
+}
+
+#divExtrasShowAd {
   margin-top: 550px;
+}
+
+#mostrarTodosAnuncios {
+  float: right;
+  margin-right: 75px;
 }
