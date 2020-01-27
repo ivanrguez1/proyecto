@@ -23,6 +23,10 @@ if (isset($_POST['registrarUsuario'])) {
 
     //Comprobamos si hay errores
 
+    if (empty($nombre)) {
+        array_push($errors, "¡El nombre es obligatorio!");
+    }
+
     if (empty($nick)) {
         array_push($errors, "¡El nick es obligatorio!");
     }
@@ -34,6 +38,18 @@ if (isset($_POST['registrarUsuario'])) {
     }
     if ($_POST['password'] != $_POST['passwordConfirm']) {
         array_push($errors, "¡Las contraseña no son iguales!");
+    }
+
+    if (sizeof($nick) < 6) {
+        array_push($errors, "¡El nick debe de tener al menos 6 carácteres!");
+    }
+
+    if (sizeof($password) < 6) {
+        array_push($errors, "¡La contraseña debe de tener al menos 6 carácteres!");
+    }
+
+    if (sizeof($nombre) < 4) {
+        array_push($errors, "¡El nombre debe de tener al menos 3 carácteres!");
     }
 
     $sql = "SELECT * FROM usuarios WHERE correo = '$email' OR nick = '$nick'";
