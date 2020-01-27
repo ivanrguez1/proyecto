@@ -64,15 +64,24 @@ if (isset($_GET['id'])) {
                         <?php
                         while ($registro = mysqli_fetch_array($resultado)) {
                         ?>
-                            <div class="form-group"><label>Precio: </label><strong><?php echo " " . $registro['precio'] . "€"; ?></strong></div>
-                            <div class="form-group"><label>Tipo de Anuncio: </label><strong><?php echo " " . $registro['tipoAnuncio']; ?></strong></div>
-                            <div class="form-group"><label>Tipo de Vivienda: </label><strong><?php echo " " . $registro['tipoVivienda']; ?></strong></div>
-                            <div class="form-group"><label>Descripción: </label><strong><?php echo " " . $registro['comentarios']; ?></strong></div>
-                            <div class="form-group"><label>Dirección: </label><strong><?php echo " " . $registro['direccion']; ?></strong></div>
-                            <div class="form-group"><label>Código Postal: </label><strong><?php echo " " . $registro['codPostal']; ?></strong></div>
-                            <div class="form-group"><label>Superficie: </label><strong><?php echo " " . $registro['superficie'] . "m²"; ?></strong></div>
-                            <div class="form-group"><label>Nº de Habitaciones: </label><strong><?php echo " " . $registro['numHabitaciones']; ?></strong></div>
-                            <div class="form-group"><label>Nº de Aseos: </label><strong><?php echo " " . $registro['numAseos']; ?></strong></div>
+                        <div class="form-group"><label>Precio:
+                            </label><strong><?php echo " " . $registro['precio'] . "€"; ?></strong></div>
+                        <div class="form-group"><label>Tipo de Anuncio:
+                            </label><strong><?php echo " " . $registro['tipoAnuncio']; ?></strong></div>
+                        <div class="form-group"><label>Tipo de Vivienda:
+                            </label><strong><?php echo " " . $registro['tipoVivienda']; ?></strong></div>
+                        <div class="form-group"><label>Descripción:
+                            </label><strong><?php echo " " . $registro['comentarios']; ?></strong></div>
+                        <div class="form-group"><label>Dirección:
+                            </label><strong><?php echo " " . $registro['direccion']; ?></strong></div>
+                        <div class="form-group"><label>Código Postal:
+                            </label><strong><?php echo " " . $registro['codPostal']; ?></strong></div>
+                        <div class="form-group"><label>Superficie:
+                            </label><strong><?php echo " " . $registro['superficie'] . "m²"; ?></strong></div>
+                        <div class="form-group"><label>Nº de Habitaciones:
+                            </label><strong><?php echo " " . $registro['numHabitaciones']; ?></strong></div>
+                        <div class="form-group"><label>Nº de Aseos:
+                            </label><strong><?php echo " " . $registro['numAseos']; ?></strong></div>
                         <?php
                         }
                         // Liberamos el resultado del SQL
@@ -129,7 +138,7 @@ if (isset($_GET['id'])) {
                     ?>
 
 
-                    <div id="divExtras" class='row'>
+                    <div id="divExtrasShowAd" class='row'>
                         <div class='column'>
                             <p style="text-align: center">- Extras Finca -</p>
                             <br><br>
@@ -192,7 +201,8 @@ if (isset($_GET['id'])) {
                     </div>
 
 
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit" id="btnVolverABuscar">Volver a Buscar</button>
+                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit"
+                            id="btnVolverABuscar">Volver a Buscar</button>
                     </div>
             </div>
             </form>

@@ -135,7 +135,8 @@ if (isset($_POST['envio'])) {
                                 <input type="file" class="pt-2 pb-2 w-100" name="foto5">
                                 <br><br>
                                 <div class="info">
-                                    <p>&emsp;Por defecto la <strong>primera</strong> imagen corresponde a la foto de <strong>portada</strong></p>
+                                    <p>&emsp;Por defecto la <strong>primera</strong> imagen corresponde a la foto de
+                                        <strong>portada</strong></p>
                                 </div>
                             </fieldset>
                             <br>
@@ -155,7 +156,8 @@ if (isset($_POST['envio'])) {
                                 <div>
                                     <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                     <div class="form-check form-check-inline d-inline">
-                                        <input class="form-check-input" type="radio" name="tipoAnuncio" value="1">
+                                        <input class="form-check-input" type="radio" name="tipoAnuncio" value="1"
+                                            checked>
                                         <label class="form-check-label">Vendo</label>
                                     </div>
                                     <div class="form-check form-check-inline d-inline">
@@ -177,7 +179,8 @@ if (isset($_POST['envio'])) {
                                 </div>
                                 <div>
                                     <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                    <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
+                                    <input type="number" name="superficie" min="1" placeholder="Superficie"
+                                        step="0.01">&nbsp;
 
                                 </div>
                                 <div>
@@ -191,7 +194,8 @@ if (isset($_POST['envio'])) {
                                 </div>
                                 <div>
                                     <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                    <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones">&nbsp;
+                                    <input type="number" name="numHabitaciones" min="1"
+                                        placeholder="Número de habitaciones">&nbsp;
 
                                 </div>
                                 <div>
@@ -234,7 +238,8 @@ if (isset($_POST['envio'])) {
                             <p>
                                 <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                     <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
-                                    <textarea rows="5" cols="100" name="comentarios" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
+                                    <textarea rows="5" cols="100" name="comentarios"
+                                        class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                     <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
                                 </legend>
                             </p>
@@ -304,11 +309,11 @@ if (isset($_POST['envio'])) {
         </section>
     </main>
     <script type="text/javascript">
-        $('option').mousedown(function(e) {
-            e.preventDefault();
-            $(this).prop('selected', !$(this).prop('selected'));
-            return false;
-        });
+    $('option').mousedown(function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        return false;
+    });
     </script>
     <?php include "./footer.html" ?>
 </body>
