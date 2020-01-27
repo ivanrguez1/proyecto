@@ -4,9 +4,19 @@ session_start();
 $mensaje = "-----";
 
 
-if (isset($_POST['envio'])) {
+if(isset($_POST['mostrarTodosAnuncios'])){
 
-    // Toda la lógica PHP de Alta del anuncio (tablas anuncios y anuncios_extras)
+    //Si el usuario desea observar todos los anuncios de la inmbobiliaria.
+
+    $sql = "SELECT * FROM anuncios";
+
+    $mensaje = "Búsqueda Finalizada";
+    $resultado = ejecutaConsulta($sql);
+    $numRegistros = mysqli_num_rows($resultado);
+
+}else if (isset($_POST['envio'])) {
+
+    // Toda la lógica PHP para la búsqueda de los anuncios que cumplan las restricciones seleccionada por el usuario
     $tipoVivienda = $_POST['tipoVivienda'];
     $tipoAnuncio = $_POST['tipoAnuncio'];
     $precio = explode(",", $_POST['precio'], 2);
@@ -46,14 +56,26 @@ if (isset($_POST['envio'])) {
 
     $codPostales = join("','", $codPostales);
 
-    $sql = "SELECT * FROM anuncios 
-            WHERE idTipoVivienda = '" . $tipoVivienda . "' 
-            AND idTipoAnuncio = '" . $tipoAnuncio . "' 
-            AND (precio >= '" . $precio[0] . "' AND precio < '" . $precio[1] . "')
-            AND (superficie >= '" . $superficie[0] . "' AND superficie < '" . $superficie[1] . "')
-            AND codPostal IN ('" . $codPostales . "')
-            AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
-            AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')";
+    if(isset($_POST['noFiltrarMunicipios'])){
+        $sql = "SELECT * FROM anuncios 
+        WHERE idTipoVivienda = '" . $tipoVivienda . "' 
+        AND idTipoAnuncio = '" . $tipoAnuncio . "' 
+        AND (precio >= '" . $precio[0] . "' AND precio < '" . $precio[1] . "')
+        AND (superficie >= '" . $superficie[0] . "' AND superficie < '" . $superficie[1] . "')
+        AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
+        AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')";
+    }else{
+        $sql = "SELECT * FROM anuncios 
+        WHERE idTipoVivienda = '" . $tipoVivienda . "' 
+        AND idTipoAnuncio = '" . $tipoAnuncio . "' 
+        AND (precio >= '" . $precio[0] . "' AND precio < '" . $precio[1] . "')
+        AND (superficie >= '" . $superficie[0] . "' AND superficie < '" . $superficie[1] . "')
+        AND codPostal IN ('" . $codPostales . "')
+        AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
+        AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')";
+
+    }
+
 
     $mensaje = "Búsqueda Finalizada";
     $resultado = ejecutaConsulta($sql);
@@ -119,7 +141,7 @@ if (isset($_POST['envio'])) {
             <div>
                 <br />
                 <?php
-                if (isset($_POST['envio'])) {
+                if (isset($_POST['envio']) || isset($_POST['mostrarTodosAnuncios'])) {
                     include "./ad-search-result.php";
                 }
                 ?>
@@ -135,6 +157,8 @@ if (isset($_POST['envio'])) {
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
+                            <input type="submit" class="btn btn-outline-success" id="mostrarTodosAnuncios"
+                                name="mostrarTodosAnuncios" value="Mostrar Todos">
                             <legend class="pt-auto pb-2">Características del inmueble</legend>
                             <div>
                                 <label class="labelAlineado">Tipo de Vivienda:&nbsp;</label>
@@ -150,7 +174,8 @@ if (isset($_POST['envio'])) {
                             <div>
                                 <label class="labelAlineado">Tipo de Anuncio:&nbsp;</label>
                                 <div class="form-check form-check-inline d-inline">
-                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1" checked="checked">
+                                    <input class="form-check-input" type="radio" name="tipoAnuncio" value="1"
+                                        checked="checked">
                                     <label class="form-check-label">Vendo</label>
                                 </div>
                                 <div class="form-check form-check-inline d-inline">
@@ -173,15 +198,15 @@ if (isset($_POST['envio'])) {
 
                                 <input class="range-slider" type="hidden" name="precio" />
                                 <script>
-                                    $('.range-slider').jRange({
-                                        from: 1,
-                                        to: 500,
-                                        step: 25,
-                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
-                                        format: '%s',
-                                        width: 750,
-                                        isRange: true,
-                                    });
+                                $('.range-slider').jRange({
+                                    from: 1,
+                                    to: 500,
+                                    step: 25,
+                                    scale: [1, 50, 100, 150, 200, 250, 300, 350, 400, 450, 500],
+                                    format: '%s',
+                                    width: 750,
+                                    isRange: true,
+                                });
                                 </script>
                             </div>
                             <div>
@@ -191,15 +216,15 @@ if (isset($_POST['envio'])) {
 
                                 <input class="range-slider" type="hidden" name="superficie" />
                                 <script>
-                                    $('.range-slider').jRange({
-                                        from: 1,
-                                        to: 400,
-                                        step: 20,
-                                        scale: [1, 50, 100, 150, 200, 250, 300, 350, 400],
-                                        format: '%s',
-                                        width: 750,
-                                        isRange: true,
-                                    });
+                                $('.range-slider').jRange({
+                                    from: 1,
+                                    to: 400,
+                                    step: 20,
+                                    scale: [1, 50, 100, 150, 200, 250, 300, 350, 400],
+                                    format: '%s',
+                                    width: 750,
+                                    isRange: true,
+                                });
                                 </script>
                             </div>
 
@@ -217,15 +242,22 @@ if (isset($_POST['envio'])) {
                                 echo "<option value='" . $registro['nombreMunicipio'] . "'>" . $registro['nombreMunicipio'] . "</option>";
                             }
                             echo "</select>";
+                            
 
                             ?>
 
+                            <br><br>
+                            <div class="form-check">
+                                <input type="checkbox" class="form-check-input" name="noFiltrarMunicipios" />
+                                <label class="form-check-label">Cualquier municipio</label>
+                            </div>
+
                             <script>
-                                $(".selectMunicipios").chosen({
-                                    disable_search_threshold: 10,
-                                    no_results_text: "Vaya, no se ha encontrado ese municipio!",
-                                    width: "30%"
-                                });
+                            $(".selectMunicipios").chosen({
+                                disable_search_threshold: 10,
+                                no_results_text: "Vaya, no se ha encontrado ese municipio!",
+                                width: "30%"
+                            });
                             </script>
 
                             <br><br>
@@ -235,15 +267,15 @@ if (isset($_POST['envio'])) {
 
                                 <input class="range-slider" type="hidden" name="numHabitaciones" />
                                 <script>
-                                    $('.range-slider').jRange({
-                                        from: 0,
-                                        to: 6,
-                                        step: 1,
-                                        scale: [0, 1, 2, 3, 4, 5, 6],
-                                        format: '%s',
-                                        width: 750,
-                                        isRange: true,
-                                    });
+                                $('.range-slider').jRange({
+                                    from: 0,
+                                    to: 6,
+                                    step: 1,
+                                    scale: [0, 1, 2, 3, 4, 5, 6],
+                                    format: '%s',
+                                    width: 750,
+                                    isRange: true,
+                                });
                                 </script>
                             </div>
                             <div>
@@ -253,21 +285,22 @@ if (isset($_POST['envio'])) {
 
                                 <input class="range-slider" type="hidden" name="numAseos" />
                                 <script>
-                                    $('.range-slider').jRange({
-                                        from: 0,
-                                        to: 4,
-                                        step: 1,
-                                        scale: [0, 1, 2, 3, 4],
-                                        format: '%s',
-                                        width: 750,
-                                        isRange: true,
-                                    });
+                                $('.range-slider').jRange({
+                                    from: 0,
+                                    to: 4,
+                                    step: 1,
+                                    scale: [0, 1, 2, 3, 4],
+                                    format: '%s',
+                                    width: 750,
+                                    isRange: true,
+                                });
                                 </script>
                                 <br><br>
                             </div>
                         </fieldset>
                         <br>
-                        <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda" name="envio"></input>
+                        <input class="btn btn-primary btn-block" type="submit" value="Realizar Búsqueda"
+                            name="envio"></input>
                     </form>
             </div>
         </section>

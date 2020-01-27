@@ -114,3 +114,8 @@ main {
 #divExtrasShowAd {
   margin-top: 550px;
 }
+
+#mostrarTodosAnuncios {
+  float: right;
+  margin-right: 75px;
+}
