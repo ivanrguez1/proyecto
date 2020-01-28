@@ -92,14 +92,13 @@ if (isset($_POST['envio'])) {
 
 
         for ($i = 1; $i < 6; $i++) {
-            $fileName = time() . basename($_FILES["foto" . $i]["name"]);
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
             if (!empty($_FILES["foto" . $i]["name"])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
-                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $relativeTargetDir . $fileName . "')";
+                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $relativeTargetDir . time() . "')";
                     ejecutarAccion($sql);
                 } else {
                     array_push($errors, "¡Vaya no se ha podido subir las fotos, anuncio creado sin fotos. Contacte con el administrador!");
