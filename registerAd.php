@@ -21,7 +21,7 @@ if (isset($_POST['envio'])) {
     $numAseos = $_POST['numAseos'];
     $consumo = $_POST['consumo'];
     $emisiones = $_POST['emisiones'];
-    $comentarios = $_POST['comentarios'];
+    $comentarios = filter_var(trim($_POST['comentarios']), FILTER_SANITIZE_STRING);
     $extras = $_POST['extras'];
 
     $idUsuario = $_SESSION['idUsuario'];
