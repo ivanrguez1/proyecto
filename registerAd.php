@@ -44,7 +44,7 @@ if (isset($_POST['envio'])) {
     //Checkeo de errores en fotos
 
     $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'] . '/';
-
+    $relativeTargetDir = 'assets/img/ads/' . $_SESSION['nick'] . '/';
     for ($i = 1; $i < 6; $i++) {
         $fileName = time() . basename($_FILES["foto" . $i]["name"]);
         $targetFilePath = $targetDir . $fileName;
@@ -54,7 +54,6 @@ if (isset($_POST['envio'])) {
             $allowTypes = array('jpg', 'png', 'jpeg');
             if (!in_array($fileType, $allowTypes)) {
                 array_push($errors, "¡Lo siento, solo se permiten fotos de tipo JPG, JPEG, PNG.!");
-                echo $_FILES["foto" . $i]["size"];
                 if (($_FILES["foto" . $i]["size"]) > 2048000) {
                     array_push($errors, "¡El máximo tamaño de las fotos es de 2MB!");
                 }
@@ -100,7 +99,7 @@ if (isset($_POST['envio'])) {
             if (!empty($_FILES["foto" . $i]["name"])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
-                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
+                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $relativeTargetDir . $fileName . "')";
                     ejecutarAccion($sql);
                 } else {
                     array_push($errors, "¡Vaya no se ha podido subir las fotos, anuncio creado sin fotos. Contacte con el administrador!");
@@ -226,13 +225,13 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="0" placeholder="Número de habitaciones"
-                                    value="0">&nbsp;
+                                <input type="number" name="numHabitaciones" min="0" max="6"
+                                    placeholder="Número de habitaciones" value="0">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="0" placeholder="Número de baños"
+                                <input type="number" name="numAseos" min="0" max="4" placeholder="Número de baños"
                                     value="0">&nbsp;
 
                             </div>
