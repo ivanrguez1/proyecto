@@ -15,8 +15,8 @@ if (isset($_POST['envio'])) {
     $tipoAnuncio = $_POST['tipoAnuncio'];
     $precio = $_POST['precio'];
     $superficie = $_POST['superficie'];
-    $direccion = $_POST['direccion'];
-    $codPostal = $_POST['codPostal'];
+    $direccion = filter_var(trim($_POST['direccion']), FILTER_SANITIZE_STRING);
+    $codPostal = filter_var(trim($_POST['codPostal']), FILTER_SANITIZE_STRING);
     $numHabitaciones = $_POST['numHabitaciones'];
     $numAseos = $_POST['numAseos'];
     $consumo = $_POST['consumo'];
@@ -74,7 +74,7 @@ if (isset($_POST['envio'])) {
     '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
     '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
 
-    $idAnuncio = ejecutarAccion($sql);
+        $idAnuncio = ejecutarAccion($sql);
 
         // Rellenamos los datos de la tabla anuncios_extras
         $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
@@ -84,7 +84,7 @@ if (isset($_POST['envio'])) {
         }
         $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
-    ejecutarAccion($sql);
+        ejecutarAccion($sql);
 
         // ----------------------------------------------------------
         // Subida de fotos a carpeta personal y registrado en BD
@@ -209,8 +209,7 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                <input type="number" name="superficie" min="1" placeholder="Superficie"
-                                    step="0.01">&nbsp;
+                                <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
 
                             </div>
                             <div>
@@ -224,14 +223,12 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="0" max="6"
-                                    placeholder="Número de habitaciones" value="0">&nbsp;
+                                <input type="number" name="numHabitaciones" min="0" max="6" placeholder="Número de habitaciones" value="0">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="0" max="4" placeholder="Número de baños"
-                                    value="0">&nbsp;
+                                <input type="number" name="numAseos" min="0" max="4" placeholder="Número de baños" value="0">&nbsp;
 
                             </div>
                         </fieldset>
@@ -269,8 +266,7 @@ if (isset($_POST['envio'])) {
                         <p>
                             <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                 <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
-                                <textarea rows="5" cols="100" name="comentarios"
-                                    class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
+                                <textarea rows="5" cols="100" name="comentarios" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                 <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
                             </legend>
                         </p>
@@ -340,11 +336,11 @@ if (isset($_POST['envio'])) {
         </section>
     </main>
     <script type="text/javascript">
-    $('select[name="extras[]"] option').mousedown(function(e) {
-        e.preventDefault();
-        $(this).prop('selected', !$(this).prop('selected'));
-        return false;
-    });
+        $('select[name="extras[]"] option').mousedown(function(e) {
+            e.preventDefault();
+            $(this).prop('selected', !$(this).prop('selected'));
+            return false;
+        });
     </script>
     <?php include "./footer.html" ?>
 </body>
