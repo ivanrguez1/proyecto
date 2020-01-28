@@ -18,6 +18,7 @@
 * [*] Creado archivo admin/admin.php        -> Página con enlaces para administrar entidades
 * [+] Creado /admin/tiposanuncio.php        -> CRUD completo de administración de tipos de anuncio
 * [+] Creado /admin/tiposvivienda.php       -> CRUD completo de administración de tipos de vivienda
+* [+] Creado /admin/usuarios.php            -> CRUD completo de administración de usuarios
 * [+] Creado /admin/footer.php              -> Pie de administración (igual que footer.php)
                                             Cambia las rutas relativas
 

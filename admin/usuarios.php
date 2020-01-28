@@ -13,8 +13,16 @@ $mensaje = "Consulta Finalizada";
 
 // Procedimiento para la inserción
 if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
-    $tipo = $_POST['tipo'];
-    $sqlINSERT = "INSERT INTO tiposVivienda (tipoVivienda) VALUES ('".$tipo."')";
+    $nombre = $_POST['nombre'];
+    $nick = $_POST['nick'];
+    $correo = $_POST['correo'];
+    $password = $_POST['password'];
+    // El password se encripta
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+
+    $sqlINSERT = "INSERT INTO usuarios (nombre, nick, correo, clave) 
+                VALUES ('".$nombre."','".$nick."','".$correo."','".$password."')";
 
     ejecutarAccion($sqlINSERT);
     $mensaje = "Inserción Realizada";
@@ -23,7 +31,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
 // Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
     $id = $_POST['id'];
-    $sqlDELETE = "DELETE FROM tiposVivienda WHERE idtipoVivienda = '".$id."'";
+    $sqlDELETE = "DELETE FROM usuarios WHERE idUsuario = '".$id."'";
 
     ejecutarAccion($sqlDELETE);
     $mensaje = "Eliminación Realizada";
@@ -33,35 +41,45 @@ if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
 // Muestra el elemento a Eliminar y muestra el mensaje de Preparado para Eliminar...
 if (isset($_GET['action']) && $_GET['action']==1 ){
     $id = $_GET['id'];
-    $sqlSELECTDELETE = "SELECT * FROM tiposVivienda WHERE idtipoVivienda='".$id."'";
+    $sqlSELECTDELETE = "SELECT * FROM usuarios WHERE idUsuario='".$id."'";
 
     $resultadoSELECTDELETE = ejecutarConsulta($sqlSELECTDELETE);
-    $tipo = "";
+    $nick = "";
     while($registro = mysqli_fetch_array($resultadoSELECTDELETE)) {
-        $tipo = $registro['tipoVivienda'];
+        $nick = $registro['nick'];
     }
-    $mensaje = "Preparado para Eliminar el tipo ".$tipo;
+    $mensaje = "Preparado para Eliminar el usuario cuyo Nick es ".$nick;
 }
 
 // Muestra el elemento a Actualizar y muestra el mensaje de Preparado para Actualizar...
 if (isset($_GET['action']) && $_GET['action']==2 ){
     $id = $_GET['id'];
-    $sqlSELECTUPDATE = "SELECT * FROM tiposVivienda WHERE idtipoVivienda='".$id."'";
+    $sqlSELECTUPDATE = "SELECT * FROM usuarios WHERE idUsuario='".$id."'";
 
     $resultadoSELECTUPDATE = ejecutarConsulta($sqlSELECTUPDATE);
-    $tipo = "";
+    $nombre = "";
+    $nick  = "";
+    $correo = "";
     while($registro = mysqli_fetch_array($resultadoSELECTUPDATE)) {
-        $tipo = $registro['tipoVivienda'];
+        $nombre  = $registro['nombre'];
+        $nick  = $registro['nick'];
+        $correo  = $registro['correo'];
     }
-    $mensaje = "Preparado para actualizar el tipo ".$tipo;
+    $mensaje = "Preparado para actualizar el usuario cuyo nick es ".$nick;
 }
 
 // Procedimiento para la Actualización
 if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
     $id = $_POST['id'];
-    $tipo = $_POST['tipo'];
+    $nombre = $_POST['nombre'];
+    $nick = $_POST['nick'];
+    $correo = $_POST['correo'];
 
-    $sqlUPDATE = "UPDATE tiposVivienda SET tipoVivienda='".$tipo ."' WHERE idtipoVivienda = '".$id ."'";
+    $sqlUPDATE = "UPDATE usuarios 
+                    SET nombre='".$nombre ."' ,
+                    nick='".$nick ."',
+                    correo='".$correo ."'
+                    WHERE idUsuario = '".$id ."'";
 
     ejecutarAccion($sqlUPDATE);
     $mensaje = "Modificación Realizada";
@@ -70,7 +88,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
 
 
 // Carga de elementos en la página con un SELECT
-$sql = "SELECT * FROM tiposVivienda";
+$sql = "SELECT * FROM usuarios";
 $resultado = ejecutarConsulta($sql);
 $numRegistros = mysqli_num_rows($resultado);
 
@@ -80,10 +98,10 @@ $numRegistros = mysqli_num_rows($resultado);
 <!DOCTYPE html>
 <html lang="es">
 
-<head>
+    <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Admin - Tipos de Vivienda</title>
+    <title>Admin - Usuarios</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
@@ -129,28 +147,32 @@ $numRegistros = mysqli_num_rows($resultado);
     </script>
         <section>
             <div class="block-heading">
-                <h2 class="text-info text-center mt-5">Administración - Tipos de Vivienda</h2>
+                <h2 class="text-info text-center mt-5">Administración - Usuarios</h2>
             <div>
                 
             </div>
 
             <div class="container">
             <?php
-                    echo '<table id="mitabla" class="table table-striped table-bordered" style="width:60%; margin:auto">';
+                    echo '<table id="mitabla" class="table table-striped table-bordered" style="width:80%; margin:auto">';
                     echo "<thead>";
                     echo "<tr>";
-                        echo "<th> idtipoVivienda </th>";
-                        echo "<th> tipoVivienda </th>";
+                        echo "<th> idUsuario </th>";
+                        echo "<th> nombre </th>";
+                        echo "<th> nick </th>";
+                        echo "<th> correo </th>";
                         echo "<th> Eliminar </th>";
                         echo "<th> Modificar </th>";
                     echo "</tr>";
                     echo "</thead>";    
                     while($registro = mysqli_fetch_array($resultado)) {
                         echo "<tr>";
-                        echo "<td>" . $registro['idtipoVivienda'] . "</td>";
-                        echo "<td>" . $registro['tipoVivienda'] . "</td>";
-                        echo "<td><a href='tiposvivienda.php?action=1&id=" . $registro['idtipoVivienda'] . "'>Eliminar Tipo</a></td>";
-                        echo "<td><a href='tiposvivienda.php?action=2&id=" . $registro['idtipoVivienda'] . "'>Modificar Tipo</a></td>";
+                        echo "<td>" . $registro['idUsuario'] . "</td>";
+                        echo "<td>" . $registro['nombre'] . "</td>";
+                        echo "<td>" . $registro['nick'] . "</td>";
+                        echo "<td>" . $registro['correo'] . "</td>";
+                        echo "<td><a href='usuarios.php?action=1&id=" . $registro['idUsuario'] . "'>Eliminar</a></td>";
+                        echo "<td><a href='usuarios.php?action=2&id=" . $registro['idUsuario'] . "'>Modificar</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>"; 
@@ -169,10 +191,22 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">INSERTAR TIPO VIVIENDA</legend>
+                            <legend class="pt-auto pb-2">INSERTAR USUARIO</legend>
                             <div>
-                                <label class="labelAlineado">Tipo de vivienda:&nbsp;</label>
-                                <input type="text" name="tipo" placeholder="Tipo">
+                                <label class="labelAlineado">Nombre:&nbsp;</label>
+                                <input type="text" name="nombre" placeholder="Nombre">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Nick:&nbsp;</label>
+                                <input type="text" name="nick" placeholder="Nick">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Correo:&nbsp;</label>
+                                <input type="text" name="correo" placeholder="Correo">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Password:&nbsp;</label>
+                                <input type="text" name="password" placeholder="La clave se mostrará">
                             </div>
                         </fieldset>
                         <br>
@@ -185,12 +219,12 @@ $numRegistros = mysqli_num_rows($resultado);
                     // Presento el formulario para Eliminar si se pulsa el enlace de Eliminar
                     if (isset($_GET['action']) && $_GET['action']==1 ){
                     ?>
-                    <form action="tiposvivienda.php" method="post" enctype="multipart/form-data">
+                    <form action="usuarios.php" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">ELIMINAR TIPO DE VIVIENDA</legend>
+                            <legend class="pt-auto pb-2">ELIMINAR USUARIO</legend>
                             <div>
-                                <label>¿Realmente desea eliminar el tipo <?php echo $tipo; ?>?</label>
+                                <label>¿Realmente desea eliminar el usuario cuyo nick es <?php echo $nick; ?>?</label>
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                             </div>
                         </fieldset>
@@ -208,11 +242,19 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">MODIFICAR TIPO DE VIVIENDA</legend>
+                            <legend class="pt-auto pb-2">MODIFICAR USUARIO</legend>
                             <div>
-                                <label class="labelAlineado">Tipo de vivienda:&nbsp;</label>
-                                <input type="text" name="tipo" value="<?php echo $tipo; ?>">
+                                <label class="labelAlineado">Nombre:&nbsp;</label>
+                                <input type="text" name="nombre" value="<?php echo $nombre; ?>">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Nick:&nbsp;</label>
+                                <input type="text" name="nick" value="<?php echo $nick; ?>">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Correo:&nbsp;</label>
+                                <input type="text" name="correo" value="<?php echo $correo; ?>">
                             </div>
                         </fieldset>
                         <br>
