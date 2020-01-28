@@ -15,6 +15,8 @@
 ### Nuevos 
 
 * [*] Creado archivo header-admin-logged.php-> Cabecera para el administrador
+* [*] Creado archivo admin/admin.php        -> Página con enlaces para administrar entidades
+* [+] Creado archivo /admin/tiposanuncio.php-> CRUD completo de administración de tipos de anuncio
 
 ### Cambios
 
@@ -22,6 +24,8 @@
 * [*] Modificado archivo upocasa.sql        -> Se ha añadido a usuarios un nuevo registro para admin
 * [*] Modificado archivo README.md          -> Se ha añadido a usuarios un nuevo registro para admin  
 * [*] Modificado archivo user-config        -> Implementada la lógica de PHP (UPDATE) 
+* [*] Modificado archivo footer.php         -> Incluye el enlace a Administración 
+                                            -> Actualizadas referencias de footer.html a footer.php
 
 ## 2020-01-27
 
@@ -57,7 +61,7 @@
 * [*] Modificado archivo index.php         -> Cambiada cabecera (logada); IGUAL en faq.php / about-es / contact-us.php
 * [*] Modificado archivo registration.php  -> Se quita del header-logged-php (no tiene sentido que se registre una vez logado)
 * [*] Modificado archivo ad-search.php     -> Se le ha añadido Jquery-DataTable
-* [*] Modificado archivo footer.html       -> Se han cambiado los enlaces (zona inferior izquierda) y pequeño bug
+* [*] Modificado archivo footer.php       -> Se han cambiado los enlaces (zona inferior izquierda) y pequeño bug
 
 ## 2020-01-03
 

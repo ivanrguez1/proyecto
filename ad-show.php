@@ -266,7 +266,7 @@ if (isset($_GET['id'])) {
 
         </section>
     </main>
-    <?php include "./footer.html" ?>
+    <?php include "./footer.php" ?>
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/carrusel.js"></script>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>

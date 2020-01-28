@@ -77,7 +77,7 @@ if (!isset($_SESSION['nombre'])) {
         </section>
     </main>
 
-    <?php include "./footer.html" ?>
+    <?php include "./footer.php" ?>
 </body>
 
 </html>

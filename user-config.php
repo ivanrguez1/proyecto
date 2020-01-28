@@ -105,7 +105,7 @@ if(isset($_POST['logout'])) {
             </div>
         </section>
     </main>
-    <?php include "./footer.html" ?>
+    <?php include "./footer.php" ?>
 </body>
 
 </html>

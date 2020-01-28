@@ -13,8 +13,8 @@ $mensaje = "Consulta Finalizada";
 
 // Procedimiento para la inserción
 if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
-    $extra = $_POST['extra'];
-    $sqlINSERT = "INSERT INTO extras (extra) VALUES ('".$extra."')";
+    $tipo = $_POST['tipo'];
+    $sqlINSERT = "INSERT INTO tiposAnuncio (tipoAnuncio) VALUES ('".$tipo."')";
 
     ejecutarAccion($sqlINSERT);
     $mensaje = "Inserción Realizada";
@@ -22,8 +22,8 @@ if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
 
 // Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
-    $idExtra = $_POST['idextra'];
-    $sqlDELETE = "DELETE FROM extras WHERE idExtra = '".$idExtra."'";
+    $id = $_POST['id'];
+    $sqlDELETE = "DELETE FROM tiposAnuncio WHERE idTipoAnuncio = '".$id."'";
 
     ejecutarAccion($sqlDELETE);
     $mensaje = "Eliminación Realizada";
@@ -32,36 +32,36 @@ if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
 
 // Muestra el elemento a Eliminar y muestra el mensaje de Preparado para Eliminar...
 if (isset($_GET['action']) && $_GET['action']==1 ){
-    $idExtra = $_GET['idextra'];
-    $sqlSELECTDELETE = "SELECT * FROM extras WHERE idExtra='".$idExtra."'";
+    $id = $_GET['id'];
+    $sqlSELECTDELETE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
 
     $resultadoSELECTDELETE = ejecutarConsulta($sqlSELECTDELETE);
-    $extra = "";
+    $tipo = "";
     while($registro = mysqli_fetch_array($resultadoSELECTDELETE)) {
-        $extra = $registro['extra'];
+        $tipo = $registro['tipoAnuncio'];
     }
-    $mensaje = "Preparado para Eliminar el extra ".$extra;
+    $mensaje = "Preparado para Eliminar el tipo ".$tipo;
 }
 
 // Muestra el elemento a Actualizar y muestra el mensaje de Preparado para Actualizar...
 if (isset($_GET['action']) && $_GET['action']==2 ){
-    $idExtra = $_GET['idextra'];
-    $sqlSELECTUPDATE = "SELECT * FROM extras WHERE idExtra='".$idExtra."'";
+    $id = $_GET['id'];
+    $sqlSELECTUPDATE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
 
     $resultadoSELECTUPDATE = ejecutarConsulta($sqlSELECTUPDATE);
-    $extra = "";
+    $tipo = "";
     while($registro = mysqli_fetch_array($resultadoSELECTUPDATE)) {
-        $extra = $registro['extra'];
+        $tipo = $registro['tipoAnuncio'];
     }
-    $mensaje = "Preparado para actualizar";
+    $mensaje = "Preparado para actualizar el tipo ".$tipo;
 }
 
 // Procedimiento para la Actualización
 if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
-    $idextra = $_POST['idextra'];
-    $extra = $_POST['extra'];
+    $id = $_POST['id'];
+    $tipo = $_POST['tipo'];
 
-    $sqlUPDATE = "UPDATE extras SET extra='".$extra ."' WHERE idExtra = '".$idextra ."'";
+    $sqlUPDATE = "UPDATE tiposAnuncio SET tipoAnuncio='".$tipo ."' WHERE idTipoAnuncio = '".$id ."'";
 
     ejecutarAccion($sqlUPDATE);
     $mensaje = "Modificación Realizada";
@@ -70,7 +70,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
 
 
 // Carga de elementos en la página con un SELECT
-$sql = "SELECT * FROM extras";
+$sql = "SELECT * FROM tiposAnuncio";
 $resultado = ejecutarConsulta($sql);
 $numRegistros = mysqli_num_rows($resultado);
 
@@ -83,7 +83,7 @@ $numRegistros = mysqli_num_rows($resultado);
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Admin - Extras</title>
+    <title>Admin - Tipos de Anuncio</title>
     <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,400i,700,700i,600,600i">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cookie">
@@ -116,6 +116,7 @@ $numRegistros = mysqli_num_rows($resultado);
 
     <main class="page faq-page">
     <script>
+    /* Para tan pocos registros no merece la pena JQuery DataTable
     $(document).ready(function() {
         $('#mitabla').DataTable( {
 
@@ -124,17 +125,17 @@ $numRegistros = mysqli_num_rows($resultado);
             "pagingType": "full_numbers",    // Se añaden los botobes Primero y último   
         } );
     } );
+    */
     </script>
         <section>
             <div class="block-heading">
-                <h2 class="text-info text-center mt-5">Administración - Extras</h2>
+                <h2 class="text-info text-center mt-5">Administración - Tipos de Anuncio</h2>
             <div>
                 
             </div>
 
             <div class="container">
             <?php
-                // Se emplea el Jquery Data Table para mostrar los elementos
                     echo '<table id="mitabla" class="table table-striped table-bordered" style="width:60%; margin:auto">';
                     echo "<thead>";
                     echo "<tr>";
@@ -146,17 +147,17 @@ $numRegistros = mysqli_num_rows($resultado);
                     echo "</thead>";    
                     while($registro = mysqli_fetch_array($resultado)) {
                         echo "<tr>";
-                        echo "<td>" . $registro['idExtra'] . "</td>";
-                        echo "<td>" . $registro['extra'] . "</td>";
-                        echo "<td><a href='extras.php?action=1&idextra=" . $registro['idExtra'] . "'>Eliminar Extra</a></td>";
-                        echo "<td><a href='extras.php?action=2&idextra=" . $registro['idExtra'] . "'>Modificar Extra</a></td>";
+                        echo "<td>" . $registro['idTipoAnuncio'] . "</td>";
+                        echo "<td>" . $registro['tipoAnuncio'] . "</td>";
+                        echo "<td><a href='tiposanuncio.php?action=1&id=" . $registro['idTipoAnuncio'] . "'>Eliminar Tipo</a></td>";
+                        echo "<td><a href='tiposanuncio.php?action=2&id=" . $registro['idTipoAnuncio'] . "'>Modificar Tipo</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>"; 
                     mysqli_free_result($resultado);
                 ?>
                 <p>&nbsp;
-                <!-- Mensajes del servidor en función de la acción a arealizar-->
+                <!-- Mensajes del servidor en función de la acción a realizar-->
                 <p id="mensajes" class="alert alert-success"><?php
                     echo $mensaje;
                 ?>
@@ -168,10 +169,10 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">INSERTAR EXTRA</legend>
+                            <legend class="pt-auto pb-2">INSERTAR TIPO ANUNCIO</legend>
                             <div>
-                                <label class="labelAlineado">Extra:&nbsp;</label>
-                                <input type="text" name="extra" min="1" placeholder="extra">
+                                <label class="labelAlineado">Tipo de anuncio:&nbsp;</label>
+                                <input type="text" name="tipo" placeholder="Tipo">
                             </div>
                         </fieldset>
                         <br>
@@ -184,13 +185,13 @@ $numRegistros = mysqli_num_rows($resultado);
                     // Presento el formulario para Eliminar si se pulsa el enlace de Eliminar
                     if (isset($_GET['action']) && $_GET['action']==1 ){
                     ?>
-                    <form action="extras.php" method="post" enctype="multipart/form-data">
+                    <form action="tiposanuncio.php" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">ELIMINAR EXTRA</legend>
+                            <legend class="pt-auto pb-2">ELIMINAR TIPO DE ANUNCIO</legend>
                             <div>
-                                <label>¿Realmente desea eliminar el extra <?php echo $extra; ?>?</label>
-                                <input type="hidden" name="idextra" value="<?php echo $idExtra; ?>">
+                                <label>¿Realmente desea eliminar el tipo <?php echo $tipo; ?>?</label>
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
                             </div>
                         </fieldset>
                         <br>
@@ -207,11 +208,11 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">MODIFICAR EXTRA</legend>
+                            <legend class="pt-auto pb-2">MODIFICAR TIPO DE ANUNCIO</legend>
                             <div>
-                                <label class="labelAlineado">Extra:&nbsp;</label>
-                                <input type="text" name="extra" min="1" value="<?php echo $extra; ?>">
-                                <input type="hidden" name="idextra" value="<?php echo $idExtra; ?>">
+                                <label class="labelAlineado">Tipo de anuncio:&nbsp;</label>
+                                <input type="text" name="tipo" value="<?php echo $tipo; ?>">
+                                <input type="hidden" name="id" value="<?php echo $id; ?>">
                             </div>
                         </fieldset>
                         <br>

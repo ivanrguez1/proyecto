@@ -342,7 +342,7 @@ if (isset($_POST['envio'])) {
             return false;
         });
     </script>
-    <?php include "./footer.html" ?>
+    <?php include "./footer.php" ?>
 </body>
 
 </html>

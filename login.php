@@ -156,7 +156,7 @@ if (isset($_POST['iniciarSesion'])) {
             </div>
         </section>
     </main>
-    <?php include "./footer.html" ?>
+    <?php include "./footer.php" ?>
 </body>
 
 </html>

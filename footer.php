@@ -9,6 +9,15 @@
         </strong><a href="faq.php">Faq</a><strong> · </strong><a href="contact-us.php">Contact</a>
       </p>
       <p class="company-name">UPOCASA © 2019</p>
+      <?php 
+      if ($_SESSION['nick']=='admin') {
+        ?>
+        <p class="links">
+        <a href="admin/admin.php">Administrar</a>
+      </p>
+      <?php
+      }
+      ?>
     </div>
     <div class="col-sm-6 col-md-4 footer-contacts">
       <div>
