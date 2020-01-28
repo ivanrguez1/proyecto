@@ -14,7 +14,7 @@ $mensaje = "Consulta Finalizada";
 // Procedimiento para la inserción
 if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
     $tipo = $_POST['tipo'];
-    $sqlINSERT = "INSERT INTO tiposAnuncio (tipoAnuncio) VALUES ('".$tipo."')";
+    $sqlINSERT = "INSERT INTO tiposVivienda (tipoVivienda) VALUES ('".$tipo."')";
 
     ejecutarAccion($sqlINSERT);
     $mensaje = "Inserción Realizada";
@@ -23,7 +23,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
 // Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
     $id = $_POST['id'];
-    $sqlDELETE = "DELETE FROM tiposAnuncio WHERE idTipoAnuncio = '".$id."'";
+    $sqlDELETE = "DELETE FROM tiposVivienda WHERE idtipoVivienda = '".$id."'";
 
     ejecutarAccion($sqlDELETE);
     $mensaje = "Eliminación Realizada";
@@ -33,12 +33,12 @@ if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
 // Muestra el elemento a Eliminar y muestra el mensaje de Preparado para Eliminar...
 if (isset($_GET['action']) && $_GET['action']==1 ){
     $id = $_GET['id'];
-    $sqlSELECTDELETE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
+    $sqlSELECTDELETE = "SELECT * FROM tiposVivienda WHERE idtipoVivienda='".$id."'";
 
     $resultadoSELECTDELETE = ejecutarConsulta($sqlSELECTDELETE);
     $tipo = "";
     while($registro = mysqli_fetch_array($resultadoSELECTDELETE)) {
-        $tipo = $registro['tipoAnuncio'];
+        $tipo = $registro['tipoVivienda'];
     }
     $mensaje = "Preparado para Eliminar el tipo ".$tipo;
 }
@@ -46,12 +46,12 @@ if (isset($_GET['action']) && $_GET['action']==1 ){
 // Muestra el elemento a Actualizar y muestra el mensaje de Preparado para Actualizar...
 if (isset($_GET['action']) && $_GET['action']==2 ){
     $id = $_GET['id'];
-    $sqlSELECTUPDATE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
+    $sqlSELECTUPDATE = "SELECT * FROM tiposVivienda WHERE idtipoVivienda='".$id."'";
 
     $resultadoSELECTUPDATE = ejecutarConsulta($sqlSELECTUPDATE);
     $tipo = "";
     while($registro = mysqli_fetch_array($resultadoSELECTUPDATE)) {
-        $tipo = $registro['tipoAnuncio'];
+        $tipo = $registro['tipoVivienda'];
     }
     $mensaje = "Preparado para actualizar el tipo ".$tipo;
 }
@@ -61,7 +61,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
     $id = $_POST['id'];
     $tipo = $_POST['tipo'];
 
-    $sqlUPDATE = "UPDATE tiposAnuncio SET tipoAnuncio='".$tipo ."' WHERE idTipoAnuncio = '".$id ."'";
+    $sqlUPDATE = "UPDATE tiposVivienda SET tipoVivienda='".$tipo ."' WHERE idtipoVivienda = '".$id ."'";
 
     ejecutarAccion($sqlUPDATE);
     $mensaje = "Modificación Realizada";
@@ -70,7 +70,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
 
 
 // Carga de elementos en la página con un SELECT
-$sql = "SELECT * FROM tiposAnuncio";
+$sql = "SELECT * FROM tiposVivienda";
 $resultado = ejecutarConsulta($sql);
 $numRegistros = mysqli_num_rows($resultado);
 
@@ -129,7 +129,7 @@ $numRegistros = mysqli_num_rows($resultado);
     </script>
         <section>
             <div class="block-heading">
-                <h2 class="text-info text-center mt-5">Administración - Tipos de Anuncio</h2>
+                <h2 class="text-info text-center mt-5">Administración - Tipos de Vivienda</h2>
             <div>
                 
             </div>
@@ -139,18 +139,18 @@ $numRegistros = mysqli_num_rows($resultado);
                     echo '<table id="mitabla" class="table table-striped table-bordered" style="width:60%; margin:auto">';
                     echo "<thead>";
                     echo "<tr>";
-                        echo "<th> idTipoAnuncio </th>";
-                        echo "<th> tipoAnuncio </th>";
+                        echo "<th> idtipoVivienda </th>";
+                        echo "<th> tipoVivienda </th>";
                         echo "<th> Eliminar </th>";
                         echo "<th> Modificar </th>";
                     echo "</tr>";
                     echo "</thead>";    
                     while($registro = mysqli_fetch_array($resultado)) {
                         echo "<tr>";
-                        echo "<td>" . $registro['idTipoAnuncio'] . "</td>";
-                        echo "<td>" . $registro['tipoAnuncio'] . "</td>";
-                        echo "<td><a href='tiposanuncio.php?action=1&id=" . $registro['idTipoAnuncio'] . "'>Eliminar Tipo</a></td>";
-                        echo "<td><a href='tiposanuncio.php?action=2&id=" . $registro['idTipoAnuncio'] . "'>Modificar Tipo</a></td>";
+                        echo "<td>" . $registro['idtipoVivienda'] . "</td>";
+                        echo "<td>" . $registro['tipoVivienda'] . "</td>";
+                        echo "<td><a href='tiposvivienda.php?action=1&id=" . $registro['idtipoVivienda'] . "'>Eliminar Tipo</a></td>";
+                        echo "<td><a href='tiposvivienda.php?action=2&id=" . $registro['idtipoVivienda'] . "'>Modificar Tipo</a></td>";
                         echo "</tr>";
                     }
                     echo "</table>"; 
@@ -169,9 +169,9 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">INSERTAR TIPO ANUNCIO</legend>
+                            <legend class="pt-auto pb-2">INSERTAR TIPO VIVIENDA</legend>
                             <div>
-                                <label class="labelAlineado">Tipo de anuncio:&nbsp;</label>
+                                <label class="labelAlineado">Tipo de vivienda:&nbsp;</label>
                                 <input type="text" name="tipo" placeholder="Tipo">
                             </div>
                         </fieldset>
@@ -185,10 +185,10 @@ $numRegistros = mysqli_num_rows($resultado);
                     // Presento el formulario para Eliminar si se pulsa el enlace de Eliminar
                     if (isset($_GET['action']) && $_GET['action']==1 ){
                     ?>
-                    <form action="tiposanuncio.php" method="post" enctype="multipart/form-data">
+                    <form action="tiposvivienda.php" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">ELIMINAR TIPO DE ANUNCIO</legend>
+                            <legend class="pt-auto pb-2">ELIMINAR TIPO DE VIVIENDA</legend>
                             <div>
                                 <label>¿Realmente desea eliminar el tipo <?php echo $tipo; ?>?</label>
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
@@ -208,9 +208,9 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">MODIFICAR TIPO DE ANUNCIO</legend>
+                            <legend class="pt-auto pb-2">MODIFICAR TIPO DE VIVIENDA</legend>
                             <div>
-                                <label class="labelAlineado">Tipo de anuncio:&nbsp;</label>
+                                <label class="labelAlineado">Tipo de vivienda:&nbsp;</label>
                                 <input type="text" name="tipo" value="<?php echo $tipo; ?>">
                                 <input type="hidden" name="id" value="<?php echo $id; ?>">
                             </div>

@@ -223,7 +223,7 @@ $numRegistros = mysqli_num_rows($resultado);
             </div>
         </section>
     </main>
-    <?php include "../footer.php" ?>
+    <?php include "footer.php" ?>
 </body>
 
 </html>
