@@ -34,7 +34,7 @@ function ejecutarAccion ($sql) {
     mysqli_query($conexion, $sql);
     $insertID = mysqli_insert_id($conexion);
     $conexion->close();
-    return mysqli_insert_id($conexion);
+    return $insertID;
 }
 
 
@@ -46,4 +46,3 @@ function devolverId ($correo) {
     $id = $registro['idUsuario'];
     return $id;
 }
-

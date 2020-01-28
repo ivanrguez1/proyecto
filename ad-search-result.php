@@ -43,7 +43,7 @@
                         $i++;
                     } while ($i < 6 && !$imagenEncontrada);
 
-                    echo "<a href='ad-show.php?id=" . $registro['idAnuncio'] . "' target='_blank'><div class='media'<br>";
+                    echo "<a href='ad-show.php?id=" . $registro['idAnuncio'] . "&idPropietario=" . $registro['idUsuario'] . "' target='_blank'><div class='media'<br>";
                     if ($imagenEncontrada) {
                         echo "<img class='d-flex align-self-start' src='" . $urlFoto . "' alt='Generic placeholder image'>";
                         $imagenEncontrada = false;

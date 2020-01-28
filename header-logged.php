@@ -27,6 +27,9 @@
                 <a class="nav-link" href="ads.php">Mis Anuncios</a>
             </li>
             <li class="nav-item" role="presentation">
+                <a class="nav-link" href="messages.php">Mis Mensajes</a>
+            </li>
+            <li class="nav-item" role="presentation">
                 <a class="nav-link" href="user-config.php">
                     <?php
                         echo "Bienvenida/o " . $_SESSION['nombre'];

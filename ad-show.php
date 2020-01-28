@@ -1,8 +1,22 @@
 <?php
 require_once("assets/php/bbdd.php");
 session_start();
-$mensaje = "-----";
 
+$errors = array();
+
+if(isset($_POST['mensajeEnviado'])){
+
+    $mensaje = filter_var(trim($_POST['mensaje']), FILTER_SANITIZE_STRING);
+
+    if(strlen($mensaje)<20){
+        array_push($errors,"El mensaje debe de ser de mínimo 20 carácteres.");
+    }
+
+    $sql = "INSERT INTO mensajes(idUsuOrigen, idUsuDestino, mensaje) VALUES('". $_SESSION['idUsuario']."','".$_GET['idPropietario']."','".$mensaje."')";
+    if(sizeof($errors)==0){
+        ejecutarAccion($sql);
+    }
+}
 
 if (isset($_GET['id'])) {
 
@@ -59,6 +73,10 @@ if (isset($_GET['id'])) {
                 <div class="block-heading">
                     <h2 class="text-info" style="text-align: center">Anuncio Seleccionado</h2>
                 </div>
+                <form action="#" method="post" id="formMensaje">
+                    <input type="hidden" name="mensajeEnviado" value="1" />
+                    <?php include('errors.php'); ?>
+                </form>
                 <form action="ad-search.php" method="post" class="clean-block-adSelected">
                     <div class="contentAdSelected">
                         <?php
@@ -199,10 +217,31 @@ if (isset($_GET['id'])) {
 
                         </div>
                     </div>
+                    <br><br>
+                    <div id="divMensaje">
+                        <p>¿Te interesa? Escríbele un mensaje al propietario del anuncio:</p>
+                        <textarea rows="4" cols="50" id="mensaje" name="mensaje" form="formMensaje"></textarea>
+                        <br>
+                        <button name="btnMensajeEnviado" id="btnMensajeEnviado" form="formMensaje">Enviar
+                            mensaje</button>
+                    </div>
+                    <?php
+                    
+                    //Si el usuario logueado es el propietario -> No se puede enviar un mensaje a sí mismo.about
 
+                    if($_GET['idPropietario'] == $_SESSION['idUsuario']){
+                        ?>
+                    <script>
+                    document.getElementById('divMensaje').style.display = "none";
+                    </script>
+                    <?php
+    }
+                    
+                    ?>
 
-                    <div class="form-group"><button class="btn btn-primary btn-block" type="submit"
-                            id="btnVolverABuscar">Volver a Buscar</button>
+                    <div class="form-group">
+                        <button class="btn btn-primary btn-block" type="submit" id="btnVolverABuscar">Volver a
+                            Buscar</button>
                     </div>
             </div>
             </form>
