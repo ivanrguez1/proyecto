@@ -22,23 +22,27 @@ function conectarBBD () {
     }
 }
 
-function ejecutaConsulta ($sql) {
+function ejecutarConsulta ($sql) {
     $conexion = conectarBBD ();
     $resultado = mysqli_query($conexion, $sql);
+    $conexion->close();
     return $resultado;
 }
 
-function ejecutaInsercion ($sql) {
+function ejecutarAccion ($sql) {
     $conexion = conectarBBD ();
     mysqli_query($conexion, $sql);
-    return mysqli_insert_id($conexion);
+    $insertID = mysqli_insert_id($conexion);
+    $conexion->close();
+    return $insertID;
 }
+
+
 
 function devolverId ($correo) {
     $sql = "SELECT idUsuario FROM usuarios WHERE correo = '".$correo."'";
-    $resultado = ejecutaConsulta ($sql);
+    $resultado = ejecutarConsulta ($sql);
     $registro = mysqli_fetch_assoc($resultado);
     $id = $registro['idUsuario'];
     return $id;
 }
-

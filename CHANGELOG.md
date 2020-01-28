@@ -3,10 +3,23 @@
 # CHANGELOG
 
 # Tabla de contenidos
-1. [2020-01-17](#2020-01-17)
-2. [2020-01-16](#2020-01-16)
-3. [2020-01-03](#2020-01-03)
-4. [2020-01-02](#2020-01-02)
+1. [2020-01-27](#2020-01-27)
+2. [2020-01-17](#2020-01-17)
+3. [2020-01-16](#2020-01-16)
+4. [2020-01-03](#2020-01-03)
+5. [2020-01-02](#2020-01-02)
+
+## 2020-01-17
+
+### Nuevos 
+
+* [+] Creado archivo /admin/extras.php      -> CRUD completo de administración de la tabla Extras
+
+### Cambios
+
+* [*] Modificado archivo /assets/bbdd.php   -> Cambio nombres: ejecutarInsercion |-> ejecutarAccion
+                                                                ejecutaConsulta |-> ejecutarConsulta
+                                            Cambiado el uso de los métodos en distintos archivos
 
 ## 2020-01-17
 
@@ -41,7 +54,7 @@
 ### Cambios
 
 * [*] Modificado archivo /assets/bbdd.php  -> devolverId ($correo), mete en SESSION[idUsuario] la id del usuario logado
-                                           -> ejecutaInsercion ($sql), devuelve la id de la ultima inserción
+                                           -> ejecutarAccion ($sql), devuelve la id de la ultima inserción
 * [*] Modificado upocasa.sql               -> (fix) anuncios.codPostal (TINYINT -> SMALLINT UNSIGNED)
                                            -> (fix) REFERENCES `upocasa`.`tiposVivienda` (`idtipoVivienda`)
 * [*] Modificado archivo registerAd.php    -> Desarrollada toda la lógica PHP, excepto subida de fotos (falta modularizar)

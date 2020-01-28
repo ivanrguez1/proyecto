@@ -168,6 +168,7 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`mensajes` (
   `idUsuOrigen` INT NOT NULL,
   `idUsuDestino` INT NOT NULL,
   `mensaje` VARCHAR(450) NOT NULL,
+  `fechaEnvio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idMensaje`),
   INDEX `fk_mensajes_usuarios_idx` (`idUsuOrigen` ASC),
   INDEX `fk_mensajes_usuarios2_idx` (`idUsuDestino` ASC),

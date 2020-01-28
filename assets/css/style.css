@@ -119,3 +119,25 @@ main {
   float: right;
   margin-right: 75px;
 }
+
+.alert-message {
+  margin: 20px 0;
+  padding: 20px;
+  width: 200%;
+  border-left: 3px solid #eee;
+}
+.alert-message h4 {
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+.alert-message p:last-child {
+  margin-bottom: 0;
+}
+
+.alert-messageRecibido {
+  background-color: #f4f8fa;
+  border-color: #5bc0de;
+}
+.alert-messageRecibido h4 {
+  color: #5bc0de;
+}

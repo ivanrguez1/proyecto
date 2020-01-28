@@ -53,7 +53,7 @@ if (isset($_POST['registrarUsuario'])) {
     }
 
     $sql = "SELECT * FROM usuarios WHERE correo = '$email' OR nick = '$nick'";
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 
     $mensaje = $numRegistros;
@@ -64,7 +64,7 @@ if (isset($_POST['registrarUsuario'])) {
         if (count($errors) == 0) {
             $sql = "INSERT INTO usuarios (nombre, nick, correo, clave) VALUES ('" . $nombre . "', '" . $nick . "', '" . $email . "', '" . $password . "')";
 
-            $resultado = ejecutaConsulta($sql);
+            $resultado = ejecutarConsulta($sql);
             if ($resultado) {
                 header("Location:login.php");
             } else {

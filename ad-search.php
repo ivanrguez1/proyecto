@@ -11,7 +11,7 @@ if(isset($_POST['mostrarTodosAnuncios'])){
     $sql = "SELECT * FROM anuncios";
 
     $mensaje = "Búsqueda Finalizada";
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 
 }else if (isset($_POST['envio'])) {
@@ -47,7 +47,7 @@ if(isset($_POST['mostrarTodosAnuncios'])){
 
     $sql = "SELECT codPostal FROM municipios WHERE nombreMunicipio = '" . $_POST['municipio'] . "'";
 
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $codPostales = array();
 
     while ($registro = mysqli_fetch_array($resultado)) {
@@ -78,7 +78,7 @@ if(isset($_POST['mostrarTodosAnuncios'])){
 
 
     $mensaje = "Búsqueda Finalizada";
-    $resultado = ejecutaConsulta($sql);
+    $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 }
 ?>
@@ -236,7 +236,7 @@ if(isset($_POST['mostrarTodosAnuncios'])){
 
 
                             $sql = "SELECT DISTINCT(nombreMunicipio) FROM municipios";
-                            $resultado = ejecutaConsulta($sql);
+                            $resultado = ejecutarConsulta($sql);
                             echo "<select class='selectMunicipios' data-placeholder='Selecciona el municipio' name='municipio'";
                             while ($registro = mysqli_fetch_array($resultado)) {
                                 echo "<option value='" . $registro['nombreMunicipio'] . "'>" . $registro['nombreMunicipio'] . "</option>";

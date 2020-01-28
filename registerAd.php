@@ -75,7 +75,7 @@ if (isset($_POST['envio'])) {
     '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
     '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
 
-        $idAnuncio = ejecutaInsercion($sql);
+    $idAnuncio = ejecutarAccion($sql);
 
         // Rellenamos los datos de la tabla anuncios_extras
         $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
@@ -85,7 +85,7 @@ if (isset($_POST['envio'])) {
         }
         $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
-        ejecutaInsercion($sql);
+    ejecutarAccion($sql);
 
         // ----------------------------------------------------------
         // Subida de fotos a carpeta personal y registrado en BD
@@ -101,7 +101,7 @@ if (isset($_POST['envio'])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
                     $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
-                    ejecutaInsercion($sql);
+                    ejecutarAccion($sql);
                 } else {
                     array_push($errors, "¡Vaya no se ha podido subir las fotos, anuncio creado sin fotos. Contacte con el administrador!");
                 }

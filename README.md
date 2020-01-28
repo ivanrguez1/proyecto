@@ -28,12 +28,6 @@ Los integrantes de este proyecto son:
 
 * (documentación)             -> (Iván) Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
 * (documentación-manual)      -> (Iván) Manual de uso de la aplicación  
-* (registration)              -> (Alex)Depurar
-* (registerAd.php)            -> (Alex) Modularizar la recogida de Fotos
-* (login.php)                 -> (Alex) Gestión de Cookies
-* (Nuevo! ads.php)            -> (Alex) Anuncios por usuario 
-* (ad-search.php)             -> (Alex) Búsqueda de anuncios. Depurar
-* (ad-show.php)               -> (Alex) Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
 * (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
 
 CRUD de Administración /admin/
@@ -74,6 +68,18 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`usuarios` (
   UNIQUE INDEX `idUsuario_UNIQUE` (`idUsuario` ASC))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+```
+* Municipios
+
+```sql
+DROP TABLE IF EXISTS `upocasa`.`municipios` ;
+
+CREATE TABLE municipios (
+  codPostal INT NOT NULL,
+  nombreMunicipio VARCHAR(255) NOT NULL)
+ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8mb4
+COMMENT = 'Municipios\n';
 ```
 
 * Tipos de anuncio
@@ -185,6 +191,7 @@ CREATE TABLE IF NOT EXISTS `upocasa`.`mensajes` (
   `idUsuOrigen` INT NOT NULL,
   `idUsuDestino` INT NOT NULL,
   `mensaje` VARCHAR(450) NOT NULL,
+  `fechaEnvio` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idMensajes`),
   INDEX `fk_mensajes_usuarios_idx` (`idUsuOrigen` ASC),
   INDEX `fk_mensajes_usuarios2_idx` (`idUsuDestino` ASC),
