@@ -28,12 +28,6 @@ Los integrantes de este proyecto son:
 
 * (documentación)             -> (Iván) Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
 * (documentación-manual)      -> (Iván) Manual de uso de la aplicación  
-* (registration)              -> (Alex)Depurar
-* (registerAd.php)            -> (Alex) Modularizar la recogida de Fotos
-* (login.php)                 -> (Alex) Gestión de Cookies
-* (Nuevo! ads.php)            -> (Alex) Anuncios por usuario 
-* (ad-search.php)             -> (Alex) Búsqueda de anuncios. Depurar
-* (ad-show.php)               -> (Alex) Anuncio concreto (Falta añadir mas campos al SELECT - incluidas las imágenes). Ponerlo Bonito!!
 * (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
 
 CRUD de Administración /admin/
