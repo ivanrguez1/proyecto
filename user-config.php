@@ -8,8 +8,24 @@ if(!isset($_SESSION['nombre'])){
 }
 
 if(isset($_POST['envio'])) {
-    $mensaje = "Enviado!<br><br>";
-    // TODO Toda la lógica PHP de Modificación de datos del usuario
+    // Obtengo el nick
+    $nick = $_SESSION['nick'];
+
+    // Saneo el input del nombre
+    $nombre = filter_var(trim($_POST['nombre']), FILTER_SANITIZE_STRING);
+
+    // Para la clave, primero saneamos y luego encriptamos
+    $password = filter_var(trim($_POST['password']), FILTER_SANITIZE_STRING);
+    $password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Y ahora procedo con la actualización
+    $sqlUPDATE = "UPDATE usuarios 
+                    SET nombre ='".$nombre ."',
+                    clave ='".$password ."'
+                    WHERE nick = '".$nick ."'";
+
+    ejecutarAccion($sqlUPDATE);
+    $mensaje = "Modificación Realizada";
 }
 
 // Cierro la sesión y redirecciono 
@@ -79,7 +95,7 @@ if(isset($_POST['logout'])) {
                             <input type="password" class="form-control" id="password" name="password" /></div>
                         <div class="form-group">
                             <label for="password2">Repita Contraseña</label>
-                            <input type="password2" class="form-control" id="password2" name="password2" /></div>
+                            <input type="password" class="form-control" id="password2" name="password2" /></div>
                         <input class="btn btn-primary btn-block" type="submit" value="Modificar Usuario"
                             name="envio"></input><br />
                         <input class="btn btn-primary btn-block" type="submit" value="Cerrar Sesión"

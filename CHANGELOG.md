@@ -21,6 +21,7 @@
 * [*] Modificado archivo /admin/extras.php  -> Cambio en el location (solo accesible el admin). Dodumentado el código
 * [*] Modificado archivo upocasa.sql        -> Se ha añadido a usuarios un nuevo registro para admin
 * [*] Modificado archivo README.md          -> Se ha añadido a usuarios un nuevo registro para admin  
+* [*] Modificado archivo user-config        -> Implementada la lógica de PHP (UPDATE) 
 
 ## 2020-01-27
 
