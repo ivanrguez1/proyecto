@@ -3,13 +3,15 @@
 require_once("../assets/php/bbdd.php");
 session_start();
 
-
-if (!isset($_SESSION['correo'])) {
-    header('Location: index.php');
+// Si no está logado como administrador, se expulsa...
+if ($_SESSION['nick'] != 'admin') {
+    header('Location: ../index.php');
 }
 
+// Si no se realiza ninguna acción, se cargan los registros y se muestra este mensaje
 $mensaje = "Consulta Finalizada";
 
+// Procedimiento para la inserción
 if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
     $extra = $_POST['extra'];
     $sqlINSERT = "INSERT INTO extras (extra) VALUES ('".$extra."')";
@@ -18,6 +20,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
     $mensaje = "Inserción Realizada";
 }
 
+// Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
     $idExtra = $_POST['idextra'];
     $sqlDELETE = "DELETE FROM extras WHERE idExtra = '".$idExtra."'";
@@ -27,7 +30,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
 }
 
 
-
+// Muestra el elemento a Eliminar y muestra el mensaje de Preparado para Eliminar...
 if (isset($_GET['action']) && $_GET['action']==1 ){
     $idExtra = $_GET['idextra'];
     $sqlSELECTDELETE = "SELECT * FROM extras WHERE idExtra='".$idExtra."'";
@@ -40,7 +43,7 @@ if (isset($_GET['action']) && $_GET['action']==1 ){
     $mensaje = "Preparado para Eliminar el extra ".$extra;
 }
 
-
+// Muestra el elemento a Actualizar y muestra el mensaje de Preparado para Actualizar...
 if (isset($_GET['action']) && $_GET['action']==2 ){
     $idExtra = $_GET['idextra'];
     $sqlSELECTUPDATE = "SELECT * FROM extras WHERE idExtra='".$idExtra."'";
@@ -53,6 +56,7 @@ if (isset($_GET['action']) && $_GET['action']==2 ){
     $mensaje = "Preparado para actualizar";
 }
 
+// Procedimiento para la Actualización
 if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
     $idextra = $_POST['idextra'];
     $extra = $_POST['extra'];
@@ -65,7 +69,7 @@ if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
 
 
 
-
+// Carga de elementos en la página con un SELECT
 $sql = "SELECT * FROM extras";
 $resultado = ejecutarConsulta($sql);
 $numRegistros = mysqli_num_rows($resultado);
@@ -107,7 +111,7 @@ $numRegistros = mysqli_num_rows($resultado);
 <body>
     <?php
 
-    include "../header-logged.php";
+    include "../header-admin-logged.php";
     ?>
 
     <main class="page faq-page">
@@ -130,6 +134,7 @@ $numRegistros = mysqli_num_rows($resultado);
 
             <div class="container">
             <?php
+                // Se emplea el Jquery Data Table para mostrar los elementos
                     echo '<table id="mitabla" class="table table-striped table-bordered" style="width:60%; margin:auto">';
                     echo "<thead>";
                     echo "<tr>";
@@ -151,12 +156,13 @@ $numRegistros = mysqli_num_rows($resultado);
                     mysqli_free_result($resultado);
                 ?>
                 <p>&nbsp;
-                <!-- Mensajes del servidor referentes al registro -->
+                <!-- Mensajes del servidor en función de la acción a arealizar-->
                 <p id="mensajes" class="alert alert-success"><?php
                     echo $mensaje;
                 ?>
 
                     <?php 
+                        // Al cargar la página o pulsar en [Consultar] se muestran los elementos y se prepara para INSERTAR
                     if (!isset($_GET['action'])) {
                     ?>
                     <form action="#" method="post" enctype="multipart/form-data">
@@ -175,7 +181,7 @@ $numRegistros = mysqli_num_rows($resultado);
                     ?>
 
                     <?php 
-                    // Presento el formulario para Eliminar
+                    // Presento el formulario para Eliminar si se pulsa el enlace de Eliminar
                     if (isset($_GET['action']) && $_GET['action']==1 ){
                     ?>
                     <form action="extras.php" method="post" enctype="multipart/form-data">
@@ -195,7 +201,7 @@ $numRegistros = mysqli_num_rows($resultado);
                     ?>
 
                     <?php 
-                    // Presento el formulario para Modificar
+                    // Presento el formulario para Modificar si se pulsa el enlace para Modificar
                     if (isset($_GET['action']) && $_GET['action']==2 ){
                     ?>
                     <form action="#" method="post" enctype="multipart/form-data">

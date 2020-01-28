@@ -3,13 +3,26 @@
 # CHANGELOG
 
 # Tabla de contenidos
+1. [2020-01-28](#2020-01-28)
 1. [2020-01-27](#2020-01-27)
 2. [2020-01-17](#2020-01-17)
 3. [2020-01-16](#2020-01-16)
 4. [2020-01-03](#2020-01-03)
 5. [2020-01-02](#2020-01-02)
 
-## 2020-01-17
+## 2020-01-28
+
+### Nuevos 
+
+* [*] Creado archivo header-admin-logged.php-> Cabecera para el administrador
+
+### Cambios
+
+* [*] Modificado archivo /admin/extras.php  -> Cambio en el location (solo accesible el admin). Dodumentado el código
+* [*] Modificado archivo upocasa.sql        -> Se ha añadido a usuarios un nuevo registro para admin
+* [*] Modificado archivo README.md          -> Se ha añadido a usuarios un nuevo registro para admin  
+
+## 2020-01-27
 
 ### Nuevos 
 

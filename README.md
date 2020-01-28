@@ -33,7 +33,6 @@ Los integrantes de este proyecto son:
 CRUD de Administración /admin/
 (Yo me encargo, le pongo el Jquery con DataTable)
 * (Nuevo! tipos-vivienda.php) -> (Iván) CRUD completo de gestión
-* (Nuevo! extras.php)         -> (Iván) CRUD completo de gestión
 * (Nuevo! tipos-anuncio.php)  -> (Iván) CRUD completo de gestión
 * (Nuevo! usuarios.php)       -> (Iván) CRUD completo de gestión
 
@@ -302,11 +301,13 @@ INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 (31, 'Zona Infantil'),
 (32, 'Piscina Comunitaria');
 
-INSERT INTO `usuarios` (`idUsuario`, `nombre`, `correo`, `clave`, `alta`) VALUES
-(1, 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
-(2, 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13');
-```
-
+-- Usuarios
+INSERT INTO `usuarios` 
+(`idUsuario`, `nombre`, `nick`, `correo`, `clave`, `alta`) 
+VALUES
+(1, 'Alejandro', 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
+(2, 'Iván', 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13'),
+(3, 'admin', 'admin', 'admin@upocasa.es', '$2y$10$bngm/n1jixoY.ElRKX6onu5/cNxf7tb6gJLe3QrQLGgTdbXzxPDhG', '2020-01-28 14:15:45'),;
 
 ## Tecnologías y Herramientas
 
