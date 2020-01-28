@@ -29,7 +29,7 @@ if (isset($_POST['envio'])) {
     if (empty($precio)) {
         array_push($errors, "¡El precio es obligatorio!");
     }
-    if (empty($superfice)) {
+    if (empty($superficie)) {
         array_push($errors, "¡La superficie es obligatoria!");
     }
 
@@ -41,36 +41,7 @@ if (isset($_POST['envio'])) {
         array_push($errors, "¡El código postal es obligatorio!");
     }
 
-    if (empty($precio)) {
-        array_push($errors, "¡El precio es obligatorio!");
-    }
-
-
-    if (count($errors) == 0) {
-    // Rellenamos los datos de la tabla anuncios
-    $sql = "INSERT INTO anuncios 
-    (idUsuario, idTipoAnuncio, idTipoVivienda, precio, 
-    superficie, direccion, codPostal, numHabitaciones, 
-    numAseos, consumo, emisiones, comentarios)
-    VALUES
-    ('" . $idUsuario . "','" . $tipoAnuncio . "','" . $tipoVivienda . "','" . $precio . "',
-    '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
-    '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
-
-    $idAnuncio = ejecutarAccion($sql);
-
-    // Rellenamos los datos de la tabla anuncios_extras
-    $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
-    VALUES ";
-    for ($i = 0; $i < count($extras) - 1; $i++) {
-        $sql .= "('" . $idAnuncio . "','" . $extras[$i] . "'),";
-    }
-    $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
-
-    ejecutarAccion($sql);
-
-    // ----------------------------------------------------------
-    // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
+    //Checkeo de errores en fotos
 
     $targetDir = $_SERVER['DOCUMENT_ROOT'] . '/upocasa/assets/img/ads/' . $_SESSION['nick'] . '/';
 
@@ -81,18 +52,60 @@ if (isset($_POST['envio'])) {
 
         if (!empty($_FILES["foto" . $i]["name"])) {
             $allowTypes = array('jpg', 'png', 'jpeg');
-            if (in_array($fileType, $allowTypes)) {
+            if (!in_array($fileType, $allowTypes)) {
+                array_push($errors, "¡Lo siento, solo se permiten fotos de tipo JPG, JPEG, PNG.!");
+                echo $_FILES["foto" . $i]["size"];
+                if (($_FILES["foto" . $i]["size"]) > 2048000) {
+                    array_push($errors, "¡El máximo tamaño de las fotos es de 2MB!");
+                }
+            }
+        }
+    }
+
+
+    if (count($errors) == 0) {
+
+        // Rellenamos los datos de la tabla anuncios
+        $sql = "INSERT INTO anuncios 
+    (idUsuario, idTipoAnuncio, idTipoVivienda, precio, 
+    superficie, direccion, codPostal, numHabitaciones, 
+    numAseos, consumo, emisiones, comentarios)
+    VALUES
+    ('" . $idUsuario . "','" . $tipoAnuncio . "','" . $tipoVivienda . "','" . $precio . "',
+    '" . $superficie . "','" . $direccion . "','" . $codPostal . "','" . $numHabitaciones . "',
+    '" . $numAseos . "','" . $consumo . "','" . $emisiones . "','" . $comentarios . "')";
+
+    $idAnuncio = ejecutarAccion($sql);
+
+        // Rellenamos los datos de la tabla anuncios_extras
+        $sql = "INSERT INTO anuncios_extras (idAnuncio, idExtra)
+    VALUES ";
+        for ($i = 0; $i < count($extras) - 1; $i++) {
+            $sql .= "('" . $idAnuncio . "','" . $extras[$i] . "'),";
+        }
+        $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
+
+    ejecutarAccion($sql);
+
+        // ----------------------------------------------------------
+        // Subida de fotos a carpeta personal y registrado en BD
+        // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
+
+
+        for ($i = 1; $i < 6; $i++) {
+            $fileName = time() . basename($_FILES["foto" . $i]["name"]);
+            $targetFilePath = $targetDir . $fileName;
+            $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+
+            if (!empty($_FILES["foto" . $i]["name"])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
                     $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $targetDir . $fileName . "')";
                     ejecutarAccion($sql);
                 } else {
-                    array_push($errors, "¡En la subida de las fotos!");
+                    array_push($errors, "¡Vaya no se ha podido subir las fotos, anuncio creado sin fotos. Contacte con el administrador!");
                 }
-            } else {
-                array_push($errors, "¡Lo siento, solo se permiten fotos de tipo JPG, JPEG, PNG.!");
-              }
-          }
+            }
         }
     }
 }
@@ -165,7 +178,7 @@ if (isset($_POST['envio'])) {
                             <div>
                                 <label class="labelAlineado">Tipo de Vivienda:&nbsp;</label>
                                 <select name="tipoVivienda">
-                                    <option value="1" selected="">Vivienda</option>
+                                    <option value="1" selected>Vivienda</option>
                                     <option value="2">Garaje</option>
                                     <option value="3">Terreno</option>
                                     <option value="4">Local Comercial</option>
@@ -213,13 +226,13 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="1" placeholder="Número de habitaciones"
+                                <input type="number" name="numHabitaciones" min="0" placeholder="Número de habitaciones"
                                     value="0">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="1" placeholder="Número de baños"
+                                <input type="number" name="numAseos" min="0" placeholder="Número de baños"
                                     value="0">&nbsp;
 
                             </div>
@@ -329,7 +342,7 @@ if (isset($_POST['envio'])) {
         </section>
     </main>
     <script type="text/javascript">
-    $('option').mousedown(function(e) {
+    $('select[name="extras[]"] option').mousedown(function(e) {
         e.preventDefault();
         $(this).prop('selected', !$(this).prop('selected'));
         return false;

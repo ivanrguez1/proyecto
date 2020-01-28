@@ -117,8 +117,13 @@ if (isset($_GET['id'])) {
 
                     $resultado = ejecutarConsulta($sql);
                     $registro = mysqli_fetch_array($resultado);
-
-                    echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
+                    
+                    if($registro==NULL){
+                        echo "<input id='fotosAnuncio' style='display: none; value=''/>";
+                    }else{
+                        echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
+                    }
+                
 
                     ?>
 
