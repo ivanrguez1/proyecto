@@ -32,7 +32,7 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="user-config.php">
                     <?php
-                        echo "Bienvenida/o " . $_SESSION['nombre'];
+                    echo "Bienvenida/o " . $_SESSION['nombre'];
                     ?>
                 </a>
             </li>
