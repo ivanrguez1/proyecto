@@ -178,7 +178,7 @@ if (isset($_POST['envio'])) {
                             <div>
                                 <label class="labelAlineado">Tipo de Vivienda:&nbsp;</label>
                                 <select name="tipoVivienda">
-                                    <option value="1" selected="">Vivienda</option>
+                                    <option value="1" selected>Vivienda</option>
                                     <option value="2">Garaje</option>
                                     <option value="3">Terreno</option>
                                     <option value="4">Local Comercial</option>
@@ -211,7 +211,8 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Superficie (m²):&nbsp;</label>
-                                <input type="number" name="superficie" min="1" placeholder="Superficie" step="0.01">&nbsp;
+                                <input type="number" name="superficie" min="1" placeholder="Superficie"
+                                    step="0.01">&nbsp;
 
                             </div>
                             <div>
@@ -225,12 +226,14 @@ if (isset($_POST['envio'])) {
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Habitaciones:&nbsp;</label>
-                                <input type="number" name="numHabitaciones" min="0" placeholder="Número de habitaciones" value="0">&nbsp;
+                                <input type="number" name="numHabitaciones" min="0" placeholder="Número de habitaciones"
+                                    value="0">&nbsp;
 
                             </div>
                             <div>
                                 <label class="labelAlineado">Nº Baños:&nbsp;</label>
-                                <input type="number" name="numAseos" min="0" placeholder="Número de baños" value="0">&nbsp;
+                                <input type="number" name="numAseos" min="0" placeholder="Número de baños"
+                                    value="0">&nbsp;
 
                             </div>
                         </fieldset>
@@ -268,7 +271,8 @@ if (isset($_POST['envio'])) {
                         <p>
                             <legend class="shadow-none p-2 pb-auto mb-4 mt-auto ">Comentarios del Inmueble
                                 <span style="font-size: 1rem; font-weight: 400;">: &nbsp; </span>
-                                <textarea rows="5" cols="100" name="comentarios" class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
+                                <textarea rows="5" cols="100" name="comentarios"
+                                    class="bg-white shadow-lg w-100 h-auto border-secondary pt-auto mt-2"></textarea>
                                 <span style="font-size: 1rem; font-weight: 400;">&nbsp; &nbsp;</span>
                             </legend>
                         </p>
@@ -338,11 +342,11 @@ if (isset($_POST['envio'])) {
         </section>
     </main>
     <script type="text/javascript">
-        $('option').mousedown(function(e) {
-            e.preventDefault();
-            $(this).prop('selected', !$(this).prop('selected'));
-            return false;
-        });
+    $('select[name="extras[]"] option').mousedown(function(e) {
+        e.preventDefault();
+        $(this).prop('selected', !$(this).prop('selected'));
+        return false;
+    });
     </script>
     <?php include "./footer.html" ?>
 </body>
