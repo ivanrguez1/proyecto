@@ -4,16 +4,16 @@ session_start();
 
 $errors = array();
 
-if(isset($_POST['mensajeEnviado'])){
+if (isset($_POST['mensajeEnviado'])) {
 
     $mensaje = filter_var(trim($_POST['mensaje']), FILTER_SANITIZE_STRING);
 
-    if(strlen($mensaje)<20){
-        array_push($errors,"El mensaje debe de ser de mínimo 20 carácteres.");
+    if (strlen($mensaje) < 20) {
+        array_push($errors, "El mensaje debe de ser de mínimo 20 carácteres.");
     }
 
-    $sql = "INSERT INTO mensajes(idUsuOrigen, idUsuDestino, mensaje) VALUES('". $_SESSION['idUsuario']."','".$_GET['idPropietario']."','".$mensaje."')";
-    if(sizeof($errors)==0){
+    $sql = "INSERT INTO mensajes(idUsuOrigen, idUsuDestino, mensaje) VALUES('" . $_SESSION['idUsuario'] . "','" . $_GET['idPropietario'] . "','" . $mensaje . "')";
+    if (sizeof($errors) == 0) {
         ejecutarAccion($sql);
     }
 }
@@ -24,7 +24,7 @@ if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $sql = "SELECT 
             tipoAnuncio, tipoVivienda, 
-            direccion, codPostal, superficie, numHabitaciones, numAseos, comentarios, precio
+            direccion, codPostal, superficie, numHabitaciones, numAseos, comentarios, precio, consumo, emisiones
             FROM anuncios, tiposAnuncio, tiposVivienda
             WHERE anuncios.idTipoAnuncio = tiposAnuncio.idTipoAnuncio
             AND anuncios.idtipoVivienda = tiposVivienda.idtipoVivienda
@@ -82,24 +82,28 @@ if (isset($_GET['id'])) {
                         <?php
                         while ($registro = mysqli_fetch_array($resultado)) {
                         ?>
-                        <div class="form-group"><label>Precio:
-                            </label><strong><?php echo " " . $registro['precio'] . "€"; ?></strong></div>
-                        <div class="form-group"><label>Tipo de Anuncio:
-                            </label><strong><?php echo " " . $registro['tipoAnuncio']; ?></strong></div>
-                        <div class="form-group"><label>Tipo de Vivienda:
-                            </label><strong><?php echo " " . $registro['tipoVivienda']; ?></strong></div>
-                        <div class="form-group"><label>Descripción:
-                            </label><strong><?php echo " " . $registro['comentarios']; ?></strong></div>
-                        <div class="form-group"><label>Dirección:
-                            </label><strong><?php echo " " . $registro['direccion']; ?></strong></div>
-                        <div class="form-group"><label>Código Postal:
-                            </label><strong><?php echo " " . $registro['codPostal']; ?></strong></div>
-                        <div class="form-group"><label>Superficie:
-                            </label><strong><?php echo " " . $registro['superficie'] . "m²"; ?></strong></div>
-                        <div class="form-group"><label>Nº de Habitaciones:
-                            </label><strong><?php echo " " . $registro['numHabitaciones']; ?></strong></div>
-                        <div class="form-group"><label>Nº de Aseos:
-                            </label><strong><?php echo " " . $registro['numAseos']; ?></strong></div>
+                            <div class="form-group"><label>Precio:
+                                </label><strong><?php echo " " . $registro['precio'] . "€"; ?></strong></div>
+                            <div class="form-group"><label>Tipo de Anuncio:
+                                </label><strong><?php echo " " . $registro['tipoAnuncio']; ?></strong></div>
+                            <div class="form-group"><label>Tipo de Vivienda:
+                                </label><strong><?php echo " " . $registro['tipoVivienda']; ?></strong></div>
+                            <div class="form-group"><label>Descripción:
+                                </label><strong><?php echo " " . $registro['comentarios']; ?></strong></div>
+                            <div class="form-group"><label>Dirección:
+                                </label><strong><?php echo " " . $registro['direccion']; ?></strong></div>
+                            <div class="form-group"><label>Código Postal:
+                                </label><strong><?php echo " " . $registro['codPostal']; ?></strong></div>
+                            <div class="form-group"><label>Superficie:
+                                </label><strong><?php echo " " . $registro['superficie'] . "m²"; ?></strong></div>
+                            <div class="form-group"><label>Nº de Habitaciones:
+                                </label><strong><?php echo " " . $registro['numHabitaciones']; ?></strong></div>
+                            <div class="form-group"><label>Nº de Aseos:
+                                </label><strong><?php echo " " . $registro['numAseos']; ?></strong></div>
+                            <div class="form-group"><label>Escala eficiencia consumo:
+                                </label><strong><?php echo " " . $registro['consumo']; ?></strong></div>
+                            <div class="form-group"><label>Escala eficiencia emisiones:
+                                </label><strong><?php echo " " . $registro['emisiones']; ?></strong></div>
                         <?php
                         }
                         // Liberamos el resultado del SQL
@@ -117,13 +121,13 @@ if (isset($_GET['id'])) {
 
                     $resultado = ejecutarConsulta($sql);
                     $registro = mysqli_fetch_array($resultado);
-                    
-                    if($registro==NULL){
+
+                    if ($registro == NULL) {
                         echo "<input id='fotosAnuncio' style='display: none; value=''/>";
-                    }else{
+                    } else {
                         echo "<input id='fotosAnuncio' style='display: none; ' value='" . $registro['urlFoto1'] . "," . $registro['urlFoto2'] . "," . $registro['urlFoto3'] . "," . $registro['urlFoto4'] . "," . $registro['urlFoto5'] . "'/>";
                     }
-                
+
 
                     ?>
 
@@ -231,17 +235,17 @@ if (isset($_GET['id'])) {
                             mensaje</button>
                     </div>
                     <?php
-                    
+
                     //Si el usuario logueado es el propietario -> No se puede enviar un mensaje a sí mismo.about
 
-                    if($_GET['idPropietario'] == $_SESSION['idUsuario']){
-                        ?>
-                    <script>
-                    document.getElementById('divMensaje').style.display = "none";
-                    </script>
+                    if ($_GET['idPropietario'] == $_SESSION['idUsuario']) {
+                    ?>
+                        <script>
+                            document.getElementById('divMensaje').style.display = "none";
+                        </script>
                     <?php
-    }
-                    
+                    }
+
                     ?>
 
                     <div class="form-group">

@@ -40,38 +40,29 @@ session_start();
         <div role="listbox" class="carousel-inner">
           <div class="carousel-item">
             <div class="jumbotron hero-nature carousel-hero">
-              <h1 class="hero-title"><b>OFERTA DESTACADA CASA 2</b></h1>
+              <h1 class="hero-title"><b>Tu mejor inmobiliaria</b></h1>
               <p class="hero-subtitle">
-                Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                justo odio, dapibus ac facilisis in, egestas eget quam.
+                Tu mejor portal para la compraventa y alquiler de viviendas.
               </p>
-              <p>
-                <a class="btn btn-primary hero-button plat" role="button" href="#">Leer más</a>
-              </p>
+
             </div>
           </div>
           <div class="carousel-item">
             <div class="jumbotron hero-photography carousel-hero">
-              <h1 class="hero-title"><b>OFERTA DESTACADA CASA 3</b></h1>
+              <h1 class="hero-title"><b>¿Tiene alguna duda?, ¡Contáctanos!</b></h1>
               <p class="hero-subtitle">
-                Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                justo odio, dapibus ac facilisis in, egestas eget quam.
-              </p>
-              <p>
-                <a class="btn btn-primary hero-button plat" role="button" href="#">Leer más</a>
+                Acceda al apartado "Contactanos" para consultas personalizadas.
+
               </p>
             </div>
           </div>
           <div class="carousel-item active">
             <div class="jumbotron hero-technology carousel-hero">
-              <h1 class="hero-title"><b>OFERTA DESTACADA CASA 1</b></h1>
+              <h1 class="hero-title"><b>Envia mensaje a los propietarios de los anuncios</b></h1>
               <p class="hero-subtitle">
-                Nullam id dolor id nibh ultricies vehicula ut id elit. Cras
-                justo odio, dapibus ac facilisis in, egestas eget quam.
+                ¿Te interesa alguna vivienda?, envíale un mensaje al propietario.
               </p>
-              <p>
-                <a class="btn btn-primary hero-button plat" href="#">Leer más</a>
-              </p>
+
             </div>
           </div>
         </div>
