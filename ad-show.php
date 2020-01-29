@@ -238,14 +238,21 @@ if (isset($_GET['id'])) {
 
                     //Si el usuario logueado es el propietario -> No se puede enviar un mensaje a sí mismo.about
 
-                    if ($_GET['idPropietario'] == $_SESSION['idUsuario']) {
+                    if (isset($_SESSION['idUsuario'])) {
+                        if ($_GET['idPropietario'] == $_SESSION['idUsuario']) {
                     ?>
+                            <script>
+                                document.getElementById('divMensaje').style.display = "none";
+                            </script>
+                        <?php
+                        }
+                    } else {
+                        ?>
                         <script>
                             document.getElementById('divMensaje').style.display = "none";
                         </script>
                     <?php
                     }
-
                     ?>
 
                     <div class="form-group">
