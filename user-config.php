@@ -35,6 +35,13 @@ if(isset($_POST['logout'])) {
 }
 
 
+$sql = "SELECT nombre FROM usuarios WHERE nick='".$_SESSION['nick']."'";
+$resultado = ejecutarConsulta($sql);
+while($registro = mysqli_fetch_array($resultado)) {
+    $nombre = $registro['nombre'];
+}
+
+
 ?>
 
 
@@ -89,7 +96,8 @@ if(isset($_POST['logout'])) {
                     <form method="post" action="user-config.php">
                         <div class="form-group">
                             <label for="name">Nombre</label>
-                            <input type="text" class="form-control item" id="name" name="nombre" /></div>
+                            <input type="text" class="form-control item" id="name" 
+                                name="nombre" value="<?php echo $nombre; ?>"/></div>
                         <div class="form-group">
                             <label for="password">Contraseña</label>
                             <input type="password" class="form-control" id="password" name="password" /></div>

@@ -67,6 +67,12 @@ if ($_SESSION['nick'] != 'admin') {
                             <p><a href="usuarios.php">Gestión de Usuarios</a></p>
                         </div>
                     </div>
+                    <div class="faq-item">
+                        <h4 class="question">Municipios</h4>
+                        <div class="answer">
+                            <p><a href="municipios.php">Gestión de Municipios/Códigos postales</a></p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

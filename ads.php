@@ -219,7 +219,10 @@ $resultado = ejecutarConsulta($sql);
                                         echo "<input type='hidden' name='id' value='".$registro['idAnuncio']."'>";
                                         echo "<div>";
                                         echo "<label class='labelAlineado'>Dirección</label>";
-                                        echo "<input type='text' name='direccion' value='".$registro['direccion']."'>";
+                                        echo "<input type='text' style='width: 60%;' name='direccion' value='".$registro['direccion']."'>";
+                                        echo "</div>";
+                                        echo "<label class='labelAlineado'>Comentarios</label>";
+                                        echo "<input type='textarea' style='width: 60%;' name='comentarios' value='".$registro['comentarios']."'>";
                                         echo "</div>";
                                         echo "<div>";
                                         echo "<label class='labelAlineado'>Código Postal</label>";
@@ -240,9 +243,6 @@ $resultado = ejecutarConsulta($sql);
                                         echo "<div>";
                                         echo "<label class='labelAlineado'>Nº Aseos</label>";
                                         echo "<input type='number' name='numaseos' value='".$registro['numAseos']."'>";
-                                        echo "</div>";
-                                        echo "<label class='labelAlineado'>Comentarios</label>";
-                                        echo "<input type='textarea' name='comentarios' value='".$registro['comentarios']."'>";
                                         echo "</div>";
                                     }
                                 ?> 
