@@ -1,3 +1,11 @@
+<script src="assets/js/jquery.min.js"></script>
+
+<?php
+
+session_start();
+
+?>
+
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
     <a class="navbar-brand logo" href="index.php">UPOCASA</a>
     <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
@@ -14,9 +22,23 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="about-us.php">Sobre nosotros</a>
             </li>
-            <li class="nav-item" role="presentation">
+            <li class="nav-item" role="presentation" id="contactar">
                 <a class="nav-link" href="contact-admin.php">Contactar con admin</a>
             </li>
+
+            <?php
+            if (isset($_SESSION)) {
+                if ($_SESSION['nick'] == 'admin') {
+            ?>
+                    <script>
+                        $('#contactar').remove();
+                    </script>
+            <?php
+                }
+            }
+
+            ?>
+
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="registerAd.php">Alta Anuncio</a>
             </li>
