@@ -15,9 +15,6 @@
                 <a class="nav-link" href="../about-us.php">Sobre nosotros</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="../contact-us.php">Contactanos</a>
-            </li>
-            <li class="nav-item" role="presentation">
                 <a class="nav-link" href="../registerAd.php">Alta Anuncio</a>
             </li>
             <li class="nav-item" role="presentation">
@@ -32,7 +29,7 @@
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="../user-config.php">
                     <?php
-                        echo "Bienvenida/o " . $_SESSION['nombre'];
+                    echo "Bienvenida/o " . $_SESSION['nombre'];
                     ?>
                 </a>
             </li>
