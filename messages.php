@@ -64,10 +64,12 @@ if (!isset($_SESSION['nombre'])) {
                         <div class="col-sm-6 col-md-6">
                             <div class="alert-message alert-messageRecibido">
                                 <h4>Mensaje de
-                                    <?php $nick = mysqli_fetch_array(ejecutarConsulta("SELECT nick FROM usuarios WHERE idUsuario=" . $registro['idUsuOrigen']));
-                                    echo $nick['nick'] . " (" . $registro['fechaEnvio'] . ")" ?>
+                                    <?php $datosUsuario = mysqli_fetch_array(ejecutarConsulta("SELECT correo,nick FROM usuarios WHERE idUsuario=" . $registro['idUsuOrigen']));
+                                    echo $datosUsuario['nick'] . " (" . $registro['fechaEnvio'] . ")" ?>
                                 </h4>
                                 <p><?php echo $registro['mensaje'] ?></p>
+                                <br>
+                                <p><strong>Email: </strong><?php echo $datosUsuario['correo'] ?></p>
                             </div>
                         </div>
                     <?php
