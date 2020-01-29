@@ -23,8 +23,8 @@ if (isset($_POST['envio']) && $_POST['envio']=="Insertar") {
 
 // Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
-    $id = $_POST['id'];
-    $sqlDELETE = "DELETE FROM tiposAnuncio WHERE idTipoAnuncio = '".$id."'";
+    $codpostal = $_POST['id'];
+    $sqlDELETE = "DELETE FROM municipios WHERE codPostal = '".$codpostal."'";
 
     ejecutarAccion($sqlDELETE);
     $mensaje = "Eliminación Realizada";
@@ -33,40 +33,45 @@ if (isset($_POST['envio']) && $_POST['envio']=="Eliminar") {
 
 // Muestra el elemento a Eliminar y muestra el mensaje de Preparado para Eliminar...
 if (isset($_GET['action']) && $_GET['action']==1 ){
-    $id = $_GET['id'];
-    $sqlSELECTDELETE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
+    $codpostal = $_GET['id'];
+    $sqlSELECTDELETE = "SELECT * FROM municipios WHERE codPostal='".$codpostal."'";
 
     $resultadoSELECTDELETE = ejecutarConsulta($sqlSELECTDELETE);
-    $tipo = "";
+    $municipio = "";
     while($registro = mysqli_fetch_array($resultadoSELECTDELETE)) {
-        $tipo = $registro['tipoAnuncio'];
+        $municipio = $registro['nombreMunicipio'];
     }
-    $mensaje = "Preparado para Eliminar el tipo ".$tipo;
+    $mensaje = "Preparado para Eliminar el Código postal ".$codpostal." del municipio ".$municipio;
 }
 
 // Muestra el elemento a Actualizar y muestra el mensaje de Preparado para Actualizar...
 if (isset($_GET['action']) && $_GET['action']==2 ){
-    $id = $_GET['id'];
-    $sqlSELECTUPDATE = "SELECT * FROM tiposAnuncio WHERE idTipoAnuncio='".$id."'";
+    $codpostal = $_GET['id'];
+    $sqlSELECTUPDATE = "SELECT * FROM municipios WHERE codPostal='".$codpostal."'";
 
     $resultadoSELECTUPDATE = ejecutarConsulta($sqlSELECTUPDATE);
-    $tipo = "";
+    $municipio = "";
     while($registro = mysqli_fetch_array($resultadoSELECTUPDATE)) {
-        $tipo = $registro['tipoAnuncio'];
+        $municipio = $registro['nombreMunicipio'];
     }
-    $mensaje = "Preparado para actualizar el tipo ".$tipo;
+    $mensaje = "Preparado para actualizar el Código postal ".$codpostal." del municipio ".$municipio;
 }
 
 // Procedimiento para la Actualización
 if (isset($_POST['envio']) && $_POST['envio']=="Modificar") {
-    $id = $_POST['id'];
-    $tipo = $_POST['tipo'];
+    $codpostal = $_POST['id'];
+    $codPostalAnterior = $_POST['idAnterior'];
+    $municipio = $_POST['municipio'];
 
-    $sqlUPDATE = "UPDATE tiposAnuncio SET tipoAnuncio='".$tipo ."' WHERE idTipoAnuncio = '".$id ."'";
+    $sqlUPDATE = "UPDATE municipios 
+                SET codPostal='".$codpostal ."',
+                nombreMunicipio='".$municipio ."'
+                 WHERE codPostal = '".$codPostalAnterior ."'";
 
     ejecutarAccion($sqlUPDATE);
     $mensaje = "Modificación Realizada";
 }
+
 
 
 
@@ -130,7 +135,7 @@ $numRegistros = mysqli_num_rows($resultado);
     </script>
         <section>
             <div class="block-heading">
-                <h2 class="text-info text-center mt-5">Administración - Municioios/Códigos postales</h2>
+                <h2 class="text-info text-center mt-5">Administración - Municipios/Códigos postales</h2>
             <div>
                 
             </div>
@@ -190,13 +195,13 @@ $numRegistros = mysqli_num_rows($resultado);
                     // Presento el formulario para Eliminar si se pulsa el enlace de Eliminar
                     if (isset($_GET['action']) && $_GET['action']==1 ){
                     ?>
-                    <form action="tiposanuncio.php" method="post" enctype="multipart/form-data">
+                    <form action="municipios.php" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">ELIMINAR TIPO DE ANUNCIO</legend>
+                            <legend class="pt-auto pb-2">ELIMINAR MUNICIPIO/CODIGO POSTAL</legend>
                             <div>
-                                <label>¿Realmente desea eliminar el tipo <?php echo $tipo; ?>?</label>
-                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                <label>¿Realmente desea eliminar el codigo postal <?php echo $codpostal; ?>?</label>
+                                <input type="hidden" name="id" value="<?php echo $codpostal; ?>">
                             </div>
                         </fieldset>
                         <br>
@@ -213,11 +218,15 @@ $numRegistros = mysqli_num_rows($resultado);
                     <form action="#" method="post" enctype="multipart/form-data">
 
                         <fieldset class="shadow pl-3 pt-1 mb-2 pb-1 mt-auto">
-                            <legend class="pt-auto pb-2">MODIFICAR TIPO DE ANUNCIO</legend>
+                            <legend class="pt-auto pb-2">MODIFICAR MUNICIPIO/CÓDIGO POSTAL</legend>
                             <div>
-                                <label class="labelAlineado">Tipo de anuncio:&nbsp;</label>
-                                <input type="text" name="tipo" value="<?php echo $tipo; ?>">
-                                <input type="hidden" name="id" value="<?php echo $id; ?>">
+                                <label class="labelAlineado">Código postal:&nbsp;</label>
+                                <input type="text" name="id" value="<?php echo $codpostal; ?>">
+                                <input type="hidden" name="idAnterior" value="<?php echo $codpostal; ?>">
+                            </div>
+                            <div>
+                                <label class="labelAlineado">Municipio:&nbsp;</label>
+                                <input type="text" name="municipio" value="<?php echo $municipio; ?>">
                             </div>
                         </fieldset>
                         <br>
