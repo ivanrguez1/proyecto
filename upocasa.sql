@@ -284,42 +284,92 @@ INSERT INTO `usuarios`
 VALUES
 (1, 'Alejandro', 'alex', 'alex@upocasa.es', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
 (2, 'Iván', 'ivan', 'ivan@upocasa.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13'),
-(3, 'admin', 'admin', 'admin@upocasa.es', '$2y$10$bngm/n1jixoY.ElRKX6onu5/cNxf7tb6gJLe3QrQLGgTdbXzxPDhG', '2020-01-28 14:15:45');
-(3, 'Adrián', 'adri', 'adri@upocasa.es', '$2y$10$CE.P1fGxR0sqsf/By3iaLOHiZdVEDxfn.URssD9gDNMS9ZvCmQr.C', '2020-01-28 14:15:45');
-(3, 'Manuel', 'manuel', 'manuel@upocasa.es', '$2y$10$XRZr76cMONMOERbgEDIN2ub9iblSI8spVu9/2e7ipaAJZYOBePVXy', '2020-01-28 14:15:45');
+(3, 'admin', 'admin', 'admin@upocasa.es', '$2y$10$bngm/n1jixoY.ElRKX6onu5/cNxf7tb6gJLe3QrQLGgTdbXzxPDhG', '2020-01-28 14:15:45'),
+(4, 'Adrián', 'adri', 'adri@upocasa.es', '$2y$10$152cdHr7j7vl2GBQ1RQJa.mpyozBhSYg2V55F5xxxikG9pQc2lRQ2', '2020-01-29 22:50:26'),
+(5, 'Manuel', 'manuel', 'manuel@upocasa.es', '$2y$10$T7RJL6dh58ELjw.mWOwfVO0e85QhqgSw6HpSPeyr/2.VevdRphhBa', '2020-01-29 22:50:39');
 
 
 
 -- Anuncios
-INSERT INTO `anuncios` 
-(`idAnuncio`, `idUsuario`, `idTipoAnuncio`, `idTipoVivienda`, 
-`precio`, `superficie`, `direccion`, `codPostal`, `numHabitaciones`, 
-`numAseos`, `consumo`, `emisiones`, `comentarios`) 
-VALUES
-(1, 2, 1, 2, '23000', '100', 'Paris, 29', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
-(2, 2, 1, 2, '15000', '60', 'Paris, 14', 41089, 0, 0, 'A', 'A', 'Parking en Montequinto'),
-(3, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle París'),
-(4, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
-(5, 2, 1, 1, '230000', '110', 'Paris, 29', 41089, 3, 2, 'A', 'A', 'Piso en Montequinto Calle Parí­s'),
-(6, 1, 1, 1, '250000', '220', 'Betis, 3', 41702, 3, 2, 'A', 'A', 'Chalet de Alex en Dos Hermanas'),
-(7, 2, 1, 1, '900000', '175', 'San Bernardo', 41012, 5, 4, 'A', 'A', 'Prueba Final');
+
+INSERT INTO `anuncios` (`idAnuncio`, `idUsuario`, `idTipoAnuncio`, `idTipoVivienda`, `precio`, `superficie`, `direccion`, `codPostal`, `numHabitaciones`, `numAseos`, `consumo`, `emisiones`, `comentarios`) VALUES
+(1, 4, 1, 1, '300000', '300', 'Calle Venecia, 4', 41089, 4, 2, 'A', 'A', 'Casa lujosa amueblada y con muchos extras.'),
+(2, 1, 2, 1, '2000', '260', 'Calle Betis, 3', 41702, 3, 2, 'A', 'B', 'Alquilo esta magnífica casa.'),
+(3, 2, 1, 2, '15000', '100', 'Calle Hispalis, 5', 41702, 0, 0, 'A', 'A', 'Garaje diafano en perfecto estado.'),
+(4, 2, 2, 2, '200', '70', 'Calle Victoria Kent', 41009, 0, 1, 'A', 'A', 'Alquiler de garaje. ¡Ideal para taller!'),
+(5, 5, 4, 3, '500', '1000', 'Calle Montelirio', 41702, 2, 1, 'A', 'A', 'Parcela ideal para el verano.');
 
 -- Anuncios-extras
+
 INSERT INTO `anuncios_extras` (`idAnuncio`, `idExtra`) VALUES
-(4, 1),(5, 1),(7, 1),(7, 3),
-(4, 7),(5, 7),(6,1),(6,2),
-(6,6),(6,7),(6,8),(6,9),(6,13),
-(6,14),(6,16),(6,17),(6,18),
-(6,19),(6,20),(6,24),(6,25),
-(6,28),(7, 7),(7, 9),(7, 10),
-(4, 24),(5, 24),(7, 24),(7, 26),
-(7, 27);
+(1, 1),
+(1, 2),
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(1, 9),
+(1, 11),
+(1, 12),
+(1, 13),
+(1, 14),
+(1, 16),
+(1, 17),
+(1, 18),
+(1, 19),
+(1, 20),
+(1, 24),
+(1, 25),
+(1, 27),
+(1, 28),
+(1, 30),
+(1, 31),
+(2, 1),
+(2, 2),
+(2, 7),
+(2, 8),
+(2, 9),
+(2, 13),
+(2, 16),
+(2, 18),
+(2, 19),
+(2, 24),
+(2, 25),
+(2, 27),
+(2, 32),
+(3, 1),
+(3, 23),
+(4, 1),
+(4, 7),
+(5, 1),
+(5, 7),
+(5, 8),
+(5, 9),
+(5, 13),
+(5, 16),
+(5, 19),
+(5, 22),
+(5, 24),
+(5, 28);
 
 -- Fotos
+
 INSERT INTO `fotos` (`idFoto`, `idAnuncio`, `urlFoto1`, `urlFoto2`, `urlFoto3`, `urlFoto4`, `urlFoto5`) VALUES
-(2, 1, 'assets/img/ads/ivan/garage1.jpg', NULL, NULL, NULL, NULL),
-(3, 2, 'assets/img/ads/ivan/garage2.jpg', NULL, NULL, NULL, NULL),
-(4, 6, 'assets/img/ads/alex/foto1Alex.jpg', 'assets/img/ads/alex/foto2Alex.jpg', 'assets/img/ads/alex/foto3Alex.jpg', NULL, NULL);
+(1, 1, 'assets/img/ads/adri/1580340730foto1Adri.jpg', 'assets/img/ads/adri/1580340730foto2Adri.jpg', 'assets/img/ads/adri/1580340730foto3Adri.jpg', NULL, NULL),
+(2, 2, 'assets/img/ads/alex/1580340876foto1Alex.jpg', 'assets/img/ads/alex/1580340876foto2Alex.jpg', 'assets/img/ads/alex/1580340876foto3Alex.jpg', NULL, NULL),
+(3, 3, 'assets/img/ads/ivan/1580341170garage1.jpg', NULL, NULL, NULL, NULL),
+(4, 4, 'assets/img/ads/ivan/1580341329garage2.jpg', NULL, NULL, NULL, NULL),
+(5, 5, 'assets/img/ads/manuel/1580341653foto4Manuel.jpg', NULL, NULL, NULL, NULL);
+
+-- Mensajes
+
+INSERT INTO `mensajes` (`idMensaje`, `idUsuOrigen`, `idUsuDestino`, `mensaje`, `fechaEnvio`) VALUES
+(1, 1, 4, 'Hola Adrián, estoy interesado en la casa. ¿Podría verla?', '2020-01-29 23:33:14'),
+(2, 4, 2, '¡Buenas! Me gustaría alquilar el garaje. Un saludo', '2020-01-29 23:44:31'),
+(3, 2, 5, 'Hola muy buenas, estaría interesado en alquilarla desde junio hasta septiembre. Gracias.', '2020-01-29 23:48:19'),
+(4, 5, 2, 'Hola. Me gustaría comprar el garaje, ¿Cuando podemos quedar? Un saludo', '2020-01-29 23:49:28');
+
+-- Municipios
 
 INSERT INTO `municipios` (`codPostal`, `nombreMunicipio`) VALUES
 ('5', 'GIRONA'),

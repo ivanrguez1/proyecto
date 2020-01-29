@@ -93,8 +93,6 @@ if (isset($_POST['envio'])) {
         }
         $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
-        echo $sql;
-
         ejecutarAccion($sql);
 
         // ----------------------------------------------------------
@@ -102,14 +100,18 @@ if (isset($_POST['envio'])) {
         // Recurso: https://www.codexworld.com/upload-store-image-file-in-database-using-php-mysql/
 
 
+        $sql = "INSERT INTO fotos (idAnuncio) VALUES ('" . $idAnuncio . "')";
+        ejecutarAccion($sql);
+
         for ($i = 1; $i < 6; $i++) {
+            $fileName = time() . basename($_FILES["foto" . $i]["name"]);
             $targetFilePath = $targetDir . $fileName;
             $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
 
             if (!empty($_FILES["foto" . $i]["name"])) {
                 // Upload file to server
                 if (move_uploaded_file($_FILES["foto" . $i]["tmp_name"], $targetFilePath)) {
-                    $sql = "INSERT INTO fotos (idAnuncio, urlFoto" . $i . ") VALUES ('" . $idAnuncio . "','" . $relativeTargetDir . time() . "')";
+                    $sql = "UPDATE fotos SET urlFoto" . $i . "='$relativeTargetDir" . $fileName . "' WHERE idAnuncio=" . $idAnuncio;
                     ejecutarAccion($sql);
                 } else {
                     array_push($errors, "¡Vaya no se ha podido subir las fotos, anuncio creado sin fotos. Contacte con el administrador!");
@@ -331,7 +333,7 @@ if (isset($_POST['envio'])) {
                                     // extras: rdoExtras -> idExtra, extra 
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
-                                    echo "<select multiple='multiple' name='extras[]'>";
+                                    echo "<select class='selectExtras' multiple='multiple' name='extras[]'>";
                                     while ($registro = mysqli_fetch_array($rdoExtras)) {
                                         if ($registro['idExtra'] == 1) {
                                             echo "<option value='1' selected='selected'>Garaje privado</option>";
@@ -371,7 +373,7 @@ if (isset($_POST['envio'])) {
                                     // extras: rdoExtras -> idExtra, extra 
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
-                                    echo "<select multiple='multiple' name='extras[]'>";
+                                    echo "<select class='selectExtras' multiple='multiple' name='extras[]'>";
                                     while ($registro = mysqli_fetch_array($rdoExtras)) {
                                         if ($registro['idExtra'] == 7) {
                                             echo "<option value='7' selected='selected'>Aire acondicionado</option>";
@@ -405,7 +407,7 @@ if (isset($_POST['envio'])) {
                                     // extras: rdoExtras -> idExtra, extra 
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
-                                    echo "<select multiple='multiple' name='extras[]'>";
+                                    echo "<select class='selectExtras' multiple='multiple' name='extras[]'>";
                                     while ($registro = mysqli_fetch_array($rdoExtras)) {
                                         if ($registro['idExtra'] == 24) {
                                             echo "<option value='24' selected='selected'>Jardín Privado</option>";

@@ -16,6 +16,12 @@ $mensaje = "Consulta Finalizada";
 // Procedimiento para la Eliminación
 if (isset($_POST['envio']) && $_POST['envio'] == "Eliminar") {
     $id = $_POST['id'];
+    $sqlDELETE = "DELETE FROM anuncios_extras WHERE idAnuncio = '" . $id . "'";
+    ejecutarAccion($sqlDELETE);
+
+    $sqlDELETE = "DELETE FROM fotos WHERE idAnuncio = '" . $id . "'";
+    ejecutarAccion($sqlDELETE);
+
     $sqlDELETE = "DELETE FROM anuncios WHERE idAnuncio = '" . $id . "'";
 
     ejecutarAccion($sqlDELETE);
