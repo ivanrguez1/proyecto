@@ -1,5 +1,5 @@
 <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-white clean-navbar">
-    <a class="navbar-brand logo" href="index.php">UPOCASA</a>
+    <a class="navbar-brand logo" href="../index.php">UPOCASA</a>
     <button data-toggle="collapse" class="navbar-toggler" data-target="#navcol-1">
         <span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span>
     </button>

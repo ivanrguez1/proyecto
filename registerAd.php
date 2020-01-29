@@ -93,6 +93,8 @@ if (isset($_POST['envio'])) {
         }
         $sql .= "('" . $idAnuncio . "','" . $extras[count($extras) - 1] . "');";
 
+        echo $sql;
+
         ejecutarAccion($sql);
 
         // ----------------------------------------------------------
@@ -194,15 +196,15 @@ if (isset($_POST['envio'])) {
                                     <option value="6">Trastero</option>
                                 </select>
                                 -->
-                                <?php 
+                                <?php
                                 echo "<select name='tipoVivienda'>";
-                                while($registro = mysqli_fetch_array($rdotiposVivienda)) {
-                                    if ($registro['idtipoVivienda']==1) {
-                                        echo "<option value='1' selected>".$registro['tipoVivienda']."</option>";
+                                while ($registro = mysqli_fetch_array($rdotiposVivienda)) {
+                                    if ($registro['idtipoVivienda'] == 1) {
+                                        echo "<option value='1' selected>" . $registro['tipoVivienda'] . "</option>";
                                     } else {
-                                        echo "<option value='".$registro['idtipoVivienda']."'>".$registro['tipoVivienda']."</option>";
+                                        echo "<option value='" . $registro['idtipoVivienda'] . "'>" . $registro['tipoVivienda'] . "</option>";
                                     }
-                                } 
+                                }
                                 echo "</select>";
                                 ?>
                             </div>
@@ -229,14 +231,14 @@ if (isset($_POST['envio'])) {
                                 <?php
                                 // tiposAnuncio: rdotiposAnuncio -> idTipoAnuncio, tipoAnuncio 
                                 echo "<div class='form-check form-check-inline d-inline'>";
-                                while($registro = mysqli_fetch_array($rdotiposAnuncio)) {
-                                    if ($registro['idTipoAnuncio']==1) {
-                                        echo "<input class='form-check-input' type='radio' name='tipoAnuncio' value='1' checked> &nbsp;"; 
+                                while ($registro = mysqli_fetch_array($rdotiposAnuncio)) {
+                                    if ($registro['idTipoAnuncio'] == 1) {
+                                        echo "<input class='form-check-input' type='radio' name='tipoAnuncio' value='1' checked> &nbsp;";
                                     } else {
-                                        echo "&nbsp;<input class='form-check-input' type='radio' name='tipoAnuncio' value='".$registro['idTipoAnuncio']."'>&nbsp;"; 
+                                        echo "&nbsp;<input class='form-check-input' type='radio' name='tipoAnuncio' value='" . $registro['idTipoAnuncio'] . "'>&nbsp;";
                                     }
-                                    echo "<label class='form-check-label'>".$registro['tipoAnuncio']."</label>";     
-                                }    
+                                    echo "<label class='form-check-label'>" . $registro['tipoAnuncio'] . "</label>";
+                                }
                                 echo "</div>";
                                 ?>
                             </div>
@@ -314,7 +316,7 @@ if (isset($_POST['envio'])) {
                             <div id="divExtras" class="d-flex flex-nowrap justify-content-between flex-row">
                                 <div class="h-100 shadow w-25 text-center ml-3 p-3">
                                     <label class="labelAlineado">Extras Finca:&nbsp;</label>
-                                     <!--
+                                    <!--
                                     <select multiple="multiple" name="extras[]">
                                         <option value="1" selected="">Garaje privado</option>
                                         <option value="2">Trastero</option>
@@ -323,23 +325,23 @@ if (isset($_POST['envio'])) {
                                         <option value="5">Servicio de portería</option>
                                         <option value="6">Videoportero</option>
                                     </select>
-                                    -->      
+                                    -->
 
                                     <?php
                                     // extras: rdoExtras -> idExtra, extra 
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
                                     echo "<select multiple='multiple' name='extras[]'>";
-                                    while($registro = mysqli_fetch_array($rdoExtras)) {
-                                        if ($registro['idExtra']==1) {
-                                            echo "<option value='1' selected='selected'>Garaje privado</option>"; 
-                                        } 
-                                        if ($registro['idExtra']>1 && $registro['idExtra']<7) {
-                                            echo "<option value='".$registro['idExtra']."'>".$registro['extra']."</option>";     
-                                        }    
-                                    }    
+                                    while ($registro = mysqli_fetch_array($rdoExtras)) {
+                                        if ($registro['idExtra'] == 1) {
+                                            echo "<option value='1' selected='selected'>Garaje privado</option>";
+                                        }
+                                        if ($registro['idExtra'] > 1 && $registro['idExtra'] < 7) {
+                                            echo "<option value='" . $registro['idExtra'] . "'>" . $registro['extra'] . "</option>";
+                                        }
+                                    }
                                     echo "</select>";
-                                    ?>                              
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="p-3 w-25 shadow text-center">
@@ -370,16 +372,16 @@ if (isset($_POST['envio'])) {
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
                                     echo "<select multiple='multiple' name='extras[]'>";
-                                    while($registro = mysqli_fetch_array($rdoExtras)) {
-                                        if ($registro['idExtra']==7) {
-                                            echo "<option value='7' selected='selected'>Aire acondicionado</option>"; 
-                                        } 
-                                        if ($registro['idExtra']>7 && $registro['idExtra']<24) {
-                                            echo "<option value='".$registro['idExtra']."'>".$registro['extra']."</option>";     
-                                        }    
-                                    }    
+                                    while ($registro = mysqli_fetch_array($rdoExtras)) {
+                                        if ($registro['idExtra'] == 7) {
+                                            echo "<option value='7' selected='selected'>Aire acondicionado</option>";
+                                        }
+                                        if ($registro['idExtra'] > 7 && $registro['idExtra'] < 24) {
+                                            echo "<option value='" . $registro['idExtra'] . "'>" . $registro['extra'] . "</option>";
+                                        }
+                                    }
                                     echo "</select>";
-                                    ?>   
+                                    ?>
                                 </div>
                                 <br>
                                 <div class="shadow p-3 w-25 text-center">
@@ -404,16 +406,16 @@ if (isset($_POST['envio'])) {
                                     $sql = "SELECT * FROM extras ORDER BY idExtra";
                                     $rdoExtras = ejecutarConsulta($sql);
                                     echo "<select multiple='multiple' name='extras[]'>";
-                                    while($registro = mysqli_fetch_array($rdoExtras)) {
-                                        if ($registro['idExtra']==24) {
-                                            echo "<option value='7' selected='selected'>Jardín Privado</option>"; 
-                                        } 
-                                        if ($registro['idExtra']>24 && $registro['idExtra']<33) {
-                                            echo "<option value='".$registro['idExtra']."'>".$registro['extra']."</option>";     
-                                        }    
-                                    }    
+                                    while ($registro = mysqli_fetch_array($rdoExtras)) {
+                                        if ($registro['idExtra'] == 24) {
+                                            echo "<option value='24' selected='selected'>Jardín Privado</option>";
+                                        }
+                                        if ($registro['idExtra'] > 24) {
+                                            echo "<option value='" . $registro['idExtra'] . "'>" . $registro['extra'] . "</option>";
+                                        }
+                                    }
                                     echo "</select>";
-                                    ?>   
+                                    ?>
                                 </div>
                             </div>
                         </fieldset>

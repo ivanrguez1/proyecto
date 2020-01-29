@@ -57,19 +57,22 @@ if (!isset($_SESSION['nombre'])) {
 
                     <?php
 
-                    $sql = "SELECT * FROM mensajes WHERE idUsuDestino=" .$_SESSION['idUsuario'] . " ORDER BY fechaEnvio DESC";
+                    $sql = "SELECT * FROM mensajes WHERE idUsuDestino=" . $_SESSION['idUsuario'] . " ORDER BY fechaEnvio DESC";
                     $resultado = ejecutarConsulta($sql);
                     while ($registro = mysqli_fetch_array($resultado)) {
-                          ?>
-                    <div class="col-sm-6 col-md-6">
-                        <div class="alert-message alert-messageRecibido">
-                            <h4>Mensaje de
-                                <?php $nick = mysqli_fetch_array(ejecutarConsulta("SELECT nick FROM usuarios WHERE idUsuario=". $registro['idUsuOrigen'])); echo $nick['nick'] . " (".$registro['fechaEnvio'].")" ?>
-                            </h4>
-                            <p><?php echo $registro['mensaje'] ?></p>
+                    ?>
+                        <div class="col-sm-6 col-md-6">
+                            <div class="alert-message alert-messageRecibido">
+                                <h4>Mensaje de
+                                    <?php $datosUsuarioMensaje = mysqli_fetch_array(ejecutarConsulta("SELECT correo,nick FROM usuarios WHERE idUsuario=" . $registro['idUsuOrigen']));
+                                    echo $datosUsuarioMensaje['nick'] . " (" . $registro['fechaEnvio'] . ")" ?>
+                                </h4>
+                                <p><?php echo $registro['mensaje'] ?></p>
+                                <br>
+                                <p><strong>Email:</strong> <?php echo $datosUsuarioMensaje['correo'] ?></p>
+                            </div>
                         </div>
-                    </div>
-                    <?php                  
+                    <?php
                     }
                     ?>
                 </div>
