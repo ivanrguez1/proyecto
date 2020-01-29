@@ -38,6 +38,12 @@ Los integrantes de este proyecto son:
 - Usando tecnología Mermaid, presentamos un esquema de entidades, incluyendo campos y relaciones
 https://mermaidjs.github.io/#/
 
+NOTA: GitHub tiene pendiente implementar la carga de Mermaid, pero editores como Notable o GitLab ya lo cargan.
+
+![](attachment/Clipboard_2020-01-29-13-22-03.png)
+
+
+
 ```mermaid
 classDiagram
     class usuarios  {
