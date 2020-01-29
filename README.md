@@ -40,7 +40,7 @@ https://mermaidjs.github.io/#/
 
 NOTA: GitHub tiene pendiente implementar la carga de Mermaid, pero editores como Notable o GitLab ya lo cargan.
 
-![](attachment/Clipboard_2020-01-29-13-22-03.png)
+![](attachments/Clipboard_2020-01-29-13-22-03.png)
 
 
 
