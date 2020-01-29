@@ -129,7 +129,7 @@ $numRegistros = mysqli_num_rows($resultado);
 <body>
     <?php
 
-    include "../header-admin-logged.php";
+    include "header-admin-logged.php";
     ?>
 
     <main class="page faq-page">

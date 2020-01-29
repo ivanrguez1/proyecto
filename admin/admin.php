@@ -33,7 +33,7 @@ if ($_SESSION['nick'] != 'admin') {
 
 <body>
     <?php
-        include "../header-logged.php";
+        include "header-logged.php";
     ?>
     <main class="page faq-page">
         <section class="clean-block clean-faq dark">
