@@ -3,7 +3,7 @@
 # CHANGELOG
 
 # Tabla de contenidos
-1. [2020-01-28](#2020-01-29)
+1. [2020-01-29](#2020-01-29)
 2. [2020-01-28](#2020-01-28)
 3. [2020-01-27](#2020-01-27)
 4. [2020-01-17](#2020-01-17)
@@ -15,7 +15,9 @@
 
 ### Nuevos 
 
-* [*] 
+* [+] Informe del Proyecto
+* [+] Presentación del Proyecto
+* [+] Creado /admin/municipios.php          -> CRUD completo de administración de Municipios/Códigos postales
 
 ### Cambios
 
