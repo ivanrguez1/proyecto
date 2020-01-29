@@ -63,7 +63,7 @@ if (isset($_POST['mostrarTodosAnuncios'])) {
         AND (superficie >= '" . $superficie[0] . "' AND superficie < '" . $superficie[1] . "')
         AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
         AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')
-        AND (idUsuario !='" . $_SESSION['idUsuario'] . "'";
+        AND (idUsuario !='" . $_SESSION['idUsuario'] . "')";
     } else {
         $sql = "SELECT * FROM anuncios 
         WHERE idTipoVivienda = '" . $tipoVivienda . "' 
@@ -73,11 +73,12 @@ if (isset($_POST['mostrarTodosAnuncios'])) {
         AND codPostal IN ('" . $codPostales . "')
         AND (numHabitaciones >= '" . $numHabitaciones[0] . "' AND numHabitaciones < '" . $numHabitaciones[1] . "')
         AND (numAseos >= '" . $numAseos[0] . "' AND numAseos < '" . $numAseos[1] . "')
-        AND (idUsuario !='" . $_SESSION['idUsuario'] . "'";
+        AND (idUsuario !='" . $_SESSION['idUsuario'] . "')";
     }
 
 
     $mensaje = "Búsqueda Finalizada";
+
     $resultado = ejecutarConsulta($sql);
     $numRegistros = mysqli_num_rows($resultado);
 }

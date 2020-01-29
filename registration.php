@@ -40,15 +40,16 @@ if (isset($_POST['registrarUsuario'])) {
         array_push($errors, "¡Las contraseña no son iguales!");
     }
 
-    if (sizeof($nick) < 4) {
+
+    if (strlen($nick) < 4) {
         array_push($errors, "¡El nick debe de tener al menos 4 carácteres!");
     }
 
-    if (sizeof($password) < 6) {
+    if (strlen($password) < 6) {
         array_push($errors, "¡La contraseña debe de tener al menos 6 carácteres!");
     }
 
-    if (sizeof($nombre) < 4) {
+    if (strlen($nombre) < 4) {
         array_push($errors, "¡El nombre debe de tener al menos 3 carácteres!");
     }
 
