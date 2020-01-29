@@ -13,8 +13,9 @@ README
 # Tabla de contenidos
 1. [Integrantes](#integrantes)
 2. [Por hacer](#por-hacer)
-3. [Base de datos](#base-de-datos)
-4. [Tecnologías y Herramientas](#tecnologías-y-herramientas)
+3. [Esquema de Entidades](#esquema-de-entidades)
+4. [Base de datos](#base-de-datos)
+5. [Tecnologías y Herramientas](#tecnologías-y-herramientas)
 
 
 ## Integrantes
@@ -32,7 +33,82 @@ Los integrantes de este proyecto son:
 * (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
 * (Nuevo! ads.php)            -> (Iván) Gestión de anuncios propios del usuario
 
+## Esquema de Entidades
 
+- Usando tecnología Mermaid, presentamos un esquema de entidades, incluyendo campos y relaciones
+https://mermaidjs.github.io/#/
+
+```mermaid
+classDiagram
+    class usuarios  {
+      idUsuario INT(11)
+      nombre VARCHAR(60)
+      nick VARCHAR(60)
+      correo VARCHAR(60)
+      clave VARCHAR(120)
+      alta TIMESTAMP
+    }
+    class tiposAnuncio  {
+      idTipoAnuncio INT(11)
+      tipoAnuncio VARCHAR(45)
+    }
+    class tiposVivienda {
+      idTipoVivienda INT(11)
+      tipoVivienda VARCHAR(45)
+    }
+    class anuncios {
+      idAnuncio INT(11)
+      idUsuario INT(11)
+      idTipoAnuncio INT(11)
+      idTipoVivienda INT(11)
+      precio DECIMAL(10,0)
+      superficie DECIMAL(10,0)
+      direccion VARCHAR(120)
+      codPostal SMALLINT(2)
+      numHabitaciones TINYINT(2)
+      consumo CHAR(1)
+      emisiones CHAR(1)
+      comentarios VARCHAR(450)
+    }
+    class extras {
+      idExtra INT(11)
+      extra VARCHAR(45)
+    }
+    class anuncios_extras {
+      idExtra INT(11)
+      idAnuncio INT(11)
+    }
+    class fotos {
+      idFoto INT(11)
+      idAnuncio INT(11)
+      urlFoto1 VARCHAR(125)
+      urlFoto2 VARCHAR(125)
+      urlFoto3 VARCHAR(125)
+      urlFoto4 VARCHAR(125)
+    }
+    class mensajes {
+      idMensaje INT(11)
+      idUsuOrigen INT(11)
+      idUsuDestino INT(11)
+      mensaje VARCHAR(450)
+      fechaEnvio TIMESTAMP
+    }
+    class municipios {
+      codPostal INT(11)
+      nombreMunicipio VARCHAR(255)
+    }
+    usuarios "1" --> "*" anuncios
+    usuarios "1" --> "*" mensajes
+    tiposAnuncio "1" --> "*" anuncios
+    tiposVivienda "1" --> "*" anuncios
+    extras "1" --> "*" anuncios_extras
+    anuncios "1" --> "*" anuncios_extras
+    fotos "1" --> "*" anuncios
+    municipios "1" --> "*" anuncios
+```
+    
+
+    
 ## Base de datos
 
 * La base de datos se llamará upocasa
