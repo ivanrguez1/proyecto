@@ -26,15 +26,12 @@ Los integrantes de este proyecto son:
 
 ## Por hacer
 
-* (documentación)             -> (Iván) Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
-* (documentación-manual)      -> (Iván) Manual de uso de la aplicación  
-* (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
+* (documentación)             -> (Iván/Alex) Análisis, Especificación, Diseño, Implementación, Pruebas y despliegue
+* (documentación-manual)      -> (Iván/Alex) Manual de uso de la aplicación  
 
-CRUD de Administración /admin/
-(Yo me encargo, le pongo el Jquery con DataTable)
-* (Nuevo! tipos-vivienda.php) -> (Iván) CRUD completo de gestión
-* (Nuevo! tipos-anuncio.php)  -> (Iván) CRUD completo de gestión
-* (Nuevo! usuarios.php)       -> (Iván) CRUD completo de gestión
+* (Nuevo! messages.php)       -> (Alex) Mensajeria entre usuarios
+* (Nuevo! ads.php)            -> (Iván) Gestión de anuncios propios del usuario
+
 
 ## Base de datos
 
