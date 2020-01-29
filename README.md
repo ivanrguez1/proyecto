@@ -391,34 +391,23 @@ VALUES
 ## Tecnologías y Herramientas
 
 * Front-End
-  * HTML 5 & CSS3
-  * JavaScript (ECMAScript 6)
-  * Jquery 3
-  * BootStrap 4
+  * HTML 5 &rightarrow; https://developer.mozilla.org/es/docs/HTML/HTML5
+  * CSS3 &rightarrow; https://developer.mozilla.org/es/docs/Web/CSS
+  * JavaScript (ECMAScript 6) &rightarrow; https://developer.mozilla.org/es/docs/Web/JavaScript
+  * Jquery 3 &rightarrow; https://jquery.com/
+  * BootStrap 4 &rightarrow; https://getbootstrap.com/
 
 * Back-End
-  * MySQL Server 5.7
-  * MySQL Workbench 6.3
-  * PHP 7
-  * PhpMyAdmin 4.9
+  * MySQL Server 5.7 &rightarrow; https://www.mysql.com/
+  * MySQL Workbench 6.3 &rightarrow; https://www.mysql.com/products/workbench/
+  * PHP 7 &rightarrow; https://www.php.net/manual/es/intro-whatis.php
+  * PhpMyAdmin 4.9 &rightarrow; https://www.phpmyadmin.net/
 
 * Otros
-  * PhpStorm 2019.3
-  * Visual Studio Code 1.40
-  * Markdown
+  * PhpStorm 2019.3 &rightarrow; https://www.jetbrains.com/es-es/phpstorm/
+  * Visual Studio Code 1.40 &rightarrow; https://code.visualstudio.com/
+  * Markdown &rightarrow; https://markdown.es/
+  * Mermaid &rightarrow; https://mermaid-js.github.io/mermaid/#/ 
 
-
-
-## Diagramas
-
-```mermaid
-classDiagram
-    class BankAccount
-    BankAccount : +String owner
-    BankAccount : +Bigdecimal balance
-    BankAccount : +deposit(amount)
-    BankAccount : +withdrawl(amount)
-
-```
 
 
