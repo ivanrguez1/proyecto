@@ -4,7 +4,7 @@ session_start();
 
 $errors = array();
 
-if (isset($_POST['mensajeEnviado'])) {
+if (isset($_POST['btnMensajeEnviado'])) {
 
     $mensaje = filter_var(trim($_POST['mensaje']), FILTER_SANITIZE_STRING);
 

@@ -15,7 +15,7 @@
                 <a class="nav-link" href="about-us.php">Sobre nosotros</a>
             </li>
             <li class="nav-item" role="presentation">
-                <a class="nav-link" href="contact-us.php">Contactanos</a>
+                <a class="nav-link" href="contact-admin.php">Contactar con admin</a>
             </li>
             <li class="nav-item" role="presentation">
                 <a class="nav-link" href="registerAd.php">Alta Anuncio</a>
