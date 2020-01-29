@@ -10,7 +10,7 @@
       </p>
       <p class="company-name">UPOCASA © 2019</p>
       <?php 
-      if ($_SESSION['nick']=='admin') {
+      if (isset($_SESSION['nick']) && $_SESSION['nick']=='admin') {
         ?>
         <p class="links">
         <a href="admin/admin.php">Administrar</a>
