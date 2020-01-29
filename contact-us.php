@@ -38,7 +38,7 @@ session_start();
             <div class="container">
                 <div class="block-heading">
                     <h2 class="text-info">Contáctanos</h2>
-                    <p>Si tiene alguna duda por favor rellene el siguiente formulario.</p>
+                    <p>Si tiene alguna duda por favor rellene el siguiente formulario. Importante rellenar con tu Email, ya que el administrador se pondrá en contacto mediante esa vía.</p>
                 </div>
                 <form>
                     <div class="form-group"><label>Nombre</label><input class="form-control" type="text"></div>
