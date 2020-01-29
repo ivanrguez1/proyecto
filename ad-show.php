@@ -229,7 +229,7 @@ if (isset($_GET['id'])) {
                     <br><br>
                     <div id="divMensaje">
                         <p>¿Te interesa? Escríbele un mensaje al propietario del anuncio:</p>
-                        <textarea rows="4" cols="50" id="mensaje" name="mensaje" form="formMensaje"></textarea>
+                        <textarea rows="4" cols="50" id="mensaje" name="mensaje" form="formMensaje" placeholder="Al propietario se le enviará tu correo electrónico asociado a esta cuenta."></textarea>
                         <br>
                         <button name="btnMensajeEnviado" id="btnMensajeEnviado" form="formMensaje">Enviar
                             mensaje</button>
