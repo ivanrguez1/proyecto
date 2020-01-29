@@ -285,6 +285,9 @@ VALUES
 (1, 'Alejandro', 'alex', 'alex@upocasa.es', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
 (2, 'Iván', 'ivan', 'ivan@upocasa.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13'),
 (3, 'admin', 'admin', 'admin@upocasa.es', '$2y$10$bngm/n1jixoY.ElRKX6onu5/cNxf7tb6gJLe3QrQLGgTdbXzxPDhG', '2020-01-28 14:15:45');
+(3, 'Adrián', 'adri', 'adri@upocasa.es', '$2y$10$CE.P1fGxR0sqsf/By3iaLOHiZdVEDxfn.URssD9gDNMS9ZvCmQr.C', '2020-01-28 14:15:45');
+(3, 'Manuel', 'manuel', 'manuel@upocasa.es', '$2y$10$XRZr76cMONMOERbgEDIN2ub9iblSI8spVu9/2e7ipaAJZYOBePVXy', '2020-01-28 14:15:45');
+
 
 
 -- Anuncios
