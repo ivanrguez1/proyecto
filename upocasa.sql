@@ -13,7 +13,7 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 -- IMPORTANTE, poner en el SQL exportado:
 -- DEFAULT COLLATE 'utf8mb4_spanish_ci'
 -- UTF8 -> UTF8MB4; spanish_ci (Moderno, CH y LL NO son letras)
-DROP SCHEMA IF EXISTS `upocasa` ;
+-- DROP SCHEMA IF EXISTS `upocasa` ;
 
 -- -----------------------------------------------------
 -- Schema upocasa
@@ -282,8 +282,8 @@ INSERT INTO `extras` (`idExtra`, `extra`) VALUES
 INSERT INTO `usuarios` 
 (`idUsuario`, `nombre`, `nick`, `correo`, `clave`, `alta`) 
 VALUES
-(1, 'Alejandro', 'alex', 'alejandrodh570@gmail.com', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
-(2, 'Iván', 'ivan', 'ivanrguez1@yahoo.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13'),
+(1, 'Alejandro', 'alex', 'alex@upocasa.es', '$2y$10$MyxsqyP/3QIwrDbQcY5Y4erf36G0d/0ki9y4cOlRhFKsNZVlEg/W6', '2019-12-30 17:56:27'),
+(2, 'Iván', 'ivan', 'ivan@upocasa.es', '$2y$10$WemNiU3zyP1qY.lN8VOVeOy9Xrsv6aYHXaFfb69xC5w7rjqvriUeK', '2019-12-30 17:57:13'),
 (3, 'admin', 'admin', 'admin@upocasa.es', '$2y$10$bngm/n1jixoY.ElRKX6onu5/cNxf7tb6gJLe3QrQLGgTdbXzxPDhG', '2020-01-28 14:15:45');
 
 
